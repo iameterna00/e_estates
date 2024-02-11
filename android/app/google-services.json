@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "295025535559",
+    "project_id": "e-estates-267a4",
+    "storage_bucket": "e-estates-267a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:295025535559:android:e26d326606efa5ca12df62",
+        "android_client_info": {
+          "package_name": "com.example.e_estates"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6qpNROowtt-R-b3twW7n5BtlEV1fKdtY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
