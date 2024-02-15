@@ -67,6 +67,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '295025535559',
     projectId: 'e-estates-267a4',
     storageBucket: 'e-estates-267a4.appspot.com',
+    androidClientId: '295025535559-0ptqdp0jc9c8hpg8410k68l0mkfmknue.apps.googleusercontent.com',
+    iosClientId: '295025535559-i897juru5qih5mfu0cupv6scmggo0uo3.apps.googleusercontent.com',
     iosBundleId: 'com.example.eEstates',
   );
 
@@ -76,6 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '295025535559',
     projectId: 'e-estates-267a4',
     storageBucket: 'e-estates-267a4.appspot.com',
+    androidClientId: '295025535559-0ptqdp0jc9c8hpg8410k68l0mkfmknue.apps.googleusercontent.com',
+    iosClientId: '295025535559-ne48epid3n3tr57qt17j2t2s7a30usoq.apps.googleusercontent.com',
     iosBundleId: 'com.example.eEstates.RunnerTests',
   );
 }
