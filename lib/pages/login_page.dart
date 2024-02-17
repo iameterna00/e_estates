@@ -1,4 +1,3 @@
-import 'package:e_estates/service/varification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -136,9 +135,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: googleSignInButton(),
                   ),
-                ] else ...[
-                  userInfoWidget(),
-                ],
+                ]
               ],
             ),
           ),
@@ -157,21 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
           text: "Sign up with Google",
           onPressed: _handleGoogleSignIn,
         ),
-      ),
-    );
-  }
-
-  Widget userInfoWidget() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Signed in as: ${_user?.email ?? 'No email available'}'),
-          ElevatedButton(
-            onPressed: signOut,
-            child: const Text('Sign Out'),
-          ),
-        ],
       ),
     );
   }
@@ -195,10 +177,12 @@ class _LoginScreenState extends State<LoginScreen> {
         // Check if sign in was successful
         if (userCredential.user != null) {
           // Navigate to the HomePage if the sign-in was successful
-          Navigator.of(context).pushReplacementNamed('/homepage');
+          if (mounted) {
+            Navigator.of(context).pushReplacementNamed('/homepage');
+          }
         }
       } catch (error) {
-        print("Failed to sign in with Google: $error");
+        ("Failed to sign in with Google");
       }
     }
   }
@@ -215,41 +199,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _handleEmailSignIn() async {
     try {
-      final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
-      Navigator.of(context).pushReplacementNamed('/homepage');
+      if (mounted) {
+        Navigator.of(context).pushReplacementNamed('/homepage');
+      }
       // Optionally, navigate to another screen upon successful sign-in
       // Navigator.of(context).pushReplacementNamed('/home');
-    } catch (error) {
-      showError(error.toString());
-    }
-  }
-
-  Future<void> _handleEmailSignUp() async {
-    try {
-      final UserCredential userCredential =
-          await _auth.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-
-      User? user = userCredential.user;
-
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => VerificationWaitingScreen()));
-        // Inform the user to check their email for verification link
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-                'Verification email has been sent. Please check your email.'),
-          ),
-        );
-      }
     } catch (error) {
       showError(error.toString());
     }

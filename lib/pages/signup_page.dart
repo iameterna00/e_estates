@@ -6,7 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -179,10 +179,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
         // Check if sign in was successful
         if (userCredential.user != null) {
           // Navigate to the HomePage if the sign-in was successful
-          Navigator.of(context).pushReplacementNamed('/homepage');
+          if (mounted) {
+            Navigator.of(context).pushReplacementNamed('/homepage');
+          }
         }
       } catch (error) {
-        print("Failed to sign in with Google: $error");
+        String errorMessage = error.toString();
+
+        // Use a regular expression to remove any text within square brackets and following colon and space, if present
+        errorMessage = errorMessage.replaceAll(RegExp(r'\[.*?\]:?\s?'), '');
+
+        showError(errorMessage);
       }
     }
   }
@@ -197,21 +204,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Future<void> _handleEmailSignIn() async {
-    try {
-      final UserCredential userCredential =
-          await _auth.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
-
-      // Optionally, navigate to another screen upon successful sign-in
-      // Navigator.of(context).pushReplacementNamed('/home');
-    } catch (error) {
-      showError(error.toString());
-    }
-  }
-
   Future<void> _handleEmailSignUp() async {
     try {
       final UserCredential userCredential =
@@ -223,26 +215,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
       User? user = userCredential.user;
 
       if (user != null && !user.emailVerified) {
-        await user.updateProfile(displayName: _displayname.text.trim());
+        await user.updateDisplayName(_displayname.text.trim());
         await user
             .reload(); // Reload the user information to ensure the update takes effect
 
         // Now that the display name is set, send the verification email
         await user.sendEmailVerification();
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => VerificationWaitingScreen()));
+        if (mounted) {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => VerificationWaitingScreen()));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                  'Verification email has been sent. Please check your email.'),
+            ),
+          );
+        }
         // Inform the user to check their email for verification link
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-                'Verification email has been sent. Please check your email.'),
-          ),
-        );
-        // Optionally, sign the user out until they verify their email
-        // await _auth.signOut();
       }
     } catch (error) {
-      showError(error.toString());
+      String errorMessage = error.toString();
+
+      // Use a regular expression to remove any text within square brackets and following colon and space, if present
+      errorMessage = errorMessage.replaceAll(RegExp(r'\[.*?\]:?\s?'), '');
+
+      showError(errorMessage);
     }
   }
 }

@@ -1,6 +1,4 @@
 import 'package:e_estates/firebase_options.dart';
-
-
 import 'package:e_estates/service/route.dart';
 import 'package:e_estates/service/theme.dart';
 import 'package:e_estates/service/themechanger.dart';

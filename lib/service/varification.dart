@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class VerificationWaitingScreen extends StatelessWidget {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  VerificationWaitingScreen({Key? key}) : super(key: key);
+  VerificationWaitingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ThemePage extends StatelessWidget {
   final Function(ThemeMode) onThemeChanged;
 
-  const ThemePage({Key? key, required this.onThemeChanged}) : super(key: key);
+  const ThemePage({super.key, required this.onThemeChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +42,11 @@ class ThemeToggleButton extends StatelessWidget {
   final VoidCallback onToggle;
 
   const ThemeToggleButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.isActive,
     required this.onToggle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

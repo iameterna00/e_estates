@@ -10,14 +10,14 @@ class CustomBottomAppBar extends StatefulWidget {
   final VoidCallback onProfileTap;
 
   const CustomBottomAppBar({
-    Key? key,
+    super.key,
     required this.auth,
     required this.onExplore,
     required this.onFavorites,
     required this.onAdd,
     required this.onChat,
     required this.onProfileTap,
-  }) : super(key: key);
+  });
 
   @override
   State<CustomBottomAppBar> createState() => _CustomBottomAppBarState();
@@ -33,48 +33,54 @@ class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.explore, size: 30),
-            onPressed: widget.onExplore,
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+          border: Border(top: BorderSide(color: Colors.grey, width: 0.1))),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: BottomAppBar(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.explore_outlined, size: 30),
+                onPressed: widget.onExplore,
+              ),
+              IconButton(
+                icon: const Icon(Icons.notifications_outlined, size: 30),
+                onPressed: widget.onFavorites,
+              ),
+              IconButton(
+                icon: const Icon(Icons.add_box_outlined, size: 30),
+                onPressed: widget.onAdd,
+              ),
+              IconButton(
+                icon: const Icon(Icons.chat_outlined, size: 30),
+                onPressed: widget.onChat,
+              ),
+              InkWell(
+                onTap: widget.onProfileTap,
+                child: FutureBuilder(
+                    future: _reloadUser(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return CircleAvatar(
+                          radius: 15,
+                          backgroundImage: photoUrl != null
+                              ? NetworkImage(photoUrl!)
+                              : const AssetImage(
+                                      'path/to/your/default/image.png')
+                                  as ImageProvider,
+                        );
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }),
+              ),
+            ],
           ),
-          IconButton(
-            icon: const Icon(Icons.favorite, size: 30),
-            onPressed: widget.onFavorites,
-          ),
-          IconButton(
-            icon: const Icon(Icons.add_circle, size: 30),
-            onPressed: widget.onAdd,
-          ),
-          IconButton(
-            icon: const Icon(Icons.chat_rounded, size: 30),
-            onPressed: widget.onChat,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: widget.onProfileTap,
-              child: FutureBuilder(
-                  future: _reloadUser(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return CircleAvatar(
-                        radius: 15,
-                        backgroundImage: photoUrl != null
-                            ? NetworkImage(photoUrl!)
-                            : const AssetImage('path/to/your/default/image.png')
-                                as ImageProvider,
-                      );
-                    } else {
-                      return const CircularProgressIndicator();
-                    }
-                  }),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
