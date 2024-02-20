@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_estates/widgets/map_widget.dart';
+import 'package:e_estates/widgets/upload_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:image_picker/image_picker.dart';
@@ -17,8 +20,8 @@ class ImageUpload extends StatefulWidget {
 
 class _ImageUploadState extends State<ImageUpload> {
   final ImagePicker _picker = ImagePicker();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
   List<XFile>? _selectedImages;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -82,8 +85,8 @@ class _ImageUploadState extends State<ImageUpload> {
 
         // Save URL and other info in Firebase
         await FirebaseFirestore.instance.collection('image').add({
-          'Title': _titleController.text,
-          'Description': _descriptionController.text,
+          'Title': titleController.text,
+          'Description': descriptionController.text,
           'url': downloadURL,
           'uploadedAt': FieldValue.serverTimestamp(),
         });
@@ -97,8 +100,8 @@ class _ImageUploadState extends State<ImageUpload> {
 
     setState(() {
       _selectedImages = [];
-      _titleController.clear();
-      _descriptionController.clear();
+      titleController.clear();
+      descriptionController.clear();
     });
     Navigator.of(context)
         .pop(); // Dismiss the loading dialog after upload is complete
@@ -127,7 +130,24 @@ class _ImageUploadState extends State<ImageUpload> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('New Post'),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        height: 65,
+        child: ElevatedButton(
+          style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)))),
+          onPressed: () async {
+            await uploadImage(); // Trigger upload process
+          },
+          child: const Text(
+            'Share',
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           // Added to accommodate scrolling
@@ -167,32 +187,10 @@ class _ImageUploadState extends State<ImageUpload> {
                             : const Icon(Icons.add_a_photo, size: 80),
                   ),
                 ),
-                TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(labelText: 'Title'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a title';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a title';
-                    }
-                    return null;
-                  },
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    await uploadImage(); // Trigger upload process
-                  },
-                  child: const Text('Upload'),
-                ),
+                UploadWidgets(
+                  titleController: titleController,
+                  descriptionController: descriptionController,
+                )
               ],
             ),
           ),

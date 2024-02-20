@@ -1,4 +1,5 @@
 import 'package:e_estates/firebase_options.dart';
+
 import 'package:e_estates/service/route.dart';
 import 'package:e_estates/service/theme.dart';
 import 'package:e_estates/service/themechanger.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 

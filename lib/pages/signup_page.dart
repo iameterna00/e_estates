@@ -1,3 +1,4 @@
+import 'package:e_estates/service/route.dart';
 import 'package:e_estates/service/varification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
@@ -176,11 +177,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
         final UserCredential userCredential =
             await _auth.signInWithCredential(credential);
 
-        // Check if sign in was successful
         if (userCredential.user != null) {
-          // Navigate to the HomePage if the sign-in was successful
           if (mounted) {
-            Navigator.of(context).pushReplacementNamed('/homepage');
+            Navigator.of(context).pushReplacementNamed(AppRoutes.homepage);
           }
         }
       } catch (error) {

@@ -11,19 +11,24 @@ class AppThemes {
         bodyMedium: GoogleFonts.raleway(color: Colors.black),
         titleLarge: GoogleFonts.raleway(color: Colors.black),
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all(Colors.white),
+              backgroundColor: MaterialStateProperty.all(Colors.blue))),
       appBarTheme: AppBarTheme(
         color: Colors.white,
         titleTextStyle: GoogleFonts.raleway(
             color: Colors.black,
             fontSize: 20), // Color of the AppBar in the light theme
-        iconTheme:
-            const IconThemeData(color: Colors.blue), // Color of icons in the AppBar
+        iconTheme: const IconThemeData(
+            color: Colors.blue), // Color of icons in the AppBar
       ),
       bottomAppBarTheme:
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-              foregroundColor: const MaterialStatePropertyAll(Color(0xFF858585)),
+              foregroundColor:
+                  const MaterialStatePropertyAll(Color(0xFF858585)),
               textStyle: MaterialStateProperty.all(GoogleFonts.raleway()),
               backgroundColor:
                   const MaterialStatePropertyAll(Color(0xFFF7F7F7)))));
@@ -41,8 +46,8 @@ class AppThemes {
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
       textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-              foregroundColor:
-                  const MaterialStatePropertyAll(Color.fromARGB(255, 255, 255, 255)),
+              foregroundColor: const MaterialStatePropertyAll(
+                  Color.fromARGB(255, 255, 255, 255)),
               elevation: MaterialStateProperty.all(4),
               backgroundColor: const MaterialStatePropertyAll(Colors.black))));
 }
