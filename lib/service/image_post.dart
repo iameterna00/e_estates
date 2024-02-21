@@ -4,21 +4,23 @@ class ImagePost {
   final String title;
   final String imageUrl;
   final String description;
-  // Add fields for price and location later
-  // final double price;
-  // final String location;
+  final double latitude;
+  final double longitude;
 
   ImagePost(
-      {required this.title, required this.imageUrl, required this.description});
+      {required this.title,
+      required this.imageUrl,
+      required this.description,
+      required this.latitude,
+      required this.longitude});
 
   factory ImagePost.fromDocument(DocumentSnapshot doc) {
     return ImagePost(
       title: doc['Title'] ?? '',
       imageUrl: doc['url'] ?? '',
       description: doc['Description'] ?? '',
-      // Add initialization for price and location later
-      // price: doc['price'],
-      // location: doc['location'],
+      latitude: doc['latitude'] ?? 0.0,
+      longitude: doc['longitude'] ?? 0.0,
     );
   }
 }

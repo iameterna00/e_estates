@@ -56,6 +56,13 @@ dependencies:
   flutter_map: ^6.1.0
   geolocator: ^11.0.0
   latlong2: ^0.9.0
+  flutter_sliding_up_panel: ^2.1.1
+  http: ^1.2.0
+  geocoding: ^2.2.0
+  flutter_typeahead: ^5.2.0
+  rxdart: ^0.27.7
+  location: ^5.0.3
+  flutter_map_animations: ^0.5.3
 
 dev_dependencies:
   flutter_test:

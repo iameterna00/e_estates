@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_estates/widgets/map_widget.dart';
+import 'package:e_estates/widgets/location_picker.dart';
 import 'package:e_estates/widgets/upload_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:image_picker/image_picker.dart';
@@ -12,10 +12,13 @@ import 'package:path/path.dart' as Path;
 import 'package:permission_handler/permission_handler.dart';
 
 class ImageUpload extends StatefulWidget {
-  const ImageUpload({super.key});
+  const ImageUpload({
+    super.key,
+    // Removed 'required' to make it truly optional and nullable
+  });
 
   @override
-  State<ImageUpload> createState() => _ImageUploadState();
+  _ImageUploadState createState() => _ImageUploadState();
 }
 
 class _ImageUploadState extends State<ImageUpload> {
@@ -25,6 +28,8 @@ class _ImageUploadState extends State<ImageUpload> {
   List<XFile>? _selectedImages;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  double? latitude;
+  double? longitude;
   Future<void> requestPermission() async {
     var status = await Permission.storage.status;
     if (!status.isGranted) {
@@ -47,9 +52,10 @@ class _ImageUploadState extends State<ImageUpload> {
         !_formKey.currentState!.validate()) {
       return;
     }
+
     showDialog(
       context: context,
-      barrierDismissible: false, // User must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return const AlertDialog(
           content: SingleChildScrollView(
@@ -89,6 +95,8 @@ class _ImageUploadState extends State<ImageUpload> {
           'Description': descriptionController.text,
           'url': downloadURL,
           'uploadedAt': FieldValue.serverTimestamp(),
+          'latitude': latitude, // Include latitude
+          'longitude': longitude, // Include longitude
         });
       } catch (e) {
         Navigator.of(context)
@@ -188,6 +196,7 @@ class _ImageUploadState extends State<ImageUpload> {
                   ),
                 ),
                 UploadWidgets(
+                  saveMystate: navigateAndReceiveLocation,
                   titleController: titleController,
                   descriptionController: descriptionController,
                 )
@@ -197,5 +206,23 @@ class _ImageUploadState extends State<ImageUpload> {
         ),
       ),
     );
+  }
+
+  Future<void> navigateAndReceiveLocation() async {
+    final locationToConfirm = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const LocationPickerMap(),
+      ),
+    );
+
+    if (locationToConfirm != null) {
+      print("Selected location: $locationToConfirm");
+      // Assuming locationToConfirm has the properties you need:
+      setState(() {
+        latitude = locationToConfirm.latitude;
+        longitude = locationToConfirm.longitude;
+      });
+    }
   }
 }

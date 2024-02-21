@@ -189,7 +189,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           onChat: () {},
           onProfileTap: () => _signOut(context)),
-      appBar: AppBar(),
     );
   }
 }

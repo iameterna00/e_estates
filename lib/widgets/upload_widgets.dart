@@ -4,11 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 class UploadWidgets extends StatefulWidget {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
+  final Function saveMystate;
 
   const UploadWidgets(
       {super.key,
       required this.titleController,
-      required this.descriptionController});
+      required this.descriptionController,
+      required this.saveMystate});
 
   @override
   State<UploadWidgets> createState() => _UploadWidgetsState();
@@ -58,7 +60,7 @@ class _UploadWidgetsState extends State<UploadWidgets> {
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: TextButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/addlocation');
+              widget.saveMystate();
             },
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
