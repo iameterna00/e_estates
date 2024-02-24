@@ -1,6 +1,7 @@
 import 'package:e_estates/pages/login_page.dart';
 import 'package:e_estates/pages/signup_page.dart';
 import 'package:e_estates/pages/home_screen.dart';
+import 'package:e_estates/pages/splash_screen.dart';
 
 import 'package:e_estates/pages/upload_image_page.dart';
 import 'package:e_estates/service/theme.dart';
@@ -10,6 +11,7 @@ import 'package:e_estates/widgets/location_picker.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
+  static const String splash = '/';
   static const String signup = '/signup';
   static const String login = '/login';
   static const String homepage = '/homepage';
@@ -23,6 +25,7 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> define() {
     return {
+      splash: (BuildContext context) => SplashScreen(),
       signup: (BuildContext context) => const SignUpScreen(),
       login: (BuildContext context) => const LoginScreen(),
       homepage: (BuildContext context) => const HomeScreen(),

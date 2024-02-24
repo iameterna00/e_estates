@@ -18,7 +18,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _displayname = TextEditingController();
-  User? _user;
 
   @override
   void initState() {
@@ -27,9 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void listenToAuthState() {
-    _auth.authStateChanges().listen((User? user) {
-      setState(() => _user = user);
-    });
+    _auth.authStateChanges().listen((User? user) {});
   }
 
   @override
@@ -163,6 +160,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void _handleGoogleSignIn() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
     if (googleUser != null) {

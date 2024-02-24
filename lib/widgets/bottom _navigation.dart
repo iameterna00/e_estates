@@ -1,8 +1,8 @@
+import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomBottomAppBar extends StatefulWidget {
-  final FirebaseAuth auth;
+class CustomBottomAppBar extends ConsumerWidget {
   final VoidCallback onExplore;
   final VoidCallback onFavorites;
   final VoidCallback onAdd;
@@ -10,73 +10,54 @@ class CustomBottomAppBar extends StatefulWidget {
   final VoidCallback onProfileTap;
 
   const CustomBottomAppBar({
-    super.key,
-    required this.auth,
+    Key? key,
     required this.onExplore,
     required this.onFavorites,
     required this.onAdd,
     required this.onChat,
     required this.onProfileTap,
-  });
+  }) : super(key: key);
 
   @override
-  State<CustomBottomAppBar> createState() => _CustomBottomAppBarState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Use the provider to get the user's photo URL
+    final photoUrl = ref.watch(userPhotoURLProvider);
 
-class _CustomBottomAppBarState extends State<CustomBottomAppBar> {
-  String? photoUrl;
-
-  Future<void> _reloadUser() async {
-    await widget.auth.currentUser?.reload();
-    photoUrl = widget.auth.currentUser?.photoURL;
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: const BoxDecoration(
-          border: Border(top: BorderSide(color: Colors.grey, width: 0.1))),
+        border: Border(top: BorderSide(color: Colors.grey, width: 0.1)),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: BottomAppBar(
-          height: 60,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 icon: const Icon(Icons.explore_outlined, size: 30),
-                onPressed: widget.onExplore,
+                onPressed: onExplore,
               ),
               IconButton(
                 icon: const Icon(Icons.notifications_outlined, size: 30),
-                onPressed: widget.onFavorites,
+                onPressed: onFavorites,
               ),
               IconButton(
                 icon: const Icon(Icons.add_box_outlined, size: 30),
-                onPressed: widget.onAdd,
+                onPressed: onAdd,
               ),
               IconButton(
                 icon: const Icon(Icons.chat_outlined, size: 30),
-                onPressed: widget.onChat,
+                onPressed: onChat,
               ),
               InkWell(
-                onTap: widget.onProfileTap,
-                child: FutureBuilder(
-                    future: _reloadUser(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return CircleAvatar(
-                          radius: 15,
-                          backgroundImage: photoUrl != null
-                              ? NetworkImage(photoUrl!)
-                              : const AssetImage(
-                                      'path/to/your/default/image.png')
-                                  as ImageProvider,
-                        );
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    }),
+                onTap: onProfileTap,
+                child: CircleAvatar(
+                  radius: 15,
+                  backgroundImage: photoUrl != null
+                      ? NetworkImage(photoUrl)
+                      : const AssetImage('path/to/your/default/image.png')
+                          as ImageProvider,
+                ),
               ),
             ],
           ),

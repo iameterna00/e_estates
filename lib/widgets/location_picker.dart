@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:e_estates/widgets/panel_controller.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
@@ -45,7 +44,8 @@ class _LocationPickerMapState extends State<LocationPickerMap>
     });
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 800), // Adjust duration to control speed
+      duration:
+          const Duration(milliseconds: 800), // Adjust duration to control speed
     )..repeat(reverse: true); // Causes the animation to auto-reverse
 
     _animation = Tween<double>(
@@ -118,10 +118,7 @@ class _LocationPickerMapState extends State<LocationPickerMap>
       _isLoading = false;
     });
 
-    _mapController.animateTo(
-      dest: mycurrentLocation!,
-      zoom: 15.0,
-    );
+    _moveToCurrentPosition();
   }
 
   void _moveToCurrentPosition() async {
@@ -159,8 +156,8 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                 : FlutterMap(
                     mapController: _mapController.mapController,
                     options: MapOptions(
-                      initialCenter:
-                          mycurrentLocation ?? LatLng(27.700769, 85.300140),
+                      initialCenter: mycurrentLocation ??
+                          const LatLng(27.700769, 85.300140),
                       initialZoom: 15,
                       maxBounds: LatLngBounds(
                         const LatLng(26.347, 80.058622),
@@ -287,22 +284,22 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                     onPressed: _moveToCurrentPosition,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(15),
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15),
                     ),
-                    child: Icon(Icons.my_location,
-                        color: const Color.fromARGB(255, 98, 183, 252)),
+                    child: const Icon(Icons.my_location,
+                        color: Color.fromARGB(255, 98, 183, 252)),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => _confirmLocation(),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(15),
+                      shape: const CircleBorder(),
+                      padding: const EdgeInsets.all(15),
                     ),
-                    child: Icon(Icons.check,
-                        color: const Color.fromARGB(255, 98, 183, 252)),
+                    child: const Icon(Icons.check,
+                        color: Color.fromARGB(255, 98, 183, 252)),
                   ),
                 ],
               ),

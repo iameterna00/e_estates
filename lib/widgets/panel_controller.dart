@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:path/path.dart';
 
 class PanelController extends StatefulWidget {
   final Function(LatLng) onLocationSelected;
@@ -37,7 +36,6 @@ class _PanelControllerState extends State<PanelController> {
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      print('Response data: $data');
 
       setState(() {
         _searchResults = data['features']
@@ -47,12 +45,10 @@ class _PanelControllerState extends State<PanelController> {
         _placeDetails = {
           for (var feature in data['features']) feature['place_name']: feature
         };
-        print('Search results updated: ${_searchResults.length} items');
       });
     } else {
       setState(() {
         _searchResults = <String>[];
-        print("#########################No results found");
       });
     }
   }
@@ -176,11 +172,12 @@ class _PanelControllerState extends State<PanelController> {
               return ListTile(
                 title: Text(
                   result,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 // Assuming result is a String
                 onTap: () {
                   onPlaceSelected(result);
+                  FocusScope.of(context).unfocus();
                   _panelController.collapse();
                   _searchController.text = result;
                 },

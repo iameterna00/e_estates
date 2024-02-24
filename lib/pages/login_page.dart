@@ -119,7 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.pushReplacementNamed(context, '/');
+                                Navigator.pushReplacementNamed(
+                                    context, '/signup');
                               },
                           ),
                         ],
@@ -160,6 +161,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _handleGoogleSignIn() async {
     final GoogleSignIn googleSignIn = GoogleSignIn();
+    await googleSignIn.signOut();
+
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
     if (googleUser != null) {
@@ -182,7 +185,8 @@ class _LoginScreenState extends State<LoginScreen> {
           }
         }
       } catch (error) {
-        ("Failed to sign in with Google");
+        // Consider showing an error message or handling the error
+        print("Failed to sign in with Google: ");
       }
     }
   }
@@ -206,10 +210,12 @@ class _LoginScreenState extends State<LoginScreen> {
       if (mounted) {
         Navigator.of(context).pushReplacementNamed('/homepage');
       }
-      // Optionally, navigate to another screen upon successful sign-in
-      // Navigator.of(context).pushReplacementNamed('/home');
     } catch (error) {
-      showError(error.toString());
+      String errorMessage = error.toString();
+
+      errorMessage = errorMessage.replaceAll(RegExp(r'\[.*?\]:?\s?'), '');
+
+      showError(errorMessage);
     }
   }
 }

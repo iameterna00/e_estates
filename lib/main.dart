@@ -1,16 +1,18 @@
 import 'package:e_estates/firebase_options.dart';
-
 import 'package:e_estates/service/route.dart';
 import 'package:e_estates/service/theme.dart';
 import 'package:e_estates/service/themechanger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(child: MyApp()), // Wrap MyApp with ProviderScope
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -36,7 +38,7 @@ class _MyAppState extends State<MyApp> {
         theme: AppThemes.lightTheme,
         darkTheme: AppThemes.darkTheme,
         themeMode: _themeMode,
-        initialRoute: AppRoutes.homepage,
+        initialRoute: AppRoutes.splash,
         routes: {
           ...AppRoutes.define(),
           AppRoutes.themepage: (context) =>

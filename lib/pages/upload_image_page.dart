@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/widgets/location_picker.dart';
 import 'package:e_estates/widgets/upload_widgets.dart';
 import 'package:flutter/material.dart';
-
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:image_picker/image_picker.dart';
@@ -27,9 +26,13 @@ class _ImageUploadState extends State<ImageUpload> {
   final TextEditingController descriptionController = TextEditingController();
   List<XFile>? _selectedImages;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  List<String> tags = ["Rent", "Apartment", "Hotel"];
+  String? selectedTag;
 
+  bool isTagSelectionValid = true;
   double? latitude;
   double? longitude;
+
   Future<void> requestPermission() async {
     var status = await Permission.storage.status;
     if (!status.isGranted) {
@@ -52,6 +55,13 @@ class _ImageUploadState extends State<ImageUpload> {
         !_formKey.currentState!.validate()) {
       return;
     }
+    if (selectedTag == null) {
+      setState(() {
+        isTagSelectionValid = false;
+      });
+
+      return;
+    }
 
     showDialog(
       context: context,
@@ -69,6 +79,7 @@ class _ImageUploadState extends State<ImageUpload> {
         );
       },
     );
+    List<String> imageUrls = [];
 
     for (XFile xFile in _selectedImages!) {
       final File originalFile = File(xFile.path);
@@ -85,25 +96,26 @@ class _ImageUploadState extends State<ImageUpload> {
         UploadTask uploadTask = storageReference.putFile(compressedFile);
 
         // Await for the upload task
-        await uploadTask;
-        // It's better to use await uploadTask.then() if you need to confirm the task's success
+        await uploadTask.whenComplete(() async {});
         String downloadURL = await storageReference.getDownloadURL();
-
-        // Save URL and other info in Firebase
-        await FirebaseFirestore.instance.collection('image').add({
-          'Title': titleController.text,
-          'Description': descriptionController.text,
-          'url': downloadURL,
-          'uploadedAt': FieldValue.serverTimestamp(),
-          'latitude': latitude, // Include latitude
-          'longitude': longitude, // Include longitude
-        });
+        imageUrls.add(downloadURL);
       } catch (e) {
-        Navigator.of(context)
-            .pop(); // Dismiss the loading dialog in case of an error
-        print(e);
-        return; // Exit the function if an error occurs
+        Navigator.of(context).pop();
+        return;
       }
+    }
+    try {
+      await FirebaseFirestore.instance.collection('image').add({
+        'Title': titleController.text,
+        'Description': descriptionController.text,
+        'urls': imageUrls, // Save list of image URLs
+        'uploadedAt': FieldValue.serverTimestamp(),
+        'latitude': latitude,
+        'longitude': longitude,
+        'Tags': selectedTag != null ? [selectedTag] : [],
+      });
+    } catch (e) {
+      print(e);
     }
 
     setState(() {
@@ -158,37 +170,36 @@ class _ImageUploadState extends State<ImageUpload> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          // Added to accommodate scrolling
           padding: const EdgeInsets.all(15.0),
           child: Form(
-            // Wrap with Form widget
             key: _formKey,
             child: Column(
               children: [
                 InkWell(
-                  // Use InkWell to make the container clickable
                   onTap: () async {
                     await requestPermission();
-                    await pickImages(); // Adjust to only pick images
+                    await pickImages();
                   },
                   child: Container(
                     height: 300,
-                    width: double.infinity,
+                    width: 400,
                     decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 0.5,
-                        ),
-                        borderRadius: BorderRadius.circular(8)),
+                      border: Border.all(width: 0.5),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child:
                         _selectedImages != null && _selectedImages!.isNotEmpty
-                            ? ListView.builder(
-                                // Use ListView.builder to show all selected images
-                                scrollDirection: Axis.horizontal,
+                            ? PageView.builder(
                                 itemCount: _selectedImages!.length,
                                 itemBuilder: (context, index) {
-                                  return Image.file(
-                                    File(_selectedImages![index].path),
-                                    fit: BoxFit.cover,
+                                  return InteractiveViewer(
+                                    panEnabled: true,
+                                    scaleEnabled: true,
+                                    child: Image.file(
+                                      File(_selectedImages![index].path),
+                                      width: double.infinity,
+                                      //  height: double.infinity,
+                                    ),
                                   );
                                 },
                               )
@@ -199,6 +210,53 @@ class _ImageUploadState extends State<ImageUpload> {
                   saveMystate: navigateAndReceiveLocation,
                   titleController: titleController,
                   descriptionController: descriptionController,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: tags.map((tag) {
+                    IconData iconData = Icons.error; // Default icon
+                    switch (tag) {
+                      case "Rent":
+                        iconData = Icons.house;
+                        break;
+                      case "Apartment":
+                        iconData = Icons.apartment;
+                        break;
+                      case "Hotel":
+                        iconData = Icons.hotel;
+                        break;
+                    }
+
+                    bool isSelected = selectedTag == tag;
+                    return AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      decoration: !isTagSelectionValid && !isSelected
+                          ? BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.red.withOpacity(0.2),
+                                  spreadRadius: 0.5,
+                                  blurRadius: 3,
+                                ),
+                              ],
+                            )
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: FilterChip(
+                          label: Text(tag),
+                          avatar: Icon(iconData, size: 20.0),
+                          selected: isSelected,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              selectedTag = tag;
+                              isTagSelectionValid = true;
+                            });
+                          },
+                        ),
+                      ),
+                    );
+                  }).toList(),
                 )
               ],
             ),
@@ -218,7 +276,7 @@ class _ImageUploadState extends State<ImageUpload> {
 
     if (locationToConfirm != null) {
       print("Selected location: $locationToConfirm");
-      // Assuming locationToConfirm has the properties you need:
+
       setState(() {
         latitude = locationToConfirm.latitude;
         longitude = locationToConfirm.longitude;
