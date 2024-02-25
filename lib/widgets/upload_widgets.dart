@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UploadWidgets extends StatefulWidget {
   final TextEditingController titleController;
   final TextEditingController descriptionController;
+  final TextEditingController priceController;
   final Function saveMystate;
+  final bool highlightLocationButton;
 
   const UploadWidgets(
       {super.key,
       required this.titleController,
       required this.descriptionController,
-      required this.saveMystate});
+      required this.saveMystate,
+      required this.priceController,
+      required this.highlightLocationButton});
 
   @override
   State<UploadWidgets> createState() => _UploadWidgetsState();
@@ -65,7 +70,9 @@ class _UploadWidgetsState extends State<UploadWidgets> {
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
               alignment: Alignment.centerLeft,
-              backgroundColor: Colors.transparent,
+              backgroundColor: widget.highlightLocationButton
+                  ? Colors.red[300]!.withOpacity(0.5)
+                  : Colors.transparent,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             child: Padding(
@@ -174,7 +181,28 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                   ],
                 )),
           ),
-        )
+        ),
+        TextFormField(
+          controller: widget.priceController,
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+          ],
+          decoration: InputDecoration(
+            hintText: 'Price',
+            hintStyle: GoogleFonts.raleway(
+              fontSize: 15,
+            ),
+            border: InputBorder.none,
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter a Price';
+            }
+            // Optional: Add additional validation for numeric value if needed
+            return null;
+          },
+        ),
       ],
     );
   }

@@ -75,11 +75,12 @@ class LocationNotifier extends StateNotifier<LocationData?> {
       var distanceInMeters = 0.0;
       for (var leg in jsonResponse['routes'][0]['legs']) {
         distanceInMeters += leg['distance'] as double;
+        print("Total distance in meters: $distanceInMeters");
       }
 
       return distanceInMeters / 1000.0;
     } else {
-      return 0.0;
+      return -1.0;
     }
   }
 

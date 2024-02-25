@@ -24,12 +24,15 @@ class _ImageUploadState extends State<ImageUpload> {
   final ImagePicker _picker = ImagePicker();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+
   List<XFile>? _selectedImages;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   List<String> tags = ["Rent", "Apartment", "Hotel"];
   String? selectedTag;
-
+  bool highlightedlocationButton = false;
   bool isTagSelectionValid = true;
+  bool _locationPicked = false;
   double? latitude;
   double? longitude;
 
@@ -58,6 +61,13 @@ class _ImageUploadState extends State<ImageUpload> {
     if (selectedTag == null) {
       setState(() {
         isTagSelectionValid = false;
+      });
+
+      return;
+    }
+    if (_locationPicked == false) {
+      setState(() {
+        highlightedlocationButton = true;
       });
 
       return;
@@ -101,6 +111,9 @@ class _ImageUploadState extends State<ImageUpload> {
         imageUrls.add(downloadURL);
       } catch (e) {
         Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to upload images. Please try again.')),
+        );
         return;
       }
     }
@@ -108,11 +121,13 @@ class _ImageUploadState extends State<ImageUpload> {
       await FirebaseFirestore.instance.collection('image').add({
         'Title': titleController.text,
         'Description': descriptionController.text,
+
         'urls': imageUrls, // Save list of image URLs
         'uploadedAt': FieldValue.serverTimestamp(),
         'latitude': latitude,
         'longitude': longitude,
         'Tags': selectedTag != null ? [selectedTag] : [],
+        'Price': double.tryParse(priceController.text) ?? 0.0,
       });
     } catch (e) {
       print(e);
@@ -210,6 +225,8 @@ class _ImageUploadState extends State<ImageUpload> {
                   saveMystate: navigateAndReceiveLocation,
                   titleController: titleController,
                   descriptionController: descriptionController,
+                  priceController: priceController,
+                  highlightLocationButton: highlightedlocationButton,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -278,6 +295,7 @@ class _ImageUploadState extends State<ImageUpload> {
       print("Selected location: $locationToConfirm");
 
       setState(() {
+        _locationPicked = true;
         latitude = locationToConfirm.latitude;
         longitude = locationToConfirm.longitude;
       });

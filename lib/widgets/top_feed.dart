@@ -1,6 +1,5 @@
 import 'package:e_estates/pages/topfeed_detaipage.dart';
 import 'package:e_estates/service/image_post.dart';
-
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
@@ -17,30 +16,46 @@ final distanceProvider =
 });
 
 class TopFeed extends ConsumerWidget {
+  final String selectedTag;
+
+  TopFeed({super.key, required this.selectedTag});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postsAsyncValue = ref.watch(topFeedProvider);
 
-    return Scaffold(
-      body: postsAsyncValue.when(
+    return Container(
+      child: postsAsyncValue.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (err, stack) => Text('Error: $err'),
         data: (posts) {
+          List<ImagePost> filteredPosts = posts;
+          if (selectedTag != "All") {
+            filteredPosts =
+                posts.where((post) => post.tags.contains(selectedTag)).toList();
+          }
+
           return SizedBox(
-            height: 400,
+            height: 250,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: posts.length,
+              itemCount: filteredPosts.length,
               itemBuilder: (context, index) {
-                final post = posts[index];
+                final post = filteredPosts[index];
 
                 final distanceAsyncValue =
                     ref.watch(postDistanceProvider(post));
                 return distanceAsyncValue.when(
                   data: (distance) {
-                    String distanceDisplay =
-                        '${distance.toStringAsFixed(1)} Km';
-                    return buildPostItem(context, post, distanceDisplay);
+                    // Only display the post if the distance is within 50 km.
+                    if (distance <= 50.0) {
+                      String distanceDisplay =
+                          '${distance.toStringAsFixed(1)} Km';
+                      return buildPostItem(context, post, distanceDisplay);
+                    } else {
+                      // Return an empty container for posts outside 50 km.
+                      // Adjust this as needed, maybe adjust itemCount instead.
+                      return Container();
+                    }
                   },
                   loading: () => buildPostItem(context, post, 'Calculating...'),
                   error: (e, stack) => buildPostItem(context, post, 'Error!'),

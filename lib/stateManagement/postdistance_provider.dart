@@ -10,5 +10,5 @@ final postDistanceProvider =
         .read(locationNotifierProvider.notifier)
         .calculateDistance(post.latitude, post.longitude);
   }
-  return -1.0; // Or any default value indicating an error or unavailable location
+  return 1.0;
 });

@@ -1,3 +1,4 @@
+import 'package:e_estates/widgets/bestfor_you.dart';
 import 'package:e_estates/widgets/bottom%20_navigation.dart';
 import 'package:e_estates/widgets/top_feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final String userLocation = "Your Location";
   final TextEditingController _locationController = TextEditingController();
   final List _tags = [
+    "All",
     "Rent",
     "Apartment",
     "Hotel",
@@ -26,6 +28,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     "Hotel",
     "ok"
   ];
+  String _selectedTag = "All";
+
   void showError(String errorMessage) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(errorMessage)),
@@ -40,7 +44,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
     _reloadUser();
     setState(() {});
-    // Fetch the display name of the currently signed-in user
   }
 
   void _reloadUser() async {
@@ -77,6 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 FutureBuilder(
                   future: _auth.currentUser?.reload(),
@@ -103,7 +107,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                       );
                     } else {
-                      return (const Text("..."));
+                      return (const Text("Hey"));
                     }
                   },
                 ),
@@ -140,42 +144,80 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     scrollDirection: Axis.horizontal,
                     itemCount: _tags.length,
                     itemBuilder: (context, index) {
+                      bool isSelected = _tags[index] ==
+                          _selectedTag; // Check if the tag is selected
                       return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: TextButton(
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(12))),
-                                  elevation: MaterialStateProperty.all(8.0)),
-                              onPressed: () {},
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(
-                                  _tags[index],
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                              )));
+                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                        child: TextButton(
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                side: isSelected
+                                    ? BorderSide(color: Colors.blue, width: 2)
+                                    : BorderSide(color: Colors.transparent),
+                              ),
+                            ),
+                            backgroundColor: MaterialStateProperty.all(
+                              isSelected
+                                  ? Colors.lightBlueAccent.withOpacity(0.2)
+                                  : Colors.black,
+                            ),
+                            elevation: MaterialStateProperty.all(8.0),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _selectedTag = _tags[index];
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              _tags[index],
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: isSelected
+                                      ? Colors.blue
+                                      : Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? Colors.white
+                                          : Colors.white),
+                            ),
+                          ),
+                        ),
+                      );
                     },
                   ),
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 60,
                   width: MediaQuery.of(context).size.width,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(12.0),
-                          child: Text(
-                            'Near from you',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Expanded(child: TopFeed())
-                      ]),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text(
+                      'Near from you',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                TopFeed(
+                  selectedTag: _selectedTag,
+                ),
+                SizedBox(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Best for you',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                BestForYou(
+                  selectedTag: _selectedTag,
                 )
               ],
             ),

@@ -60,9 +60,7 @@ class _PanelControllerState extends State<PanelController> {
       final latLng = LatLng(coordinates[1], coordinates[0]);
 
       widget.onLocationSelected(latLng);
-    } else {
-      print('Place details not found for $placeName');
-    }
+    } else {}
   }
 
   @override

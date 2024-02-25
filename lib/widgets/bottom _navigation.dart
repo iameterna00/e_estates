@@ -10,13 +10,13 @@ class CustomBottomAppBar extends ConsumerWidget {
   final VoidCallback onProfileTap;
 
   const CustomBottomAppBar({
-    Key? key,
+    super.key,
     required this.onExplore,
     required this.onFavorites,
     required this.onAdd,
     required this.onChat,
     required this.onProfileTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
