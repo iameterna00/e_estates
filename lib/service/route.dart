@@ -1,3 +1,4 @@
+import 'package:e_estates/pages/explore_page.dart';
 import 'package:e_estates/pages/login_page.dart';
 import 'package:e_estates/pages/signup_page.dart';
 import 'package:e_estates/pages/home_screen.dart';
@@ -7,6 +8,7 @@ import 'package:e_estates/pages/upload_image_page.dart';
 import 'package:e_estates/service/theme.dart';
 
 import 'package:e_estates/service/varification.dart';
+import 'package:e_estates/widgets/explore_maps.dart';
 import 'package:e_estates/widgets/location_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +19,7 @@ class AppRoutes {
   static const String homepage = '/homepage';
   static const String themepage = '/themepage';
   static const String verificationWaiting = '/verificationWaiting';
-
+  static const String explore = '/explore';
   static const String uploadimage = '/picker';
   static const String topfeedDetail = '/topfeeddetail';
 
@@ -36,7 +38,7 @@ class AppRoutes {
           VerificationWaitingScreen(),
       uploadimage: (BuildContext context) => ImageUpload(),
       locationPicker: (BuildContext context) => const LocationPickerMap(),
-      // locationPicker: (BuildContext context) => const LocationPickerMap(),
+      explore: (BuildContext context) => const ExplorePage(),
     };
   }
 }

@@ -186,7 +186,6 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       } catch (error) {
         // Consider showing an error message or handling the error
-        print("Failed to sign in with Google: ");
       }
     }
   }

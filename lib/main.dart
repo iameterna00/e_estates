@@ -5,10 +5,18 @@ import 'package:e_estates/service/themechanger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  await Hive.initFlutter(appDocumentDir.path);
+  await Hive.openBox('tileCache');
+  var box = await Hive.openBox('locationBox');
+
+  await box.clear();
 
   runApp(
     const ProviderScope(child: MyApp()),

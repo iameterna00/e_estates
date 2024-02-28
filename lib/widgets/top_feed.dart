@@ -134,7 +134,7 @@ class TopFeed extends ConsumerWidget {
                 left: 10,
                 bottom: 10,
                 child: Text(post.title,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.bold)),
@@ -145,7 +145,7 @@ class TopFeed extends ConsumerWidget {
                 child: RatingBarIndicator(
                   rating: 3, // Assuming a static rating for example
                   itemBuilder: (context, index) =>
-                      Icon(Icons.star, color: Colors.amber),
+                      const Icon(Icons.star, color: Colors.amber),
                   itemCount: 5,
                   itemSize: 18.0,
                 ),

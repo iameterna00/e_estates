@@ -103,6 +103,13 @@ class _PanelControllerState extends State<PanelController> {
     );
   }
 
+  @override
+  void dispose() {
+    _panelController.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
   Widget _panelContent() {
     return Column(
       children: [

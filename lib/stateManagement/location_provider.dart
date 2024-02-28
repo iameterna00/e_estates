@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -10,13 +11,73 @@ final locationNotifierProvider =
 
 class LocationNotifier extends StateNotifier<LocationData?> {
   Location location = Location();
+  late final Box<dynamic> locationBox;
 
   LocationNotifier() : super(null) {
+    _initHive();
     fetchUserLocation();
     location.onLocationChanged.listen((LocationData currentLocation) {
       state = currentLocation;
+      _storeLocationInHive(currentLocation);
     });
     configureLocationUpdates();
+  }
+
+  void _initHive() async {
+    await Hive.initFlutter();
+    locationBox = await Hive.openBox('locationBox');
+  }
+
+  void _storeLocationInHive(LocationData currentLocation) {
+    var locationMap = {
+      'latitude': currentLocation.latitude,
+      'longitude': currentLocation.longitude,
+      'timestamp': currentLocation.time,
+    };
+    locationBox.put('location', jsonEncode(locationMap));
+  }
+
+  LocationData? _getLocationFromHive() {
+    var locationString = locationBox.get('location');
+    if (locationString != null) {
+      var locationMap = jsonDecode(locationString);
+      return LocationData.fromMap(locationMap);
+    }
+    return null;
+  }
+
+  Future<void> _fetchOrUseStoredLocation() async {
+    var storedLocation = _getLocationFromHive();
+    if (storedLocation != null && _isLocationRecent(storedLocation)) {
+      // Use the stored location if it's recent enough
+      state = storedLocation;
+    } else {
+      // Fetch a new location if there's no stored location or it's outdated
+      await fetchUserLocation();
+      if (state == null) {
+        // Handle the scenario where fetching the location fails or is not permitted
+        // For example, you could set a default location, show an error, etc.
+        // Example: state = defaultLocation;
+      }
+    }
+  }
+
+  Future<LocationData?> getOptimizedLocation() async {
+    var storedLocation = _getLocationFromHive();
+    if (storedLocation != null && _isLocationRecent(storedLocation)) {
+      return storedLocation;
+    } else {
+      await fetchUserLocation();
+      return state;
+    }
+  }
+
+  bool _isLocationRecent(LocationData location) {
+    // Implement your logic to determine if the location is recent enough
+    // For example, consider a location recent if it's less than 10 minutes old
+    var currentTime = DateTime.now().millisecondsSinceEpoch;
+    var locationTime = location.time!;
+    return (currentTime - locationTime) < 600000; // 10 minutes in milliseconds
   }
 
   Future<void> fetchUserLocation() async {
@@ -41,10 +102,10 @@ class LocationNotifier extends StateNotifier<LocationData?> {
     var userLocation = await location.getLocation();
 
     state = userLocation;
+    _storeLocationInHive(userLocation);
   }
 
   void configureLocationUpdates() {
-    // Frequency and accuracy of location updates
     location.changeSettings(
         interval: 300000, distanceFilter: 100); // 5 minutes or 100 meters
   }

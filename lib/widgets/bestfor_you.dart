@@ -5,9 +5,9 @@ import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 final distanceProvider =
     FutureProvider.family<double, ImagePost>((ref, post) async {
@@ -27,7 +27,7 @@ class BestForYou extends ConsumerWidget {
 
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: double.infinity,
           child: postsAsyncValue.when(
             loading: () => const Center(child: CircularProgressIndicator()),
@@ -42,7 +42,7 @@ class BestForYou extends ConsumerWidget {
 
               return ListView.builder(
                 shrinkWrap: true,
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 itemCount: filteredPosts.length,
                 itemBuilder: (context, index) {
                   final post = filteredPosts[index];
@@ -118,28 +118,28 @@ class BestForYou extends ConsumerWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Divider(),
                     Text(
-                      post.price.toString(),
+                      "Rs ${NumberFormat('#,##,###.##', 'en_IN').format(post.price)}",
                       style: const TextStyle(
-                        fontSize: 16,
+                        color: Colors.blue,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       distanceDisplay,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
                       ),
                     ),
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Text(
                       post.tags.join(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 12,
                       ),

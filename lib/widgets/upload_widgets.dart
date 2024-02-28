@@ -190,16 +190,13 @@ class _UploadWidgetsState extends State<UploadWidgets> {
           ],
           decoration: InputDecoration(
             hintText: 'Price',
-            hintStyle: GoogleFonts.raleway(
-              fontSize: 15,
-            ),
+            hintStyle: GoogleFonts.raleway(fontSize: 15),
             border: InputBorder.none,
           ),
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter a Price';
             }
-            // Optional: Add additional validation for numeric value if needed
             return null;
           },
         ),

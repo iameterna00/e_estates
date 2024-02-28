@@ -78,7 +78,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         onRefresh: () => refreshData(ref),
         child: SafeArea(
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -154,8 +154,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 side: isSelected
-                                    ? BorderSide(color: Colors.blue, width: 2)
-                                    : BorderSide(color: Colors.transparent),
+                                    ? const BorderSide(
+                                        color: Colors.blue, width: 2)
+                                    : const BorderSide(
+                                        color: Colors.transparent),
                               ),
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -225,7 +227,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
       bottomNavigationBar: CustomBottomAppBar(
-          onExplore: () {},
+          onExplore: () {
+            Navigator.pushNamed(context, "/explore");
+          },
           onFavorites: () {},
           onAdd: () {
             Navigator.pushNamed(context, "/picker");

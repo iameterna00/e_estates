@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration.zero, () async {
@@ -13,9 +15,9 @@ class SplashScreen extends StatelessWidget {
     });
 
     // Show a loading indicator while checking
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: const CircularProgressIndicator(),
+        child: CircularProgressIndicator(),
       ),
     );
   }

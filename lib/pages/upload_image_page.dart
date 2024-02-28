@@ -112,7 +112,8 @@ class _ImageUploadState extends State<ImageUpload> {
       } catch (e) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to upload images. Please try again.')),
+          const SnackBar(
+              content: Text('Failed to upload images. Please try again.')),
         );
         return;
       }
@@ -129,9 +130,7 @@ class _ImageUploadState extends State<ImageUpload> {
         'Tags': selectedTag != null ? [selectedTag] : [],
         'Price': double.tryParse(priceController.text) ?? 0.0,
       });
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
 
     setState(() {
       _selectedImages = [];
