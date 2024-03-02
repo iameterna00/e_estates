@@ -14,6 +14,7 @@ void main() async {
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDocumentDir.path);
   await Hive.openBox('tileCache');
+
   var box = await Hive.openBox('locationBox');
 
   await box.clear();

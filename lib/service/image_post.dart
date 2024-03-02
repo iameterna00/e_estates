@@ -9,19 +9,23 @@ class ImagePost {
   final double longitude;
   final List<String> tags;
   final double price;
+  final String location;
+  final String? paymentfrequency;
 
-  ImagePost({
-    required this.id,
-    required this.title,
-    required this.imageUrls,
-    required this.description,
-    required this.latitude,
-    required this.longitude,
-    required this.tags,
-    required this.price,
-  });
+  ImagePost(
+      {required this.id,
+      required this.title,
+      required this.imageUrls,
+      required this.description,
+      required this.latitude,
+      required this.longitude,
+      required this.tags,
+      required this.price,
+      required this.location,
+      this.paymentfrequency});
 
   factory ImagePost.fromDocument(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return ImagePost(
       id: doc.id, // Make sure to extract the document ID here
       title: doc['Title'] ?? '',
@@ -31,6 +35,10 @@ class ImagePost {
       longitude: doc['longitude'] ?? 0.0,
       tags: List<String>.from(doc['Tags'] ?? []),
       price: doc['Price']?.toDouble() ?? 0.0,
+      location: doc['Location'] ?? '',
+      paymentfrequency: data.containsKey('PaymentFrequency')
+          ? data['PaymentFrequency']
+          : 'Monthly',
     );
   }
 }

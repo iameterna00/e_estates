@@ -24,9 +24,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     "Apartment",
     "Hotel",
     "Shared",
-    "Apartment",
-    "Hotel",
-    "ok"
   ];
   String _selectedTag = "All";
 
@@ -139,7 +136,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  height: 50.0,
+                  height: 40.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: _tags.length,
@@ -177,7 +174,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             child: Text(
                               _tags[index],
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   color: isSelected
                                       ? Colors.blue
                                       : Theme.of(context).brightness ==
@@ -199,7 +196,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     child: Text(
                       'Near from you',
                       style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -211,10 +208,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   width: MediaQuery.of(context).size.width,
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text(
-                      'Best for you',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Best for you',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'See more',
+                          style: TextStyle(
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -1,8 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:geolocator/geolocator.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:geocoding/geocoding.dart' as geo;
 
 final locationNotifierProvider =
     StateNotifierProvider<LocationNotifier, LocationData?>((ref) {
@@ -12,6 +15,7 @@ final locationNotifierProvider =
 class LocationNotifier extends StateNotifier<LocationData?> {
   Location location = Location();
   late final Box<dynamic> locationBox;
+  final distanceCache = <String, double>{};
 
   LocationNotifier() : super(null) {
     _initHive();
@@ -110,16 +114,31 @@ class LocationNotifier extends StateNotifier<LocationData?> {
         interval: 300000, distanceFilter: 100); // 5 minutes or 100 meters
   }
 
-  Future<double> calculateDistance(
+  Future<dynamic> calculateDistance(
       double destLatitude, double destLongitude) async {
-    if (state == null) {
-      return -1.0;
+    final cacheKey = '$destLatitude-$destLongitude';
+    final cachedDistance = distanceCache[cacheKey];
+    if (cachedDistance != null) {
+      return cachedDistance;
     }
-    if ((state!.latitude == destLatitude &&
-            state!.longitude == destLongitude) ||
-        closeEnough(
-            state!.latitude!, state!.longitude!, destLatitude, destLongitude)) {
-      return 0.0;
+
+    if (state == null) {
+      List<geo.Placemark> placemarks =
+          await geo.placemarkFromCoordinates(destLatitude, destLongitude);
+      return placemarks.first.name ?? 'Nepal ';
+    }
+
+    const double radius = 2.0;
+    double straightLineDistance = Geolocator.distanceBetween(
+          state!.latitude!,
+          state!.longitude!,
+          destLatitude,
+          destLongitude,
+        ) /
+        1000;
+
+    if (straightLineDistance > radius) {
+      return '';
     }
 
     // Prepare the API request
@@ -139,7 +158,9 @@ class LocationNotifier extends StateNotifier<LocationData?> {
         print("Total distance in meters: $distanceInMeters");
       }
 
-      return distanceInMeters / 1000.0;
+      final distanceInKm = distanceInMeters / 1000.0;
+      distanceCache[cacheKey] = distanceInKm;
+      return distanceInKm;
     } else {
       return -1.0;
     }

@@ -8,7 +8,6 @@ import 'package:e_estates/pages/upload_image_page.dart';
 import 'package:e_estates/service/theme.dart';
 
 import 'package:e_estates/service/varification.dart';
-import 'package:e_estates/widgets/explore_maps.dart';
 import 'package:e_estates/widgets/location_picker.dart';
 import 'package:flutter/material.dart';
 

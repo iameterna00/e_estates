@@ -38,10 +38,10 @@ class AppThemes {
       useMaterial3: true, // Enable Material 3 features
       brightness: Brightness.dark, // Set the overall theme brightness to dark
       primarySwatch: Colors.teal, // Primary color for the app in dark theme
-      textTheme: TextTheme(
+      textTheme: GoogleFonts.ralewayTextTheme(TextTheme(
         bodyMedium: GoogleFonts.raleway(color: Colors.white),
         titleLarge: GoogleFonts.raleway(color: Colors.white),
-      ),
+      )),
       bottomAppBarTheme:
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
       textButtonTheme: TextButtonThemeData(

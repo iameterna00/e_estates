@@ -8,6 +8,7 @@ class UploadWidgets extends StatefulWidget {
   final TextEditingController priceController;
   final Function saveMystate;
   final bool highlightLocationButton;
+  final Function(String?) onPaymentFrequencyChanged;
 
   const UploadWidgets(
       {super.key,
@@ -15,13 +16,22 @@ class UploadWidgets extends StatefulWidget {
       required this.descriptionController,
       required this.saveMystate,
       required this.priceController,
-      required this.highlightLocationButton});
+      required this.highlightLocationButton,
+      required this.onPaymentFrequencyChanged});
 
   @override
   State<UploadWidgets> createState() => _UploadWidgetsState();
 }
 
 class _UploadWidgetsState extends State<UploadWidgets> {
+  String? paymentFrequency = 'Monthly';
+
+  String dropdownValue = 'Monthly';
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -107,7 +117,71 @@ class _UploadWidgetsState extends State<UploadWidgets> {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Padding(
+                            padding: EdgeInsets.all(12.0),
+                            child: Text(
+                              'Add more details ',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.grey, width: 0.3),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Text("Home Aminities"),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        InkWell(
+                                            onTap: () {},
+                                            child: ColorFiltered(
+                                              colorFilter: ColorFilter.mode(
+                                                Colors
+                                                    .white, // Change this to your desired color
+
+                                                BlendMode
+                                                    .modulate, // This blend mode changes the color
+                                              ),
+                                              child: Image.asset(
+                                                'assets/icons/trace.svg',
+                                                scale: 4,
+                                              ),
+                                            ))
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  });
+            },
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
               alignment: Alignment.centerLeft,
@@ -182,24 +256,66 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                 )),
           ),
         ),
-        TextFormField(
-          controller: widget.priceController,
-          keyboardType: TextInputType.numberWithOptions(decimal: true),
-          inputFormatters: <TextInputFormatter>[
-            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
+                onTap: () {
+                  setState(() {
+                    widget.onPaymentFrequencyChanged(paymentFrequency);
+                  });
+                },
+                controller: widget.priceController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+                ],
+                decoration: const InputDecoration(
+                  hintText: 'Price',
+                  hintStyle: TextStyle(fontSize: 15),
+                  border: InputBorder.none,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a Price';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            Container(
+              decoration: const BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(color: Colors.grey, width: 0.5))),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: DropdownButton<String>(
+                  value: dropdownValue,
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.blue),
+                  underline: Container(
+                    height: 2,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownValue = newValue!;
+                      paymentFrequency = newValue;
+                      print(paymentFrequency);
+                    });
+                    widget.onPaymentFrequencyChanged(paymentFrequency);
+                  },
+                  items: <String>['Monthly', 'Yearly', 'Weekly', 'Daily']
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
           ],
-          decoration: InputDecoration(
-            hintText: 'Price',
-            hintStyle: GoogleFonts.raleway(fontSize: 15),
-            border: InputBorder.none,
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please enter a Price';
-            }
-            return null;
-          },
-        ),
+        )
       ],
     );
   }

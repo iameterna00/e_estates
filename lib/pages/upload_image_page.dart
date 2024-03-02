@@ -35,6 +35,9 @@ class _ImageUploadState extends State<ImageUpload> {
   bool _locationPicked = false;
   double? latitude;
   double? longitude;
+  String? location;
+  String? paymentFrequency;
+  List<String>? homeAminities;
 
   Future<void> requestPermission() async {
     var status = await Permission.storage.status;
@@ -122,20 +125,23 @@ class _ImageUploadState extends State<ImageUpload> {
       await FirebaseFirestore.instance.collection('image').add({
         'Title': titleController.text,
         'Description': descriptionController.text,
-
         'urls': imageUrls, // Save list of image URLs
         'uploadedAt': FieldValue.serverTimestamp(),
         'latitude': latitude,
         'longitude': longitude,
         'Tags': selectedTag != null ? [selectedTag] : [],
         'Price': double.tryParse(priceController.text) ?? 0.0,
+        'Location': location,
+        'PaymentFrequency': paymentFrequency,
       });
     } catch (e) {}
 
     setState(() {
+      print("Payment $paymentFrequency");
       _selectedImages = [];
       titleController.clear();
       descriptionController.clear();
+      priceController.clear();
     });
     Navigator.of(context)
         .pop(); // Dismiss the loading dialog after upload is complete
@@ -221,58 +227,71 @@ class _ImageUploadState extends State<ImageUpload> {
                   ),
                 ),
                 UploadWidgets(
+                  homeAminities: (newhome) {
+                    setState(() {
+                      homeAminities = newhome;
+                    });
+                  },
+                  onPaymentFrequencyChanged: (newPaymentFrequency) {
+                    setState(() {
+                      paymentFrequency = newPaymentFrequency;
+                    });
+                  },
                   saveMystate: navigateAndReceiveLocation,
                   titleController: titleController,
                   descriptionController: descriptionController,
                   priceController: priceController,
                   highlightLocationButton: highlightedlocationButton,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: tags.map((tag) {
-                    IconData iconData = Icons.error; // Default icon
-                    switch (tag) {
-                      case "Rent":
-                        iconData = Icons.house;
-                        break;
-                      case "Apartment":
-                        iconData = Icons.apartment;
-                        break;
-                      case "Hotel":
-                        iconData = Icons.hotel;
-                        break;
-                    }
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: tags.map((tag) {
+                      IconData iconData = Icons.error; // Default icon
+                      switch (tag) {
+                        case "Rent":
+                          iconData = Icons.house;
+                          break;
+                        case "Apartment":
+                          iconData = Icons.apartment;
+                          break;
+                        case "Hotel":
+                          iconData = Icons.hotel;
+                          break;
+                      }
 
-                    bool isSelected = selectedTag == tag;
-                    return AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      decoration: !isTagSelectionValid && !isSelected
-                          ? BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.red.withOpacity(0.2),
-                                  spreadRadius: 0.5,
-                                  blurRadius: 3,
-                                ),
-                              ],
-                            )
-                          : null,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: FilterChip(
-                          label: Text(tag),
-                          avatar: Icon(iconData, size: 20.0),
-                          selected: isSelected,
-                          onSelected: (bool selected) {
-                            setState(() {
-                              selectedTag = tag;
-                              isTagSelectionValid = true;
-                            });
-                          },
+                      bool isSelected = selectedTag == tag;
+                      return AnimatedContainer(
+                        duration: Duration(milliseconds: 300),
+                        decoration: !isTagSelectionValid && !isSelected
+                            ? BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.red.withOpacity(0.2),
+                                    spreadRadius: 0.5,
+                                    blurRadius: 3,
+                                  ),
+                                ],
+                              )
+                            : null,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: FilterChip(
+                            label: Text(tag),
+                            avatar: Icon(iconData, size: 20.0),
+                            selected: isSelected,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                selectedTag = tag;
+                                isTagSelectionValid = true;
+                              });
+                            },
+                          ),
                         ),
-                      ),
-                    );
-                  }).toList(),
+                      );
+                    }).toList(),
+                  ),
                 )
               ],
             ),
@@ -283,20 +302,23 @@ class _ImageUploadState extends State<ImageUpload> {
   }
 
   Future<void> navigateAndReceiveLocation() async {
-    final locationToConfirm = await Navigator.push(
+    FocusNode unfocusNode = FocusNode();
+    FocusScope.of(context).requestFocus(unfocusNode);
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const LocationPickerMap(),
       ),
     );
 
-    if (locationToConfirm != null) {
-      print("Selected location: $locationToConfirm");
+    if (result != null) {
+      print("Selected location: $result");
 
       setState(() {
         _locationPicked = true;
-        latitude = locationToConfirm.latitude;
-        longitude = locationToConfirm.longitude;
+        latitude = result['latitude'];
+        longitude = result['longitude'];
+        location = result['Location'];
       });
     }
   }

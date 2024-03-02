@@ -5,7 +5,6 @@ import 'package:e_estates/stateManagement/tile_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
 import 'package:e_estates/widgets/panel_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_animations/flutter_map_animations.dart';
@@ -177,8 +176,8 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
             ? const Center(child: CircularProgressIndicator())
             : Consumer(
                 builder: (context, ref, child) {
-                  final tileProvider = ref.watch(cachedTileProviderFamily(
-                    "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
+                  ref.watch(cachedTileProviderFamily(
+                    "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?style=mapbox://styles/mapbox/outdoors-v12?optimize=true&access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
                   ));
 
                   return FlutterMap(
@@ -187,6 +186,7 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
                       initialCenter: mycurrentLocation ??
                           const LatLng(27.700769, 85.300140),
                       initialZoom: 15,
+                      maxZoom: 16,
                       maxBounds: LatLngBounds(
                         const LatLng(26.347, 80.058622),
                         const LatLng(30.422, 88.201416),
@@ -201,7 +201,7 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
                       TileLayer(
                         tileProvider: CachedTileProvider(
                           urlTemplate:
-                              "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
+                              "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?style=mapbox://styles/mapbox/outdoors-v12?optimize=true&access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
                           cacheBox: Hive.box('tileCache'),
                         ),
                         additionalOptions: const {

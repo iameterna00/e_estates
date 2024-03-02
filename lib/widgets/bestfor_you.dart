@@ -51,8 +51,16 @@ class BestForYou extends ConsumerWidget {
                       ref.watch(postDistanceProvider(post));
                   return distanceAsyncValue.when(
                     data: (distance) {
-                      String distanceDisplay =
-                          '${distance.toStringAsFixed(1)} Km';
+                      String distanceDisplay;
+                      if (distance is double) {
+                        distanceDisplay = '${distance.toStringAsFixed(1)} Km';
+                      } else if (distance is String) {
+                        distanceDisplay =
+                            distance; // If distance is a location name
+                      } else {
+                        distanceDisplay =
+                            'Unknown'; // Fallback for any other cases
+                      }
                       return buildPostItem(context, post, distanceDisplay);
                     },
                     loading: () =>
@@ -93,14 +101,42 @@ class BestForYou extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(25),
                 color: Colors.transparent,
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  post.imageUrls[0],
-                  fit: BoxFit.cover,
-                  width: 100,
-                  height: 100,
-                ),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      post.imageUrls[0],
+                      fit: BoxFit.cover,
+                      width: 120,
+                      height: 120,
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    left: 10,
+                    child: distanceDisplay.isNotEmpty
+                        ? Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/icons/IC_Location.png',
+                                  scale: 1.5,
+                                ),
+                                const SizedBox(width: 1),
+                                Text(distanceDisplay,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 8)),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                  )
+                ],
               ),
             ),
             Expanded(
@@ -119,7 +155,7 @@ class BestForYou extends ConsumerWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      "Rs ${NumberFormat('#,##,###.##', 'en_IN').format(post.price)}",
+                      "Rs ${NumberFormat('#,##,###.##', 'en_IN').format(post.price)}/ ${post.paymentfrequency}",
                       style: const TextStyle(
                         color: Colors.blue,
                         fontSize: 10,
@@ -129,13 +165,13 @@ class BestForYou extends ConsumerWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      distanceDisplay,
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    ),
+                    Text(post.location,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 12,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 4),
                     Text(
                       post.tags.join(),

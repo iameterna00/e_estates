@@ -7,7 +7,15 @@ import 'package:latlong2/latlong.dart';
 
 class PanelController extends StatefulWidget {
   final Function(LatLng) onLocationSelected;
-  const PanelController({super.key, required this.onLocationSelected});
+  final Function(String)? onLocationNameUpdated;
+  final String initialLocationName;
+
+  const PanelController({
+    super.key,
+    required this.onLocationSelected,
+    this.onLocationNameUpdated,
+    this.initialLocationName = "",
+  });
 
   @override
   State<PanelController> createState() => _PanelControllerState();
@@ -24,6 +32,17 @@ class _PanelControllerState extends State<PanelController> {
   void initState() {
     super.initState();
     _panelController = SlidingUpPanelController();
+    _searchController.text = widget.initialLocationName;
+    // _searchController.text = widget.onLocationNameUpdated;
+  }
+
+  @override
+  void didUpdateWidget(covariant PanelController oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // If initialLocationName updates, reflect it in the search controller.
+    if (widget.initialLocationName != oldWidget.initialLocationName) {
+      _searchController.text = widget.initialLocationName;
+    }
   }
 
   Future<void> searchLocations(String query) async {
@@ -51,6 +70,12 @@ class _PanelControllerState extends State<PanelController> {
         _searchResults = <String>[];
       });
     }
+  }
+
+  void updateLocationName(String newName) {
+    setState(() {
+      _searchController.text = newName;
+    });
   }
 
   void onPlaceSelected(String placeName) {
