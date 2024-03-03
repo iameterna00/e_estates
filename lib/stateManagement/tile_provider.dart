@@ -39,7 +39,7 @@ class CachedTileProvider extends TileProvider {
 
       return CachedNetworkImageProvider(
         url,
-        headers: options.additionalOptions?['headers'] as Map<String, String>?,
+        headers: options.additionalOptions['headers'] as Map<String, String>?,
       )..resolve(const ImageConfiguration()).addListener(
           ImageStreamListener((ImageInfo image, bool synchronousCall) async {
             final byteData =
