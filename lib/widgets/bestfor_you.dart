@@ -170,16 +170,30 @@ class BestForYou extends ConsumerWidget {
                           color: Colors.grey,
                           fontSize: 12,
                         ),
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 4),
-                    Text(
-                      post.tags.join(),
-                      style: const TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
-                    ),
+                    Wrap(
+                      spacing: 2.0,
+                      runSpacing: 2.0,
+                      children: post.tags.map((String tag) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 4.0),
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(6.0),
+                          ),
+                          child: Text(
+                            tag,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    )
                   ],
                 ),
               ),

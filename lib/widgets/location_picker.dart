@@ -218,8 +218,8 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                             for (Placemark p in placemarks) {
                               if (p.street != null &&
                                   p.street!.isNotEmpty &&
-                                  !p.street!.contains(new RegExp(
-                                      r'[!@#\$%^&*(),.?"+:{}|<>]'))) {
+                                  !p.street!.contains(
+                                      RegExp(r'[!@#\$%^&*(),.?"+:{}|<>]'))) {
                                 place = p;
                                 break;
                               }
@@ -247,7 +247,6 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                             // Update the search bar with the location name
                             setState(() {
                               _searchControllerlite.text = locationName;
-                              print(_searchControllerlite.text);
                             });
                           }
                         },
@@ -288,17 +287,14 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                                                     return Transform.scale(
                                                       scale: _animation.value,
                                                       child: Container(
-                                                        width:
-                                                            20, // Adjust based on the size of your marker
-                                                        height:
-                                                            20, // Adjust based on the size of your marker
+                                                        width: 20,
+                                                        height: 20,
                                                         decoration:
                                                             BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
                                                           color: Colors.blue
-                                                              .withOpacity(
-                                                                  0.5), // Semi-transparent blue circle
+                                                              .withOpacity(0.5),
                                                         ),
                                                       ),
                                                     );

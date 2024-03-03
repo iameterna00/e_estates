@@ -10,6 +10,12 @@ class AppThemes {
       textTheme: TextTheme(
         bodyMedium: GoogleFonts.raleway(color: Colors.black),
         titleLarge: GoogleFonts.raleway(color: Colors.black),
+        bodySmall: GoogleFonts.raleway(color: Colors.black),
+        bodyLarge: GoogleFonts.raleway(
+          color: Colors.black,
+        ),
+        titleSmall: GoogleFonts.raleway(color: Colors.black),
+        titleMedium: GoogleFonts.raleway(color: Colors.black),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
@@ -41,6 +47,9 @@ class AppThemes {
       textTheme: GoogleFonts.ralewayTextTheme(TextTheme(
         bodyMedium: GoogleFonts.raleway(color: Colors.white),
         titleLarge: GoogleFonts.raleway(color: Colors.white),
+        bodySmall: GoogleFonts.raleway(color: Colors.white),
+        bodyLarge: GoogleFonts.raleway(
+            color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
       )),
       bottomAppBarTheme:
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),

@@ -1,3 +1,4 @@
+import 'package:e_estates/widgets/home_amanities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -116,302 +117,88 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                 )),
           ),
         ),
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          child: TextButton(
-            onPressed: () {
-              showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setState) {
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height / 2,
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            const Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Text(
-                                'Add more details ',
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 200,
-                                width: MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey, width: 0.3),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Padding(
-                                      padding: EdgeInsets.all(12.0),
-                                      child: Text("Home Aminities"),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          InkWell(
-                                            highlightColor: Colors.transparent,
-                                            splashColor: Colors.transparent,
-                                            onTap: () {
-                                              setState(() {
-                                                if (selectedItems
-                                                    .contains('Laundary')) {
-                                                  selectedItems
-                                                      .remove("Laundary");
-                                                } else {
-                                                  selectedItems.add("Laundary");
-                                                }
-                                              });
-                                            },
-                                            child: Card(
-                                              elevation: 1,
-                                              child: Column(
-                                                children: [
-                                                  Stack(
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Image.asset(
-                                                          Theme.of(context)
-                                                                      .brightness ==
-                                                                  Brightness
-                                                                      .dark
-                                                              ? 'assets/icons/WashingMachineWhite.png'
-                                                              : 'assets/icons/WashingMachine.png',
-                                                          scale: 6,
-                                                        ),
-                                                      ),
-                                                      if (selectedItems
-                                                          .contains('Laundary'))
-                                                        const Positioned(
-                                                          right: 0,
-                                                          bottom: 0,
-                                                          child: CircleAvatar(
-                                                            backgroundColor:
-                                                                Colors.white,
-                                                            child: Icon(
-                                                                Icons
-                                                                    .check_circle,
-                                                                color: Colors
-                                                                    .purple,
-                                                                size: 30),
-                                                          ),
-                                                        ),
-                                                    ],
-                                                  ),
-                                                  const Text(
-                                                    '    Laundary',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            highlightColor: Colors.transparent,
-                                            splashColor: Colors.transparent,
-                                            onTap: () {
-                                              setState(() {
-                                                if (selectedItems
-                                                    .contains('Furnished')) {
-                                                  selectedItems
-                                                      .remove('Furnished');
-                                                } else {
-                                                  selectedItems
-                                                      .add('Furnished');
-                                                }
-                                              });
-                                            },
-                                            child: Card(
-                                              elevation: 1,
-                                              child: Column(
-                                                children: [
-                                                  Stack(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Image.asset(
-                                                          Theme.of(context)
-                                                                      .brightness ==
-                                                                  Brightness
-                                                                      .dark
-                                                              ? 'assets/icons/FurnishedBlack.png'
-                                                              : 'assets/icons/Furnished.png',
-                                                          scale: 6,
-                                                        ),
-                                                      ),
-                                                      if (selectedItems
-                                                          .contains(
-                                                              'Furnished'))
-                                                        const Positioned(
-                                                          right: 0,
-                                                          bottom: 0,
-                                                          child: CircleAvatar(
-                                                            backgroundColor:
-                                                                Colors.white,
-                                                            child: Icon(
-                                                                Icons
-                                                                    .check_circle,
-                                                                color: Colors
-                                                                    .purple,
-                                                                size: 30),
-                                                          ),
-                                                        ),
-                                                    ],
-                                                  ),
-                                                  const Text(
-                                                    'Furniture',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            highlightColor: Colors.transparent,
-                                            splashColor: Colors.transparent,
-                                            onTap: () {
-                                              setState(() {
-                                                if (selectedItems
-                                                    .contains('Parking')) {
-                                                  selectedItems
-                                                      .remove('Parking');
-                                                } else {
-                                                  selectedItems.add('Parking');
-                                                }
-                                              });
-                                            },
-                                            child: Card(
-                                              elevation: 1,
-                                              child: Column(
-                                                children: [
-                                                  Stack(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(8.0),
-                                                        child: Image.asset(
-                                                          Theme.of(context)
-                                                                      .brightness ==
-                                                                  Brightness
-                                                                      .dark
-                                                              ? 'assets/icons/ParkingBlack.png'
-                                                              : 'assets/icons/Parking.png',
-                                                          scale: 6,
-                                                        ),
-                                                      ),
-                                                      if (selectedItems
-                                                          .contains('Parking'))
-                                                        const Positioned(
-                                                          right: 0,
-                                                          bottom: 0,
-                                                          child: CircleAvatar(
-                                                            backgroundColor:
-                                                                Colors.white,
-                                                            child: Icon(
-                                                                Icons
-                                                                    .check_circle,
-                                                                color: Colors
-                                                                    .purple,
-                                                                size: 30),
-                                                          ),
-                                                        ),
-                                                    ],
-                                                  ),
-                                                  const Text(
-                                                    ' Parking',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          /*   Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: ElevatedButton(
-                                              onPressed: () {
-                                                widget.homeAminities(
-                                                    selectedItems);
-                                                print(
-                                                    "this is ${widget.homeAminities}");
-                                              },
-                                              child: Text('Share'),
-                                            ),
-                                          ), */
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    });
-                  });
-            },
-            style: TextButton.styleFrom(
-              padding: EdgeInsets.zero,
-              alignment: Alignment.centerLeft,
-              backgroundColor: Colors.transparent,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            child: Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
+        TextButton(
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                //  isScrollControlled: true,
+                builder: (BuildContext context) {
+                  return StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                    return Column(
                       children: [
-                        const Icon(
-                          Icons.shopping_bag,
-                          size: 16,
+                        const SizedBox(
+                          height: 45,
+                          child: Icon(Icons.drag_handle),
                         ),
-                        const SizedBox(width: 4),
-                        Text(
-                          'Add Details',
-                          style: GoogleFonts.raleway(
-                            fontSize: 15,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height / 2,
+                          width: MediaQuery.of(context).size.width,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                const Padding(
+                                  padding: EdgeInsets.all(12.0),
+                                  child: Text(
+                                    'Add more details ',
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                homeAmanities(selectedItems: selectedItems),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      widget.homeAminities(selectedItems);
+                                    },
+                                    child: Text('Share'),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
-                    ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                    ),
-                  ],
-                )),
+                    );
+                  });
+                });
+          },
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero,
+            alignment: Alignment.centerLeft,
+            backgroundColor: Colors.transparent,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
+          child: Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.shopping_bag,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Add Details',
+                        style: GoogleFonts.raleway(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                  ),
+                ],
+              )),
         ),
         Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -496,7 +283,6 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                     setState(() {
                       dropdownValue = newValue!;
                       paymentFrequency = newValue;
-                      print(paymentFrequency);
                     });
                     widget.onPaymentFrequencyChanged(paymentFrequency);
                   },

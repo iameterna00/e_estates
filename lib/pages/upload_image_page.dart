@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/widgets/location_picker.dart';
 import 'package:e_estates/widgets/upload_widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as imglib;
@@ -56,6 +57,9 @@ class _ImageUploadState extends State<ImageUpload> {
   }
 
   Future<void> uploadImage() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    String name = user?.displayName ?? "";
+    String profilePicture = user?.photoURL ?? "";
     if (_selectedImages == null ||
         _selectedImages!.isEmpty ||
         !_formKey.currentState!.validate()) {
@@ -133,6 +137,8 @@ class _ImageUploadState extends State<ImageUpload> {
         'Price': double.tryParse(priceController.text) ?? 0.0,
         'Location': location,
         'PaymentFrequency': paymentFrequency,
+        'HomeAmanities': homeAminities,
+        'uploader': {"Name": name, "ProfilePicture": profilePicture}
       });
     } catch (e) {}
 
@@ -205,7 +211,7 @@ class _ImageUploadState extends State<ImageUpload> {
                     width: 400,
                     decoration: BoxDecoration(
                       border: Border.all(width: 0.5),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child:
                         _selectedImages != null && _selectedImages!.isNotEmpty
@@ -225,23 +231,6 @@ class _ImageUploadState extends State<ImageUpload> {
                               )
                             : const Icon(Icons.add_a_photo, size: 80),
                   ),
-                ),
-                UploadWidgets(
-                  homeAminities: (newhome) {
-                    setState(() {
-                      homeAminities = newhome;
-                    });
-                  },
-                  onPaymentFrequencyChanged: (newPaymentFrequency) {
-                    setState(() {
-                      paymentFrequency = newPaymentFrequency;
-                    });
-                  },
-                  saveMystate: navigateAndReceiveLocation,
-                  titleController: titleController,
-                  descriptionController: descriptionController,
-                  priceController: priceController,
-                  highlightLocationButton: highlightedlocationButton,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -278,21 +267,48 @@ class _ImageUploadState extends State<ImageUpload> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: FilterChip(
-                            label: Text(tag),
-                            avatar: Icon(iconData, size: 20.0),
-                            selected: isSelected,
-                            onSelected: (bool selected) {
-                              setState(() {
-                                selectedTag = tag;
-                                isTagSelectionValid = true;
-                              });
-                            },
-                          ),
+                              elevation: 0,
+                              label: Text(tag),
+                              avatar: Icon(iconData, size: 20.0),
+                              selected: isSelected,
+                              onSelected: (bool selected) {
+                                setState(() {
+                                  selectedTag = tag;
+                                  isTagSelectionValid = true;
+                                });
+                              },
+                              backgroundColor: Colors.transparent,
+                              selectedColor: Colors.blue.withOpacity(0.3),
+                              shape: isSelected
+                                  ? RoundedRectangleBorder(
+                                      side: const BorderSide(
+                                        color: Colors.blue,
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8))
+                                  : null),
                         ),
                       );
                     }).toList(),
                   ),
-                )
+                ),
+                UploadWidgets(
+                  homeAminities: (newhome) {
+                    setState(() {
+                      homeAminities = newhome;
+                    });
+                  },
+                  onPaymentFrequencyChanged: (newPaymentFrequency) {
+                    setState(() {
+                      paymentFrequency = newPaymentFrequency;
+                    });
+                  },
+                  saveMystate: navigateAndReceiveLocation,
+                  titleController: titleController,
+                  descriptionController: descriptionController,
+                  priceController: priceController,
+                  highlightLocationButton: highlightedlocationButton,
+                ),
               ],
             ),
           ),

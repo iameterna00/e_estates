@@ -128,15 +128,19 @@ class TopFeed extends ConsumerWidget {
                   ),
                 ),
               ),
-              // Other Positioned widgets for title, rating, and distance
               Positioned(
                 left: 10,
                 bottom: 10,
-                child: Text(post.title,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold)),
+                right: 10,
+                child: Text(
+                  post.title,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
               ),
               Positioned(
                 top: 10,
@@ -153,7 +157,8 @@ class TopFeed extends ConsumerWidget {
                 top: 10,
                 left: 10,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: Colors.black.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(20),
@@ -163,9 +168,10 @@ class TopFeed extends ConsumerWidget {
                     children: [
                       Image.asset(
                           'assets/icons/IC_Location.png'), // Ensure this asset exists
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(distanceDisplay,
-                          style: TextStyle(color: Colors.white, fontSize: 10)),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 10)),
                     ],
                   ),
                 ),
