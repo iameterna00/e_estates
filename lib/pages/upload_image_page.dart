@@ -18,10 +18,10 @@ class ImageUpload extends StatefulWidget {
   });
 
   @override
-  _ImageUploadState createState() => _ImageUploadState();
+  ImageUploadState createState() => ImageUploadState();
 }
 
-class _ImageUploadState extends State<ImageUpload> {
+class ImageUploadState extends State<ImageUpload> {
   final ImagePicker _picker = ImagePicker();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -117,12 +117,14 @@ class _ImageUploadState extends State<ImageUpload> {
         String downloadURL = await storageReference.getDownloadURL();
         imageUrls.add(downloadURL);
       } catch (e) {
-        Navigator.of(context).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Failed to upload images. Please try again.')),
-        );
-        return;
+        if (mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+                content: Text('Failed to upload images. Please try again.')),
+          );
+          return;
+        }
       }
     }
     try {
@@ -252,7 +254,7 @@ class _ImageUploadState extends State<ImageUpload> {
 
                       bool isSelected = selectedTag == tag;
                       return AnimatedContainer(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         decoration: !isTagSelectionValid && !isSelected
                             ? BoxDecoration(
                                 boxShadow: [

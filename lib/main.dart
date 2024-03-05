@@ -2,6 +2,7 @@ import 'package:e_estates/firebase_options.dart';
 import 'package:e_estates/service/route.dart';
 import 'package:e_estates/service/theme.dart';
 import 'package:e_estates/service/themechanger.dart';
+import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +19,8 @@ void main() async {
   var box = await Hive.openBox('locationBox');
 
   await box.clear();
+  final locationNotifier = LocationNotifier();
+  await locationNotifier.fetchUserLocation();
 
   runApp(
     const ProviderScope(child: MyApp()),

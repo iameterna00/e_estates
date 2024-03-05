@@ -16,10 +16,12 @@ class LocationNotifier extends StateNotifier<LocationData?> {
   Location location = Location();
   late final Box<dynamic> locationBox;
   final distanceCache = <String, double>{};
+  LocationData? get currentLocation => state;
+  String? address;
 
   LocationNotifier() : super(null) {
     _initHive();
-    fetchUserLocation();
+    getOptimizedLocation();
     location.onLocationChanged.listen((LocationData currentLocation) {
       state = currentLocation;
       _storeLocationInHive(currentLocation);
@@ -27,43 +29,32 @@ class LocationNotifier extends StateNotifier<LocationData?> {
     configureLocationUpdates();
   }
 
+  Future<String> getStreetNameAndCity(LocationData currentLocation) async {
+    List<geo.Placemark> placemarks = await geo.placemarkFromCoordinates(
+      currentLocation.latitude!,
+      currentLocation.longitude!,
+    );
+
+    geo.Placemark place = placemarks[0];
+
+    return '${place.country}, ${place.locality}';
+  }
+
   void _initHive() async {
     await Hive.initFlutter();
     locationBox = await Hive.openBox('locationBox');
   }
 
-  void _storeLocationInHive(LocationData currentLocation) {
+  void _storeLocationInHive(LocationData currentLocation) async {
+    String address = await getStreetNameAndCity(currentLocation);
+    this.address = address;
     var locationMap = {
       'latitude': currentLocation.latitude,
       'longitude': currentLocation.longitude,
       'timestamp': currentLocation.time,
+      'address': address,
     };
     locationBox.put('location', jsonEncode(locationMap));
-  }
-
-  LocationData? _getLocationFromHive() {
-    var locationString = locationBox.get('location');
-    if (locationString != null) {
-      var locationMap = jsonDecode(locationString);
-      return LocationData.fromMap(locationMap);
-    }
-    return null;
-  }
-
-  Future<void> _fetchOrUseStoredLocation() async {
-    var storedLocation = _getLocationFromHive();
-    if (storedLocation != null && _isLocationRecent(storedLocation)) {
-      // Use the stored location if it's recent enough
-      state = storedLocation;
-    } else {
-      // Fetch a new location if there's no stored location or it's outdated
-      await fetchUserLocation();
-      if (state == null) {
-        // Handle the scenario where fetching the location fails or is not permitted
-        // For example, you could set a default location, show an error, etc.
-        // Example: state = defaultLocation;
-      }
-    }
   }
 
   Future<LocationData?> getOptimizedLocation() async {
@@ -74,14 +65,6 @@ class LocationNotifier extends StateNotifier<LocationData?> {
       await fetchUserLocation();
       return state;
     }
-  }
-
-  bool _isLocationRecent(LocationData location) {
-    // Implement your logic to determine if the location is recent enough
-    // For example, consider a location recent if it's less than 10 minutes old
-    var currentTime = DateTime.now().millisecondsSinceEpoch;
-    var locationTime = location.time!;
-    return (currentTime - locationTime) < 600000; // 10 minutes in milliseconds
   }
 
   Future<void> fetchUserLocation() async {
@@ -104,14 +87,28 @@ class LocationNotifier extends StateNotifier<LocationData?> {
     }
 
     var userLocation = await location.getLocation();
-
+    print('Fetched location: $userLocation'); // Add this line
     state = userLocation;
     _storeLocationInHive(userLocation);
   }
 
+  LocationData? _getLocationFromHive() {
+    var locationString = locationBox.get('location');
+    if (locationString != null) {
+      var locationMap = jsonDecode(locationString);
+      return LocationData.fromMap(locationMap);
+    }
+    return null;
+  }
+
+  bool _isLocationRecent(LocationData location) {
+    var currentTime = DateTime.now().millisecondsSinceEpoch;
+    var locationTime = location.time!;
+    return (currentTime - locationTime) < 300000; // 5 minutes in milliseconds
+  }
+
   void configureLocationUpdates() {
-    location.changeSettings(
-        interval: 300000, distanceFilter: 100); // 5 minutes or 100 meters
+    location.changeSettings(interval: 300000, distanceFilter: 100);
   }
 
   Future<dynamic> calculateDistance(

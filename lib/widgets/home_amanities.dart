@@ -54,24 +54,27 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/WashingMachine.png'
-                                          : 'assets/icons/WashingMachineWhite.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.local_laundry_service_rounded,
+                                      size: 75,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Laundary'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -107,25 +110,28 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/FurnishedBlack.png'
-                                          : 'assets/icons/Furnished.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.chair_rounded,
+                                      size: 75,
                                     ),
                                   ),
                                   if (widget.selectedItems
                                       .contains('Furnished'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -159,24 +165,27 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/KitchenBlack.png'
-                                          : 'assets/icons/Kitchen.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.soup_kitchen_rounded,
+                                      size: 75,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Kitchen'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -218,24 +227,27 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/WifiBlack.png'
-                                          : 'assets/icons/Wifi.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.network_wifi_rounded,
+                                      size: 75,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('FreeWifi'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -282,13 +294,19 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('CCTV'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -329,17 +347,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                               Brightness.dark
                                           ? 'assets/icons/ParkingBlack.png'
                                           : 'assets/icons/Parking.png',
-                                      scale: 6,
+                                      scale: 7,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Parking'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -360,7 +384,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 25,
           ),
           Container(
@@ -398,24 +422,27 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/LiftDark.png'
-                                          : 'assets/icons/Lift.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.elevator_rounded,
+                                      size: 75,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Lift'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -435,12 +462,10 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('GYM')) {
-                              widget.selectedItems.remove('GYM');
-                              print(widget.selectedItems);
+                            if (widget.selectedItems.contains('Gym')) {
+                              widget.selectedItems.remove('Gym');
                             } else {
-                              widget.selectedItems.add('GYM');
-                              print(widget.selectedItems);
+                              widget.selectedItems.add('Gym');
                             }
                           });
                         },
@@ -451,24 +476,27 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/GYMDark.png'
-                                          : 'assets/icons/GYM.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.fitness_center_rounded,
+                                      size: 75,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('GYM'))
-                                    const Positioned(
+                                  if (widget.selectedItems.contains('Gym'))
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -502,25 +530,28 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/SwimmingDark.png'
-                                          : 'assets/icons/SwimmingPool.png',
-                                      scale: 6,
+                                  const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(
+                                      Icons.pool_rounded,
+                                      size: 75,
                                     ),
                                   ),
                                   if (widget.selectedItems
                                       .contains('SwimmingPool'))
-                                    const Positioned(
+                                    Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
-                                        child: Icon(Icons.check_circle,
-                                            color: Colors.purple, size: 30),
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.dark
+                                              ? Colors.purple
+                                              : Colors.blue,
+                                          size: 30,
+                                        ),
                                       ),
                                     ),
                                 ],

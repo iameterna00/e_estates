@@ -121,7 +121,6 @@ class _UploadWidgetsState extends State<UploadWidgets> {
           onPressed: () {
             showModalBottomSheet(
                 context: context,
-                //  isScrollControlled: true,
                 builder: (BuildContext context) {
                   return StatefulBuilder(
                       builder: (BuildContext context, StateSetter setState) {
@@ -148,13 +147,27 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                                   ),
                                 ),
                                 homeAmanities(selectedItems: selectedItems),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      widget.homeAminities(selectedItems);
-                                    },
-                                    child: Text('Share'),
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        widget.homeAminities(selectedItems);
+                                        Navigator.pop(context);
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content: Text('Added')));
+                                      },
+                                      style: ButtonStyle(
+                                          elevation:
+                                              MaterialStateProperty.all(5),
+                                          shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)))),
+                                      child: const Text('Done'),
+                                    ),
                                   ),
                                 ),
                               ],

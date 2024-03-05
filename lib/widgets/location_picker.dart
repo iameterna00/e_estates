@@ -14,7 +14,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class LocationPickerMap extends StatefulWidget {
-  final Function(LatLng)? onLocationSelected;
+  final Function(LatLng)? onLocationSelected; //NO USE??
 
   const LocationPickerMap({
     super.key,
@@ -31,7 +31,7 @@ class _LocationPickerMapState extends State<LocationPickerMap>
       AnimatedMapController(vsync: this);
   late AnimationController _animationController;
   late Animation<double> _animation;
-  TextEditingController _searchControllerlite = TextEditingController();
+  final TextEditingController _searchControllerlite = TextEditingController();
   LatLng? mycurrentLocation;
   LatLng? selectedLocation;
   bool _isLoading = true;
@@ -70,8 +70,9 @@ class _LocationPickerMapState extends State<LocationPickerMap>
   void _fetchCurrentLocation() {
     // Access the provider using the context, which is now available
     final providerContainer = ProviderScope.containerOf(context);
-    final currentLocation =
-        providerContainer.read(locationNotifierProvider.notifier).state;
+    final currentLocation = providerContainer
+        .read(locationNotifierProvider.notifier)
+        .currentLocation;
     if (currentLocation != null) {
       setState(() {
         mycurrentLocation =

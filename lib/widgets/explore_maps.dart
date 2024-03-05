@@ -16,8 +16,10 @@ import 'package:permission_handler/permission_handler.dart';
 
 class ExploreMaps extends StatefulWidget {
   final Function(LatLng)? onLocationSelected;
+  final LatLng? singleHomeLocation;
 
-  const ExploreMaps({super.key, this.onLocationSelected});
+  const ExploreMaps(
+      {super.key, this.onLocationSelected, this.singleHomeLocation});
 
   @override
   _ExploreMaps createState() => _ExploreMaps();
@@ -39,7 +41,7 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _requestPermissions();
-    //  _locateMyCurrentPosition();
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _fetchCurrentLocation();
     });
@@ -53,10 +55,8 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
     });
     _animationController = AnimationController(
       vsync: this,
-      duration:
-          const Duration(milliseconds: 800), // Adjust duration to control speed
-    )..repeat(reverse: true); // Causes the animation to auto-reverse
-
+      duration: const Duration(milliseconds: 1200),
+    )..repeat(reverse: true);
     _animation = Tween<double>(
       begin: 0.9, // Starting scale
       end: 1.1, // Ending scale (slightly larger)
@@ -68,8 +68,9 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
   void _fetchCurrentLocation() {
     // Access the provider using the context, which is now available
     final providerContainer = ProviderScope.containerOf(context);
-    final currentLocation =
-        providerContainer.read(locationNotifierProvider.notifier).state;
+    final currentLocation = providerContainer
+        .read(locationNotifierProvider.notifier)
+        .currentLocation;
     if (currentLocation != null) {
       setState(() {
         mycurrentLocation =
@@ -77,6 +78,8 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
         _isLoading = false;
       });
       _moveToCurrentPosition();
+    } else {
+      _locateMyCurrentPosition();
     }
   }
 
@@ -117,33 +120,31 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
     }
   }
 
-  //LOCATE CURRENT POSITION
+  Future<void> _locateMyCurrentPosition() async {
+    setState(() {
+      _isLoading = true; // Indicate that loading has started
+    });
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return Future.error('Location Service are disabled.');
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      return Future.error('Location permisssion are denied');
+    }
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error('Location permissions are permanently denied');
+    }
+    Position position = await Geolocator.getCurrentPosition();
+    setState(() {
+      mycurrentLocation = LatLng(position.latitude, position.longitude);
+      _isLoading = false;
+    });
 
-  // Future<void> _locateMyCurrentPosition() async {
-  //   setState(() {
-  //     _isLoading = true; // Indicate that loading has started
-  //   });
-  //   bool serviceEnabled;
-  //   LocationPermission permission;
-  //   serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //   if (!serviceEnabled) {
-  //     return Future.error('Location Service are disabled.');
-  //   }
-  //   permission = await Geolocator.checkPermission();
-  //   if (permission == LocationPermission.denied) {
-  //     return Future.error('Location permisssion are denied');
-  //   }
-  //   if (permission == LocationPermission.deniedForever) {
-  //     return Future.error('Location permissions are permanently denied');
-  //   }
-  //   Position position = await Geolocator.getCurrentPosition();
-  //   setState(() {
-  //     mycurrentLocation = LatLng(position.latitude, position.longitude);
-  //     _isLoading = false;
-  //   });
-
-  //   _moveToCurrentPosition();
-  // }
+    _moveToCurrentPosition();
+  }
 
   void _moveToCurrentPosition() async {
     final position = await Geolocator.getCurrentPosition(
@@ -264,6 +265,14 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
                                   if (selectedLocation != null)
                                     Marker(
                                       point: selectedLocation!,
+                                      child: const Icon(
+                                        Icons.location_pin,
+                                        size: 40,
+                                      ),
+                                    ),
+                                  if (widget.singleHomeLocation != null)
+                                    Marker(
+                                      point: widget.singleHomeLocation!,
                                       child: const Icon(
                                         Icons.location_pin,
                                         size: 40,

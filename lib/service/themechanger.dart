@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
@@ -6,17 +7,17 @@ class AppThemes {
   static ThemeData lightTheme = ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      scaffoldBackgroundColor: const Color(0xFFFAFAFA),
+      scaffoldBackgroundColor: const Color.fromRGBO(245, 245, 245, 1),
       textTheme: TextTheme(
         bodyMedium: GoogleFonts.raleway(color: Colors.black),
         titleLarge: GoogleFonts.raleway(color: Colors.black),
         bodySmall: GoogleFonts.raleway(color: Colors.black),
         bodyLarge: GoogleFonts.raleway(
-          color: Colors.black,
-        ),
+            color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
         titleSmall: GoogleFonts.raleway(color: Colors.black),
         titleMedium: GoogleFonts.raleway(color: Colors.black),
       ),
+      iconTheme: const IconThemeData(color: Colors.black),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
               foregroundColor: MaterialStateProperty.all(Colors.white),
@@ -27,8 +28,10 @@ class AppThemes {
             color: Colors.black,
             fontSize: 20), // Color of the AppBar in the light theme
         iconTheme: const IconThemeData(
-            color: Colors.blue), // Color of icons in the AppBar
+            color: Colors.black), // Color of icons in the AppBar
       ),
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: Colors.black),
       bottomAppBarTheme:
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
       textButtonTheme: TextButtonThemeData(
@@ -41,9 +44,9 @@ class AppThemes {
 
   // Define the dark theme
   static ThemeData darkTheme = ThemeData(
-      useMaterial3: true, // Enable Material 3 features
-      brightness: Brightness.dark, // Set the overall theme brightness to dark
-      primarySwatch: Colors.teal, // Primary color for the app in dark theme
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: const Color.fromARGB(31, 79, 79, 79),
       textTheme: GoogleFonts.ralewayTextTheme(TextTheme(
         bodyMedium: GoogleFonts.raleway(color: Colors.white),
         titleLarge: GoogleFonts.raleway(color: Colors.white),
@@ -51,6 +54,7 @@ class AppThemes {
         bodyLarge: GoogleFonts.raleway(
             color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
       )),
+      //iconTheme: const IconThemeData(color: Colors.blue),
       bottomAppBarTheme:
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
       textButtonTheme: TextButtonThemeData(
@@ -58,5 +62,7 @@ class AppThemes {
               foregroundColor: const MaterialStatePropertyAll(
                   Color.fromARGB(255, 255, 255, 255)),
               elevation: MaterialStateProperty.all(4),
-              backgroundColor: const MaterialStatePropertyAll(Colors.black))));
+              backgroundColor: const MaterialStatePropertyAll(Colors.black))),
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: Colors.blue));
 }

@@ -20,7 +20,7 @@ class CustomBottomAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final photoUrl = ref.watch(userPhotoURLProvider);
+    final photoUrl = ref.watch(userProvider).photoURL;
 
     return BottomAppBar(
       height: 60,
@@ -28,19 +28,19 @@ class CustomBottomAppBar extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            icon: const Icon(Icons.explore_outlined, size: 25),
+            icon: const Icon(Icons.explore_rounded, size: 25),
             onPressed: onExplore,
           ),
           IconButton(
-            icon: const Icon(Icons.notifications_outlined, size: 25),
+            icon: const Icon(Icons.notifications_rounded, size: 25),
             onPressed: onFavorites,
           ),
           IconButton(
-            icon: const Icon(Icons.add_box_outlined, size: 25),
+            icon: const Icon(Icons.add_box_rounded, size: 25),
             onPressed: onAdd,
           ),
           IconButton(
-            icon: const Icon(Icons.chat_outlined, size: 25),
+            icon: const Icon(Icons.chat_rounded, size: 25),
             onPressed: onChat,
           ),
           Container(

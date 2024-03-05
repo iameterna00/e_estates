@@ -13,7 +13,6 @@ class TopFeedNotifier extends StateNotifier<AsyncValue<List<ImagePost>>> {
   }
 
   Future<void> fetchhPosts() async {
-    print('Fetching posts...');
     try {
       final posts = await fetchPost();
       state = AsyncValue.data(posts);

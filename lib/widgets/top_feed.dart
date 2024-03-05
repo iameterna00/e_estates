@@ -4,7 +4,6 @@ import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -136,13 +135,13 @@ class TopFeed extends ConsumerWidget {
                   post.title,
                   style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 10,
                       fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 ),
               ),
-              Positioned(
+              /*  Positioned(
                 top: 10,
                 right: 10,
                 child: RatingBarIndicator(
@@ -152,7 +151,7 @@ class TopFeed extends ConsumerWidget {
                   itemCount: 5,
                   itemSize: 18.0,
                 ),
-              ),
+              ), */
               Positioned(
                 top: 10,
                 left: 10,

@@ -109,14 +109,12 @@ class _PanelControllerState extends State<PanelController> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 5.0),
-        decoration: const ShapeDecoration(
-          color: Color.fromARGB(255, 56, 56, 56),
-          shadows: [
-            BoxShadow(
-                blurRadius: 5.0, spreadRadius: 2.0, color: Color(0x11000000)),
-          ],
-          shape: RoundedRectangleBorder(
+        width: MediaQuery.of(context).size.width,
+        decoration: ShapeDecoration(
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : const Color.fromARGB(255, 24, 24, 24),
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(18.0),
               topRight: Radius.circular(18.0),
@@ -142,14 +140,10 @@ class _PanelControllerState extends State<PanelController> {
           height: 50.0,
           child: Center(
             child: Icon(
-              Icons.swipe_up,
+              Icons.drag_handle,
               color: Color.fromARGB(255, 124, 124, 124),
             ), // Arrow icon
           ),
-        ),
-        const Divider(
-          color: Color.fromARGB(255, 80, 80, 80),
-          height: 0.1,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -163,15 +157,12 @@ class _PanelControllerState extends State<PanelController> {
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: 'Search location',
-              hintStyle: const TextStyle(color: Colors.white),
               prefixIcon: const Icon(
                 Icons.search,
-                color: Colors.white,
               ),
               suffixIcon: IconButton(
                 icon: const Icon(
                   Icons.clear,
-                  color: Colors.white,
                 ),
                 onPressed: () {
                   _searchController.clear();
@@ -182,7 +173,7 @@ class _PanelControllerState extends State<PanelController> {
                 },
               ),
             ),
-            style: const TextStyle(color: Colors.white),
+            style: Theme.of(context).textTheme.bodyMedium,
             onChanged: (String value) async {
               if (value.isNotEmpty) {
                 await searchLocations(value);
@@ -202,7 +193,7 @@ class _PanelControllerState extends State<PanelController> {
               return ListTile(
                 title: Text(
                   result,
-                  style: const TextStyle(color: Colors.white),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 // Assuming result is a String
                 onTap: () {

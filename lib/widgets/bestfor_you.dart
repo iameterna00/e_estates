@@ -1,11 +1,9 @@
 import 'package:e_estates/pages/topfeed_detaipage.dart';
 import 'package:e_estates/service/image_post.dart';
-
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -79,7 +77,7 @@ class BestForYou extends ConsumerWidget {
   Widget buildPostItem(
       BuildContext context, ImagePost post, String distanceDisplay) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 0, bottom: 10),
+      padding: const EdgeInsets.only(left: 10, right: 0, bottom: 15),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -108,8 +106,8 @@ class BestForYou extends ConsumerWidget {
                     child: Image.network(
                       post.imageUrls[0],
                       fit: BoxFit.cover,
-                      width: 120,
-                      height: 120,
+                      width: 150,
+                      height: 150,
                     ),
                   ),
                   Positioned(
@@ -158,7 +156,7 @@ class BestForYou extends ConsumerWidget {
                       "Rs ${NumberFormat('#,##,###.##', 'en_IN').format(post.price)}/ ${post.paymentfrequency}",
                       style: const TextStyle(
                         color: Colors.blue,
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.bold,
                       ),
                       maxLines: 2,
@@ -181,16 +179,20 @@ class BestForYou extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 4.0),
                           decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(6.0),
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? Colors.white
+                                    : Colors.black,
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: Text(
-                            tag,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
-                          ),
+                          child: Text(tag,
+                              style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.grey
+                                    : Colors.white,
+                                fontSize: 10,
+                              )),
                         );
                       }).toList(),
                     )
