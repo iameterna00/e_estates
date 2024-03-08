@@ -45,7 +45,7 @@ class TopFeed extends ConsumerWidget {
                     ref.watch(postDistanceProvider(post));
                 return distanceAsyncValue.when(
                   data: (distance) {
-                    if (distance is double && distance <= 50.0) {
+                    if (distance is double && distance <= 10.0) {
                       String distanceDisplay =
                           '${distance.toStringAsFixed(1)} Km';
                       return buildPostItem(context, post, distanceDisplay);

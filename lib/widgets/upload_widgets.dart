@@ -1,4 +1,5 @@
 import 'package:e_estates/widgets/home_amanities.dart';
+import 'package:e_estates/widgets/tenent_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,8 +10,12 @@ class UploadWidgets extends StatefulWidget {
   final TextEditingController priceController;
   final Function saveMystate;
   final bool highlightLocationButton;
+  final bool checkedLocationButton;
+  final bool highlightedAmanitiesButton;
+
   final Function(String?) onPaymentFrequencyChanged;
   final Function(List<String>) homeAminities;
+  final Function(List<String>) tenentPreferences;
 
   const UploadWidgets(
       {super.key,
@@ -20,15 +25,20 @@ class UploadWidgets extends StatefulWidget {
       required this.priceController,
       required this.highlightLocationButton,
       required this.onPaymentFrequencyChanged,
-      required this.homeAminities});
+      required this.homeAminities,
+      required this.checkedLocationButton,
+      required this.highlightedAmanitiesButton,
+      required this.tenentPreferences});
 
   @override
   State<UploadWidgets> createState() => _UploadWidgetsState();
 }
 
 class _UploadWidgetsState extends State<UploadWidgets> {
+  bool amanitiesChecker = false;
   String? paymentFrequency = 'Monthly';
   List<String> selectedItems = [];
+  List<String> selectedPreference = [];
   String dropdownValue = 'Monthly';
   @override
   void initState() {
@@ -43,6 +53,7 @@ class _UploadWidgetsState extends State<UploadWidgets> {
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: TextFormField(
             controller: widget.titleController,
+            style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
                 hintText: 'Write a title...',
                 hintStyle: GoogleFonts.raleway(
@@ -109,8 +120,10 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                         ),
                       ],
                     ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
+                    Icon(
+                      widget.checkedLocationButton
+                          ? Icons.check_circle_rounded
+                          : Icons.arrow_forward_ios,
                       size: 16,
                     ),
                   ],
@@ -120,69 +133,78 @@ class _UploadWidgetsState extends State<UploadWidgets> {
         TextButton(
           onPressed: () {
             showModalBottomSheet(
+                backgroundColor:
+                    Theme.of(context).brightness == Brightness.light
+                        ? const Color.fromRGBO(245, 245, 245, 1)
+                        : Colors.black,
                 context: context,
-                builder: (BuildContext context) {
-                  return StatefulBuilder(
-                      builder: (BuildContext context, StateSetter setState) {
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 45,
-                          child: Icon(Icons.drag_handle),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 2,
-                          width: MediaQuery.of(context).size.width,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                const Padding(
-                                  padding: EdgeInsets.all(12.0),
-                                  child: Text(
-                                    'Add more details ',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                homeAmanities(selectedItems: selectedItems),
-                                Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        widget.homeAminities(selectedItems);
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(const SnackBar(
-                                                content: Text('Added')));
-                                      },
-                                      style: ButtonStyle(
-                                          elevation:
-                                              MaterialStateProperty.all(5),
-                                          shape: MaterialStateProperty.all(
-                                              RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10)))),
-                                      child: const Text('Done'),
+                isScrollControlled: true,
+                builder: (context) => DraggableScrollableSheet(
+                      expand: false,
+                      initialChildSize: 0.75, // 100% of screen height
+                      minChildSize: 0.5, // 50% of screen height
+                      maxChildSize: 1, // 100% of screen height
+                      builder: (BuildContext context,
+                          ScrollController scrollController) {
+                        return SingleChildScrollView(
+                          controller: scrollController,
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 85,
+                                child: Icon(Icons.drag_handle_rounded),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  const Padding(
+                                    padding: EdgeInsets.all(12.0),
+                                    child: Text(
+                                      'Add more details ',
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
+                                  homeAmanities(selectedItems: selectedItems),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          widget.homeAminities(selectedItems);
+                                          amanitiesChecker = true;
+                                          Navigator.pop(context);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                                  content: Text('Added')));
+                                        },
+                                        style: ButtonStyle(
+                                            elevation:
+                                                MaterialStateProperty.all(5),
+                                            shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)))),
+                                        child: const Text('Done'),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    );
-                  });
-                });
+                        );
+                      },
+                    ));
           },
           style: TextButton.styleFrom(
             padding: EdgeInsets.zero,
             alignment: Alignment.centerLeft,
-            backgroundColor: Colors.transparent,
+            backgroundColor: widget.highlightedAmanitiesButton
+                ? Colors.red[300]!.withOpacity(0.5)
+                : Colors.transparent,
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
           child: Padding(
@@ -206,8 +228,10 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                       ),
                     ],
                   ),
-                  const Icon(
-                    Icons.arrow_forward_ios,
+                  Icon(
+                    amanitiesChecker
+                        ? Icons.check_circle_rounded
+                        : Icons.arrow_forward_ios,
                     size: 16,
                   ),
                 ],
@@ -216,7 +240,77 @@ class _UploadWidgetsState extends State<UploadWidgets> {
         Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           child: TextButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.light
+                          ? const Color.fromRGBO(245, 245, 245, 1)
+                          : Colors.black,
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) => DraggableScrollableSheet(
+                        expand: false,
+                        initialChildSize: 0.75, // 100% of screen height
+                        minChildSize: 0.5, // 50% of screen height
+                        maxChildSize: 1, // 100% of screen height
+                        builder: (BuildContext context,
+                            ScrollController scrollController) {
+                          return SingleChildScrollView(
+                            controller: scrollController,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 85,
+                                  child: Icon(Icons.drag_handle_rounded),
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    const Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: Text(
+                                        'Add more details ',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    TenantPreference(
+                                      selectedPreferences: selectedPreference,
+                                    ),
+                                    Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: ElevatedButton(
+                                          onPressed: () {
+                                            widget.tenentPreferences(
+                                                selectedPreference);
+                                            amanitiesChecker = true;
+                                            Navigator.pop(context);
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text('Added')));
+                                          },
+                                          style: ButtonStyle(
+                                              elevation:
+                                                  MaterialStateProperty.all(5),
+                                              shape: MaterialStateProperty.all(
+                                                  RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10)))),
+                                          child: const Text('Done'),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ));
+            },
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
               alignment: Alignment.centerLeft,
@@ -262,7 +356,8 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                   });
                 },
                 controller: widget.priceController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
                 ],

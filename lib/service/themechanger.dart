@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemes {
@@ -16,6 +16,9 @@ class AppThemes {
             color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
         titleSmall: GoogleFonts.raleway(color: Colors.black),
         titleMedium: GoogleFonts.raleway(color: Colors.black),
+      ),
+      cardTheme: const CardTheme(
+        color: Colors.white,
       ),
       iconTheme: const IconThemeData(color: Colors.black),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -54,6 +57,9 @@ class AppThemes {
         bodyLarge: GoogleFonts.raleway(
             color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
       )),
+      cardTheme: const CardTheme(
+        color: Colors.black,
+      ),
       //iconTheme: const IconThemeData(color: Colors.blue),
       bottomAppBarTheme:
           const BottomAppBarTheme(color: Colors.transparent, elevation: 0),

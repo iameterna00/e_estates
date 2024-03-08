@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class homeAmanities extends StatefulWidget {
-  const homeAmanities({
+class TenantPreference extends StatefulWidget {
+  const TenantPreference({
     super.key,
-    required this.selectedItems,
+    required this.selectedPreferences,
   });
 
-  final List<String> selectedItems;
+  final List<String> selectedPreferences;
 
   @override
-  State<homeAmanities> createState() => _homeAmanitiesState();
+  State<TenantPreference> createState() => _TenantPreference();
 }
 
-class _homeAmanitiesState extends State<homeAmanities> {
+class _TenantPreference extends State<TenantPreference> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +38,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
               children: [
                 const Padding(
                   padding: EdgeInsets.all(12.0),
-                  child: Text("Select Home Aminities"),
+                  child: Text("Who do you want to rent to?"),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -48,10 +50,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('Laundary')) {
-                              widget.selectedItems.remove("Laundary");
+                            if (widget.selectedPreferences.contains('Family')) {
+                              widget.selectedPreferences.remove("Family");
                             } else {
-                              widget.selectedItems.add("Laundary");
+                              widget.selectedPreferences.add("Family");
+                              widget.selectedPreferences.remove("Any");
                             }
                           });
                         },
@@ -61,25 +64,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.local_laundry_service_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/family.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('Laundary'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('Family'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
                                           Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          color: Colors.blue,
                                           size: 30,
                                         ),
                                       ),
@@ -87,7 +88,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'Laundary',
+                                'Family',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -101,12 +102,13 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('Furnished')) {
-                              widget.selectedItems.remove('Furnished');
-                              print(widget.selectedItems);
+                            if (widget.selectedPreferences
+                                .contains('Female Student')) {
+                              widget.selectedPreferences
+                                  .remove('Female Student');
                             } else {
-                              widget.selectedItems.add('Furnished');
-                              print(widget.selectedItems);
+                              widget.selectedPreferences.add('Female Student');
+                              widget.selectedPreferences.remove("Any");
                             }
                           });
                         },
@@ -117,26 +119,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.chair_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/studentfemaleblack.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems
-                                      .contains('Furnished'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('Female Student'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
                                           Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          color: Colors.blue,
                                           size: 30,
                                         ),
                                       ),
@@ -144,7 +143,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'Furnished',
+                                'Female Student',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -158,10 +157,12 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('Kitchen')) {
-                              widget.selectedItems.remove('Kitchen');
+                            if (widget.selectedPreferences
+                                .contains('Male Student')) {
+                              widget.selectedPreferences.remove('Male Student');
                             } else {
-                              widget.selectedItems.add('Kitchen');
+                              widget.selectedPreferences.add('Male Student');
+                              widget.selectedPreferences.remove("Any");
                             }
                           });
                         },
@@ -172,25 +173,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.soup_kitchen_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/studentmale.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('Kitchen'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('Male Student'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
                                           Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          color: Colors.blue,
                                           size: 30,
                                         ),
                                       ),
@@ -198,7 +197,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'Kitchen',
+                                'Male Student',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -221,10 +220,12 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('FreeWifi')) {
-                              widget.selectedItems.remove("FreeWifi");
+                            if (widget.selectedPreferences
+                                .contains('MaleWorker')) {
+                              widget.selectedPreferences.remove("MaleWorker");
                             } else {
-                              widget.selectedItems.add("FreeWifi");
+                              widget.selectedPreferences.add("MaleWorker");
+                              widget.selectedPreferences.remove("Any");
                             }
                           });
                         },
@@ -233,85 +234,24 @@ class _homeAmanitiesState extends State<homeAmanities> {
                           child: Column(
                             children: [
                               Stack(
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.network_wifi_rounded,
-                                      size: 75,
-                                    ),
-                                  ),
-                                  if (widget.selectedItems.contains('FreeWifi'))
-                                    Positioned(
-                                      right: 0,
-                                      bottom: 0,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        child: Icon(
-                                          Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
-                                          size: 30,
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
-                              const Text(
-                                'Free Wifi',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        highlightColor: Colors.transparent,
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            if (widget.selectedItems.contains('CCTV')) {
-                              widget.selectedItems.remove('CCTV');
-                              print(widget.selectedItems);
-                            } else {
-                              widget.selectedItems.add('CCTV');
-                              print(widget.selectedItems);
-                            }
-                          });
-                        },
-                        child: Card(
-                          elevation: 0,
-                          child: Column(
-                            children: [
-                              Stack(
-                                alignment: Alignment.bottomRight,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/CCTVBlack.png'
-                                          : 'assets/icons/CCTV.png',
+                                      'assets/icons/businessman.png',
                                       scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('CCTV'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('MaleWorker'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
                                           Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          color: Colors.blue,
                                           size: 30,
                                         ),
                                       ),
@@ -319,7 +259,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'CCTV',
+                                'MaleWorker',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -333,10 +273,13 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('Parking')) {
-                              widget.selectedItems.remove('Parking');
+                            if (widget.selectedPreferences
+                                .contains('Female Worker')) {
+                              widget.selectedPreferences
+                                  .remove('Female Worker');
                             } else {
-                              widget.selectedItems.add('Parking');
+                              widget.selectedPreferences.add('Female Worker');
+                              widget.selectedPreferences.remove("Any");
                             }
                           });
                         },
@@ -350,25 +293,20 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/ParkingBlack.png'
-                                          : 'assets/icons/Parking.png',
-                                      scale: 7,
+                                      'assets/icons/businesswoman.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('Parking'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('Female Worker'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
                                           Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          color: Colors.blue,
                                           size: 30,
                                         ),
                                       ),
@@ -376,7 +314,60 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                ' Parking',
+                                'Female Worker',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        highlightColor: Colors.transparent,
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          setState(() {
+                            if (widget.selectedPreferences.contains('Any')) {
+                              widget.selectedPreferences.remove("Any");
+                            } else {
+                              widget.selectedPreferences.clear();
+                              widget.selectedPreferences.add('Any');
+                            }
+                          });
+                        },
+                        child: Card(
+                          elevation: 0,
+                          child: Column(
+                            children: [
+                              Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/all.png',
+                                      scale: 6,
+                                    ),
+                                  ),
+                                  if (widget.selectedPreferences
+                                      .contains('Any'))
+                                    const Positioned(
+                                      right: 0,
+                                      bottom: 0,
+                                      child: CircleAvatar(
+                                        backgroundColor: Colors.white,
+                                        child: Icon(
+                                          Icons.check_circle,
+                                          color: Colors.blue,
+                                          size: 30,
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                              const Text(
+                                ' Any',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -411,7 +402,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
               children: [
                 const Padding(
                   padding: EdgeInsets.all(12.0),
-                  child: Text("Facilities"),
+                  child: Text("Your Preferences"),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -423,10 +414,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('Lift')) {
-                              widget.selectedItems.remove("Lift");
+                            if (widget.selectedPreferences
+                                .contains('No Smooking')) {
+                              widget.selectedPreferences.remove("No Smooking");
                             } else {
-                              widget.selectedItems.add("Lift");
+                              widget.selectedPreferences.add("No Smooking");
                             }
                           });
                         },
@@ -436,25 +428,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.elevator_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/no-smoking.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('Lift'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('No Smooking'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
-                                          Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          Icons.cancel_rounded,
+                                          color: Colors.red,
                                           size: 30,
                                         ),
                                       ),
@@ -462,7 +452,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'Lift',
+                                'Smooking',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -476,10 +466,10 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('Gym')) {
-                              widget.selectedItems.remove('Gym');
+                            if (widget.selectedPreferences.contains('Pets')) {
+                              widget.selectedPreferences.remove('Pets');
                             } else {
-                              widget.selectedItems.add('Gym');
+                              widget.selectedPreferences.add('Pets');
                             }
                           });
                         },
@@ -490,25 +480,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.fitness_center_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/pets.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems.contains('Gym'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('Pets'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
-                                          Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          Icons.cancel_rounded,
+                                          color: Colors.red,
                                           size: 30,
                                         ),
                                       ),
@@ -516,7 +504,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'Gym',
+                                'Pets',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -530,10 +518,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                         splashColor: Colors.transparent,
                         onTap: () {
                           setState(() {
-                            if (widget.selectedItems.contains('SwimmingPool')) {
-                              widget.selectedItems.remove('SwimmingPool');
+                            if (widget.selectedPreferences
+                                .contains('Night Shift')) {
+                              widget.selectedPreferences.remove('Night Shift');
                             } else {
-                              widget.selectedItems.add('SwimmingPool');
+                              widget.selectedPreferences.add('Night Shift');
                             }
                           });
                         },
@@ -544,26 +533,23 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.pool_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/nightshift.png',
+                                      scale: 6,
                                     ),
                                   ),
-                                  if (widget.selectedItems
-                                      .contains('SwimmingPool'))
-                                    Positioned(
+                                  if (widget.selectedPreferences
+                                      .contains('Night Shift'))
+                                    const Positioned(
                                       right: 0,
                                       bottom: 0,
                                       child: CircleAvatar(
                                         backgroundColor: Colors.white,
                                         child: Icon(
-                                          Icons.check_circle,
-                                          color: Theme.of(context).brightness ==
-                                                  Brightness.dark
-                                              ? Colors.purple
-                                              : Colors.blue,
+                                          Icons.cancel_rounded,
+                                          color: Colors.red,
                                           size: 30,
                                         ),
                                       ),
@@ -571,7 +557,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                 ],
                               ),
                               const Text(
-                                'SwimmingPool',
+                                'Night Shift',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),

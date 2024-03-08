@@ -124,8 +124,12 @@ class LocationNotifier extends StateNotifier<LocationData?> {
           await geo.placemarkFromCoordinates(destLatitude, destLongitude);
       return placemarks.first.name ?? 'Nepal ';
     }
+    if (closeEnough(
+        state!.latitude!, state!.longitude!, destLatitude, destLongitude)) {
+      return 0.0;
+    }
 
-    const double radius = 2.0;
+    const double radius = 1.0;
     double straightLineDistance = Geolocator.distanceBetween(
           state!.latitude!,
           state!.longitude!,
@@ -164,7 +168,7 @@ class LocationNotifier extends StateNotifier<LocationData?> {
   }
 
   bool closeEnough(double lat1, double lon1, double lat2, double lon2) {
-    const double threshold = 0.001; // Adjust threshold to your needs
+    const double threshold = 0.001;
     return (lat1 - lat2).abs() < threshold && (lon1 - lon2).abs() < threshold;
   }
 }

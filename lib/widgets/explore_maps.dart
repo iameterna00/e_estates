@@ -177,8 +177,11 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
             ? const Center(child: CircularProgressIndicator())
             : Consumer(
                 builder: (context, ref, child) {
+                  final theme = Theme.of(context).brightness;
                   ref.watch(cachedTileProviderFamily(
-                    "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?style=mapbox://styles/mapbox/outdoors-v12?optimize=true&access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
+                    theme == Brightness.dark
+                        ? "https://api.maptiler.com/maps/bright-v2-dark/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI"
+                        : "https://api.maptiler.com/maps/streets-v2-light/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI",
                   ));
 
                   return FlutterMap(
@@ -201,9 +204,14 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
                     children: <Widget>[
                       TileLayer(
                         tileProvider: CachedTileProvider(
-                          urlTemplate:
-                              "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?style=mapbox://styles/mapbox/outdoors-v12?optimize=true&access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
-                          cacheBox: Hive.box('tileCache'),
+                          urlTemplate: Theme.of(context).brightness ==
+                                  Brightness.dark
+                              ? "https://api.maptiler.com/maps/bright-v2-dark/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI"
+                              : "https://api.maptiler.com/maps/streets-v2-light/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI",
+                          cacheBox: Hive.box(
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? 'darkTileCache'
+                                  : 'lightTileCache'),
                         ),
                         additionalOptions: const {
                           'apiKey':

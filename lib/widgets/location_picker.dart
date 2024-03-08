@@ -67,7 +67,7 @@ class _LocationPickerMapState extends State<LocationPickerMap>
     );
   }
 
-  void _fetchCurrentLocation() {
+  Future<void> _fetchCurrentLocation() async {
     // Access the provider using the context, which is now available
     final providerContainer = ProviderScope.containerOf(context);
     final currentLocation = providerContainer
@@ -80,8 +80,58 @@ class _LocationPickerMapState extends State<LocationPickerMap>
         _isLoading = false;
       });
       _moveToCurrentPosition();
+      updateLocationName();
     } else {
       _locateMyCurrentPosition();
+    }
+  }
+
+  String buildLocationName(Placemark place) {
+    List<String> locationParts = [];
+
+    if (place.subLocality != null && place.subLocality!.isNotEmpty) {
+      locationParts.add(place.subLocality!);
+    }
+
+    if (place.street != null && place.street!.isNotEmpty) {
+      locationParts.add(place.street!);
+    }
+
+    if (place.locality != null && place.locality!.isNotEmpty) {
+      locationParts.add(place.locality!);
+    }
+
+    return locationParts.join(', ');
+  }
+
+  void updateLocationName() async {
+    final providerContainer = ProviderScope.containerOf(context);
+    final currentLocation = providerContainer
+        .read(locationNotifierProvider.notifier)
+        .currentLocation;
+    if (currentLocation != null) {
+      // Fetch the placemark data for the current location
+      List<Placemark> placemarks = await placemarkFromCoordinates(
+          currentLocation.latitude!, currentLocation.longitude!);
+
+      Placemark place = placemarks.first;
+
+      // Iterate over the placemarks until a non-empty street name is found
+      for (Placemark p in placemarks) {
+        if (p.street != null &&
+            p.street!.isNotEmpty &&
+            !p.street!.contains(RegExp(r'[!@#\$%^&*(),.?"+:{}|<>]'))) {
+          place = p;
+          break;
+        }
+      }
+
+      String locationName = buildLocationName(place);
+
+      // Update the search bar with the location name
+      setState(() {
+        _searchControllerlite.text = locationName;
+      });
     }
   }
 
@@ -154,7 +204,7 @@ class _LocationPickerMapState extends State<LocationPickerMap>
     final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     final currentLocation = LatLng(position.latitude, position.longitude);
-
+    updateLocationName();
     setState(() {
       mycurrentLocation = currentLocation;
       selectedLocation = null;
@@ -183,10 +233,12 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                     child:
                         CircularProgressIndicator()) // Show loading indicator while loading
                 : Consumer(builder: (context, ref, child) {
+                    final theme = Theme.of(context).brightness;
                     ref.watch(cachedTileProviderFamily(
-                      "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
+                      theme == Brightness.dark
+                          ? "https://api.maptiler.com/maps/bright-v2-dark/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI"
+                          : "https://api.maptiler.com/maps/streets-v2-light/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI",
                     ));
-
                     return FlutterMap(
                       mapController: _mapController.mapController,
                       options: MapOptions(
@@ -213,7 +265,6 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                           // Check if we got any results
                           if (placemarks.isNotEmpty) {
                             Placemark place = placemarks.first;
-                            String locationName;
 
                             // Iterate over the placemarks until a non-empty street name is found
                             for (Placemark p in placemarks) {
@@ -226,28 +277,11 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                               }
                             }
 
-                            List<String> locationParts = [];
-
-                            if (place.subLocality != null &&
-                                place.subLocality!.isNotEmpty) {
-                              locationParts.add(place.subLocality!);
-                            }
-
-                            if (place.street != null &&
-                                place.street!.isNotEmpty) {
-                              locationParts.add(place.street!);
-                            }
-
-                            if (place.locality != null &&
-                                place.locality!.isNotEmpty) {
-                              locationParts.add(place.locality!);
-                            }
-
-                            locationName = locationParts.join(', ');
-
+                            String locationNameSelected =
+                                buildLocationName(place);
                             // Update the search bar with the location name
                             setState(() {
-                              _searchControllerlite.text = locationName;
+                              _searchControllerlite.text = locationNameSelected;
                             });
                           }
                         },
@@ -255,9 +289,14 @@ class _LocationPickerMapState extends State<LocationPickerMap>
                       children: <Widget>[
                         TileLayer(
                           tileProvider: CachedTileProvider(
-                            urlTemplate:
-                                "https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5pc2hoLWpvc2hpIiwiYSI6ImNscnl6YWg4NjF1ZWYycW5hNTN1YmRmZWYifQ.Tn3WvzCor5H1w0Fkq9u2aQ",
-                            cacheBox: Hive.box('tileCache'),
+                            urlTemplate: Theme.of(context).brightness ==
+                                    Brightness.dark
+                                ? "https://api.maptiler.com/maps/bright-v2-dark/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI"
+                                : "https://api.maptiler.com/maps/streets-v2-light/{z}/{x}/{y}.png?key=rl2E7qJsNHe3PFmq0WjI",
+                            cacheBox: Hive.box(
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? 'darkTileCache'
+                                    : 'lightTileCache'),
                           ),
                           additionalOptions: const {
                             'apiKey':

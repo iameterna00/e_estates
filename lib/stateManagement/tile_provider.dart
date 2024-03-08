@@ -7,9 +7,13 @@ import 'package:hive/hive.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:location/location.dart';
 
+final themeProvider = StateProvider<Brightness>((ref) => Brightness.light);
+
 final cachedTileProviderFamily =
     Provider.family<CachedTileProvider, String>((ref, urlTemplate) {
-  final cacheBox = Hive.box('tileCache');
+  final theme = ref.watch(themeProvider);
+  final cacheBox =
+      Hive.box(theme == Brightness.dark ? 'darkTileCache' : 'lightTileCache');
   final locationData = ref.watch(locationNotifierProvider);
   return CachedTileProvider(
       urlTemplate: urlTemplate, cacheBox: cacheBox, locationData: locationData);

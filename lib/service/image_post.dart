@@ -48,7 +48,7 @@ class ImagePost {
           : 'Monthly',
       homeAminities: data.containsKey('HomeAmanities')
           ? List<String>.from(data['HomeAmanities'])
-          : null,
+          : [],
       uploaderName: data['uploader']?['Name'],
       uploaderProfilePicture: data['uploader']?['ProfilePicture'],
     );

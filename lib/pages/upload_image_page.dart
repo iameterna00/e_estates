@@ -32,13 +32,17 @@ class ImageUploadState extends State<ImageUpload> {
   List<String> tags = ["Rent", "Apartment", "Hotel"];
   String? selectedTag;
   bool highlightedlocationButton = false;
+  bool highlightedAmanitiesButton = false;
+  bool checkedlocationButton = false;
   bool isTagSelectionValid = true;
   bool _locationPicked = false;
+  bool _amanitiesPicked = false;
   double? latitude;
   double? longitude;
   String? location;
   String? paymentFrequency;
   List<String>? homeAminities;
+  List<String>? tenentPreferences;
 
   Future<void> requestPermission() async {
     var status = await Permission.storage.status;
@@ -72,9 +76,18 @@ class ImageUploadState extends State<ImageUpload> {
 
       return;
     }
+
     if (_locationPicked == false) {
       setState(() {
         highlightedlocationButton = true;
+      });
+
+      return;
+    }
+    if (_amanitiesPicked == false) {
+      setState(() {
+        highlightedAmanitiesButton = true;
+        print(" hellos $highlightedAmanitiesButton");
       });
 
       return;
@@ -131,7 +144,7 @@ class ImageUploadState extends State<ImageUpload> {
       await FirebaseFirestore.instance.collection('image').add({
         'Title': titleController.text,
         'Description': descriptionController.text,
-        'urls': imageUrls, // Save list of image URLs
+        'urls': imageUrls,
         'uploadedAt': FieldValue.serverTimestamp(),
         'latitude': latitude,
         'longitude': longitude,
@@ -140,6 +153,7 @@ class ImageUploadState extends State<ImageUpload> {
         'Location': location,
         'PaymentFrequency': paymentFrequency,
         'HomeAmanities': homeAminities,
+        'TenantPreferences': tenentPreferences,
         'uploader': {"Name": name, "ProfilePicture": profilePicture}
       });
     } catch (e) {}
@@ -239,10 +253,11 @@ class ImageUploadState extends State<ImageUpload> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: tags.map((tag) {
-                      IconData iconData = Icons.error; // Default icon
+                      IconData iconData = Icons.error;
                       switch (tag) {
                         case "Rent":
                           iconData = Icons.house;
+
                           break;
                         case "Apartment":
                           iconData = Icons.apartment;
@@ -279,7 +294,10 @@ class ImageUploadState extends State<ImageUpload> {
                                   isTagSelectionValid = true;
                                 });
                               },
-                              backgroundColor: Colors.transparent,
+                              backgroundColor: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.black
+                                  : Colors.white,
                               selectedColor: Colors.blue.withOpacity(0.3),
                               shape: isSelected
                                   ? RoundedRectangleBorder(
@@ -298,6 +316,7 @@ class ImageUploadState extends State<ImageUpload> {
                   homeAminities: (newhome) {
                     setState(() {
                       homeAminities = newhome;
+                      _amanitiesPicked = true;
                     });
                   },
                   onPaymentFrequencyChanged: (newPaymentFrequency) {
@@ -310,6 +329,11 @@ class ImageUploadState extends State<ImageUpload> {
                   descriptionController: descriptionController,
                   priceController: priceController,
                   highlightLocationButton: highlightedlocationButton,
+                  checkedLocationButton: checkedlocationButton,
+                  highlightedAmanitiesButton: highlightedAmanitiesButton,
+                  tenentPreferences: (tenants) {
+                    tenentPreferences = tenants;
+                  },
                 ),
               ],
             ),
@@ -333,6 +357,7 @@ class ImageUploadState extends State<ImageUpload> {
       print("Selected location: $result");
 
       setState(() {
+        checkedlocationButton = true;
         _locationPicked = true;
         latitude = result['latitude'];
         longitude = result['longitude'];
