@@ -1,3 +1,4 @@
+import 'package:e_estates/pages/discover_page.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,7 @@ class CustomBottomAppBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final photoUrl = ref.watch(userProvider).photoURL;
+    final userid = ref.watch(userProvider).uid;
 
     return BottomAppBar(
       height: 60,
@@ -33,7 +35,14 @@ class CustomBottomAppBar extends ConsumerWidget {
           ),
           IconButton(
             icon: const Icon(Icons.notifications_rounded, size: 25),
-            onPressed: onFavorites,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => UsersListPage(),
+                ),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.add_box_rounded, size: 25),
@@ -41,7 +50,14 @@ class CustomBottomAppBar extends ConsumerWidget {
           ),
           IconButton(
             icon: const Icon(Icons.chat_rounded, size: 25),
-            onPressed: onChat,
+            onPressed: () {
+              /*     Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatListPage(currentUserId: userid),
+                ),
+              ); */
+            },
           ),
           Container(
             width: 48,

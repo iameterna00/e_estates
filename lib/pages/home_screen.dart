@@ -1,12 +1,12 @@
+import 'package:e_estates/pages/my_profilepage.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/widgets/bestfor_you.dart';
-import 'package:e_estates/widgets/bottom%20_navigation.dart';
+import 'package:e_estates/widgets/bottom_navigation.dart';
 import 'package:e_estates/widgets/top_feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../stateManagement/top_feed_provider.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -56,18 +56,32 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void _signOut(signout) async {
     try {
       await _auth.signOut();
-      // Optionally, navigate the user to the login screen after signing out
+
       if (mounted) {
         Navigator.of(context).pushReplacementNamed('/signup');
       }
     } catch (error) {
       String errorMessage = error.toString();
 
-      // Use a regular expression to remove any text within square brackets and following colon and space, if present
       errorMessage = errorMessage.replaceAll(RegExp(r'\[.*?\]:?\s?'), '');
 
       showError(errorMessage);
     }
+  }
+
+  String greeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Good morning';
+    }
+    if (hour < 17) {
+      return 'Good Afternoon';
+    }
+    return 'Good Evening';
+  }
+
+  String firstName(String displayName) {
+    return displayName.split(' ')[0];
   }
 
   @override
@@ -91,13 +105,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(left: 8, top: 10, bottom: 10),
+                          const EdgeInsets.only(left: 8, top: 20, bottom: 10),
                       child: Container(
                         width: 60,
                         height: 60,
                         alignment: Alignment.center,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyProfilePage()));
+                          },
                           child: CircleAvatar(
                             radius: 50,
                             backgroundImage: photoUrl != null
@@ -120,7 +139,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       child: RichText(
                         text: TextSpan(children: [
                           TextSpan(
-                            text: 'Hey $displayName\n',
+                            text: '${greeting()}, ${firstName(displayName)}\n',
                             style: Theme.of(context).textTheme.bodyLarge,
                           ),
                           const WidgetSpan(
@@ -162,67 +181,114 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ))
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Text(
-                    "Categories",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                /*          Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                            height: 150,
+                            width: 150,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.black
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Image.asset(
+                              "assets/icons/findPerson.png",
+                              scale: 5,
+                            )),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: Container(
+                            height: 150,
+                            width: 150,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.black
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Image.asset(
+                              "assets/icons/rent.png",
+                              scale: 5,
+                            )),
+                      )
+                    ],
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  height: 50.0,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _tags.length,
-                    itemBuilder: (context, index) {
-                      bool isSelected = _tags[index] ==
-                          _selectedTag; // Check if the tag is selected
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: TextButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
+                ), */
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        "Categories",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                      height: 50.0,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _tags.length,
+                        itemBuilder: (context, index) {
+                          bool isSelected = _tags[index] ==
+                              _selectedTag; // Check if the tag is selected
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: TextButton(
+                              style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18),
+                                  ),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                    isSelected
+                                        ? Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? Colors.black
+                                            : Colors.blue
+                                        : Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? Colors.white
+                                            : Colors.black),
+                                elevation: MaterialStateProperty.all(8.0),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _selectedTag = _tags[index];
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 8),
+                                child: Text(
+                                  _tags[index],
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      color: isSelected
+                                          ? Colors.white
+                                          : Theme.of(context).brightness ==
+                                                  Brightness.light
+                                              ? Colors.black
+                                              : Colors.white),
+                                ),
                               ),
                             ),
-                            backgroundColor: MaterialStateProperty.all(
-                                isSelected
-                                    ? Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? Colors.black
-                                        : Colors.blue
-                                    : Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? Colors.white
-                                        : Colors.black),
-                            elevation: MaterialStateProperty.all(8.0),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _selectedTag = _tags[index];
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 4, horizontal: 8),
-                            child: Text(
-                              _tags[index],
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color: isSelected
-                                      ? Colors.white
-                                      : Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Colors.black
-                                          : Colors.white),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 60,
@@ -243,7 +309,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   height: 60,
                   width: MediaQuery.of(context).size.width,
                   child: const Padding(
-                    padding: EdgeInsets.all(12.0),
+                    padding: EdgeInsets.only(left: 12, right: 12, top: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

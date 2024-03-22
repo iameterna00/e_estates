@@ -10,11 +10,10 @@ class SplashScreen extends StatelessWidget {
       if (FirebaseAuth.instance.currentUser != null) {
         Navigator.of(context).pushReplacementNamed('/homepage');
       } else {
-        Navigator.of(context).pushReplacementNamed('/login');
+        Navigator.of(context).pushReplacementNamed('/signup');
       }
     });
 
-    // Show a loading indicator while checking
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),

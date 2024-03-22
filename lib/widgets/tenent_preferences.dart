@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TenantPreference extends StatefulWidget {
   const TenantPreference({
@@ -221,10 +219,10 @@ class _TenantPreference extends State<TenantPreference> {
                         onTap: () {
                           setState(() {
                             if (widget.selectedPreferences
-                                .contains('MaleWorker')) {
-                              widget.selectedPreferences.remove("MaleWorker");
+                                .contains('Male Worker')) {
+                              widget.selectedPreferences.remove("Male Worker");
                             } else {
-                              widget.selectedPreferences.add("MaleWorker");
+                              widget.selectedPreferences.add("Male Worker");
                               widget.selectedPreferences.remove("Any");
                             }
                           });
@@ -243,7 +241,7 @@ class _TenantPreference extends State<TenantPreference> {
                                     ),
                                   ),
                                   if (widget.selectedPreferences
-                                      .contains('MaleWorker'))
+                                      .contains('Male Worker'))
                                     const Positioned(
                                       right: 0,
                                       bottom: 0,
@@ -259,7 +257,7 @@ class _TenantPreference extends State<TenantPreference> {
                                 ],
                               ),
                               const Text(
-                                'MaleWorker',
+                                'Male Worker',
                                 style: TextStyle(
                                   fontSize: 14,
                                 ),
@@ -431,7 +429,7 @@ class _TenantPreference extends State<TenantPreference> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.asset(
-                                      'assets/icons/no-smoking.png',
+                                      'assets/icons/smoking.png',
                                       scale: 6,
                                     ),
                                   ),

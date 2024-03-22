@@ -1,4 +1,4 @@
-import 'package:e_estates/service/image_post.dart';
+import 'package:e_estates/models/image_post.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

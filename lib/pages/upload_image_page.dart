@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:path/path.dart' as Path;
+import 'package:path/path.dart' as path;
 import 'package:permission_handler/permission_handler.dart';
 
 class ImageUpload extends StatefulWidget {
@@ -33,10 +33,12 @@ class ImageUploadState extends State<ImageUpload> {
   String? selectedTag;
   bool highlightedlocationButton = false;
   bool highlightedAmanitiesButton = false;
+  bool highlightedPrefrencesButton = false;
   bool checkedlocationButton = false;
   bool isTagSelectionValid = true;
   bool _locationPicked = false;
   bool _amanitiesPicked = false;
+  bool _prefrencesPicked = false;
   double? latitude;
   double? longitude;
   String? location;
@@ -64,6 +66,7 @@ class ImageUploadState extends State<ImageUpload> {
     User? user = FirebaseAuth.instance.currentUser;
     String name = user?.displayName ?? "";
     String profilePicture = user?.photoURL ?? "";
+    String uid = user!.uid;
     if (_selectedImages == null ||
         _selectedImages!.isEmpty ||
         !_formKey.currentState!.validate()) {
@@ -87,7 +90,13 @@ class ImageUploadState extends State<ImageUpload> {
     if (_amanitiesPicked == false) {
       setState(() {
         highlightedAmanitiesButton = true;
-        print(" hellos $highlightedAmanitiesButton");
+      });
+
+      return;
+    }
+    if (_prefrencesPicked == false) {
+      setState(() {
+        highlightedPrefrencesButton = true;
       });
 
       return;
@@ -118,7 +127,7 @@ class ImageUploadState extends State<ImageUpload> {
       final File compressedFile = await compressedImage(
           originalFile); // Note: This method now does not return null, so no need to check for null.
 
-      String filename = Path.basename(compressedFile.path);
+      String filename = path.basename(compressedFile.path);
       Reference storageReference =
           FirebaseStorage.instance.ref('uploads/$filename');
       try {
@@ -141,7 +150,8 @@ class ImageUploadState extends State<ImageUpload> {
       }
     }
     try {
-      await FirebaseFirestore.instance.collection('image').add({
+      DocumentReference docRef =
+          await FirebaseFirestore.instance.collection('image').add({
         'Title': titleController.text,
         'Description': descriptionController.text,
         'urls': imageUrls,
@@ -153,20 +163,23 @@ class ImageUploadState extends State<ImageUpload> {
         'Location': location,
         'PaymentFrequency': paymentFrequency,
         'HomeAmanities': homeAminities,
-        'TenantPreferences': tenentPreferences,
-        'uploader': {"Name": name, "ProfilePicture": profilePicture}
+        'OwnerPreferences': tenentPreferences,
+        "Name": name,
+        "UID": uid,
+        "ProfilePicture": profilePicture,
+        'likedUsers': []
       });
+      String postId = docRef.id;
+      await docRef.update({'postId': postId});
     } catch (e) {}
 
     setState(() {
-      print("Payment $paymentFrequency");
       _selectedImages = [];
       titleController.clear();
       descriptionController.clear();
       priceController.clear();
     });
-    Navigator.of(context)
-        .pop(); // Dismiss the loading dialog after upload is complete
+    Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Images uploaded successfully!')));
   }
@@ -179,7 +192,7 @@ class ImageUploadState extends State<ImageUpload> {
 
     final directory = await getTemporaryDirectory();
     final String targetPath =
-        Path.join(directory.path, 'compressed_${Path.basename(file.path)}');
+        path.join(directory.path, 'compressed_${path.basename(file.path)}');
 
     // Save the resized image to the target path as a JPEG.
     final File compressedFile = File(targetPath)
@@ -333,7 +346,9 @@ class ImageUploadState extends State<ImageUpload> {
                   highlightedAmanitiesButton: highlightedAmanitiesButton,
                   tenentPreferences: (tenants) {
                     tenentPreferences = tenants;
+                    _prefrencesPicked = true;
                   },
+                  highlightedPrefrencesButton: highlightedPrefrencesButton,
                 ),
               ],
             ),
@@ -354,8 +369,6 @@ class ImageUploadState extends State<ImageUpload> {
     );
 
     if (result != null) {
-      print("Selected location: $result");
-
       setState(() {
         checkedlocationButton = true;
         _locationPicked = true;

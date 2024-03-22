@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:e_estates/service/image_post.dart';
+import 'package:e_estates/models/image_post.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/stateManagement/tile_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
@@ -191,9 +191,11 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
                           const LatLng(27.700769, 85.300140),
                       initialZoom: 15,
                       maxZoom: 16,
-                      maxBounds: LatLngBounds(
-                        const LatLng(26.347, 80.058622),
-                        const LatLng(30.422, 88.201416),
+                      cameraConstraint: CameraConstraint.contain(
+                        bounds: LatLngBounds(
+                          const LatLng(26.347, 80.058622),
+                          const LatLng(30.422, 88.201416),
+                        ),
                       ),
                       onTap: (_, point) {
                         setState(() {

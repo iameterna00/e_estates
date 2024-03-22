@@ -3,7 +3,7 @@ import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 import 'package:e_estates/widgets/explore_maps.dart';
 
 class ExplorePage extends StatefulWidget {
-  const ExplorePage({Key? key}) : super(key: key);
+  const ExplorePage({super.key});
 
   @override
   _ExplorePageState createState() => _ExplorePageState();
@@ -20,7 +20,7 @@ class _ExplorePageState extends State<ExplorePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Stack(
         children: [
           ExploreMaps(),

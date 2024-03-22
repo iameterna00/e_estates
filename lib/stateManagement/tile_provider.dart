@@ -28,18 +28,17 @@ class CachedTileProvider extends TileProvider {
       {required this.urlTemplate, required this.cacheBox, this.locationData});
 
   @override
-  ImageProvider getImage(coords, options) {
-    final tileKey = '${coords.z}-${coords.x}-${coords.y}';
+  ImageProvider getImage(coordinates, options) {
+    final tileKey = '${coordinates.z}-${coordinates.x}-${coordinates.y}';
     final cachedTile = cacheBox.get(tileKey);
 
     if (cachedTile != null) {
       return MemoryImage(cachedTile);
     } else {
       final url = urlTemplate
-          .replaceAll('{z}', coords.z.toString())
-          .replaceAll('{x}', coords.x.toString())
-          .replaceAll('{y}', coords.y.toString());
-      print("Fetching tile from network: $url");
+          .replaceAll('{z}', coordinates.z.toString())
+          .replaceAll('{x}', coordinates.x.toString())
+          .replaceAll('{y}', coordinates.y.toString());
 
       return CachedNetworkImageProvider(
         url,
@@ -49,7 +48,6 @@ class CachedTileProvider extends TileProvider {
             final byteData =
                 await image.image.toByteData(format: ImageByteFormat.png);
             final buffer = byteData!.buffer.asUint8List();
-            print("Saving tile to cache: $tileKey");
             await cacheBox.put(tileKey, buffer);
           }),
         );

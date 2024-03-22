@@ -12,7 +12,7 @@ class UploadWidgets extends StatefulWidget {
   final bool highlightLocationButton;
   final bool checkedLocationButton;
   final bool highlightedAmanitiesButton;
-
+  final bool highlightedPrefrencesButton;
   final Function(String?) onPaymentFrequencyChanged;
   final Function(List<String>) homeAminities;
   final Function(List<String>) tenentPreferences;
@@ -28,7 +28,8 @@ class UploadWidgets extends StatefulWidget {
       required this.homeAminities,
       required this.checkedLocationButton,
       required this.highlightedAmanitiesButton,
-      required this.tenentPreferences});
+      required this.tenentPreferences,
+      required this.highlightedPrefrencesButton});
 
   @override
   State<UploadWidgets> createState() => _UploadWidgetsState();
@@ -36,6 +37,7 @@ class UploadWidgets extends StatefulWidget {
 
 class _UploadWidgetsState extends State<UploadWidgets> {
   bool amanitiesChecker = false;
+  bool prefrencesChecker = false;
   String? paymentFrequency = 'Monthly';
   List<String> selectedItems = [];
   List<String> selectedPreference = [];
@@ -72,12 +74,20 @@ class _UploadWidgetsState extends State<UploadWidgets> {
         ),
         TextFormField(
           controller: widget.descriptionController,
+          style: Theme.of(context).textTheme.bodyMedium,
           decoration: InputDecoration(
-              hintText: 'Description',
-              hintStyle: GoogleFonts.raleway(
-                fontSize: 15,
-              ),
-              border: InputBorder.none),
+            hintText: 'Description',
+            hintStyle: GoogleFonts.raleway(
+              fontSize: 15,
+            ),
+            border: InputBorder.none,
+            counterText: '${widget.descriptionController.text.length} / 250',
+          ),
+          maxLength: 250,
+          maxLines: null,
+          onChanged: (text) {
+            setState(() {});
+          },
           validator: (value) {
             if (value == null || value.isEmpty) {
               return 'Please enter a Description';
@@ -172,12 +182,12 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          widget.homeAminities(selectedItems);
-                                          amanitiesChecker = true;
+                                          setState(() {
+                                            widget.homeAminities(selectedItems);
+                                            amanitiesChecker = true;
+                                          });
+
                                           Navigator.pop(context);
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
-                                                  content: Text('Added')));
                                         },
                                         style: ButtonStyle(
                                             elevation:
@@ -283,13 +293,12 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: ElevatedButton(
                                           onPressed: () {
-                                            widget.tenentPreferences(
-                                                selectedPreference);
-                                            amanitiesChecker = true;
+                                            setState(() {
+                                              widget.tenentPreferences(
+                                                  selectedPreference);
+                                              prefrencesChecker = true;
+                                            });
                                             Navigator.pop(context);
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(const SnackBar(
-                                                    content: Text('Added')));
                                           },
                                           style: ButtonStyle(
                                               elevation:
@@ -314,7 +323,9 @@ class _UploadWidgetsState extends State<UploadWidgets> {
             style: TextButton.styleFrom(
               padding: EdgeInsets.zero,
               alignment: Alignment.centerLeft,
-              backgroundColor: Colors.transparent,
+              backgroundColor: widget.highlightedPrefrencesButton
+                  ? Colors.red[300]!.withOpacity(0.5)
+                  : Colors.transparent,
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             child: Padding(
@@ -338,8 +349,10 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                         ),
                       ],
                     ),
-                    const Icon(
-                      Icons.arrow_forward_ios,
+                    Icon(
+                      prefrencesChecker
+                          ? Icons.check_circle_rounded
+                          : Icons.arrow_forward_ios,
                       size: 16,
                     ),
                   ],

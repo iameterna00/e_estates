@@ -61,11 +61,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.local_laundry_service_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/WashingMachine.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Laundary'))
@@ -103,10 +103,8 @@ class _homeAmanitiesState extends State<homeAmanities> {
                           setState(() {
                             if (widget.selectedItems.contains('Furnished')) {
                               widget.selectedItems.remove('Furnished');
-                              print(widget.selectedItems);
                             } else {
                               widget.selectedItems.add('Furnished');
-                              print(widget.selectedItems);
                             }
                           });
                         },
@@ -117,11 +115,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.chair_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/Furnished.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems
@@ -172,11 +170,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.soup_kitchen_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/Kitchen.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Kitchen'))
@@ -234,11 +232,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.network_wifi_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/Wifi.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('FreeWifi'))
@@ -276,10 +274,8 @@ class _homeAmanitiesState extends State<homeAmanities> {
                           setState(() {
                             if (widget.selectedItems.contains('CCTV')) {
                               widget.selectedItems.remove('CCTV');
-                              print(widget.selectedItems);
                             } else {
                               widget.selectedItems.add('CCTV');
-                              print(widget.selectedItems);
                             }
                           });
                         },
@@ -293,10 +289,7 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/CCTVBlack.png'
-                                          : 'assets/icons/CCTV.png',
+                                      'assets/icons/CCTV.png',
                                       scale: 6,
                                     ),
                                   ),
@@ -350,11 +343,8 @@ class _homeAmanitiesState extends State<homeAmanities> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Image.asset(
-                                      Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? 'assets/icons/ParkingBlack.png'
-                                          : 'assets/icons/Parking.png',
-                                      scale: 7,
+                                      'assets/icons/Parking.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Parking'))
@@ -436,11 +426,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                             children: [
                               Stack(
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.elevator_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/Lift.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Lift'))
@@ -490,11 +480,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.fitness_center_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/GYM.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems.contains('Gym'))
@@ -544,11 +534,11 @@ class _homeAmanitiesState extends State<homeAmanities> {
                               Stack(
                                 alignment: Alignment.bottomRight,
                                 children: [
-                                  const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(
-                                      Icons.pool_rounded,
-                                      size: 75,
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      'assets/icons/SwimmingPool.png',
+                                      scale: 6,
                                     ),
                                   ),
                                   if (widget.selectedItems

@@ -14,7 +14,6 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   await Hive.initFlutter(appDocumentDir.path);
-
   await Hive.openBox('lightTileCache');
   await Hive.openBox('darkTileCache');
 

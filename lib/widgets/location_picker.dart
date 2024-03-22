@@ -484,7 +484,7 @@ class _LocationPickerMapState extends State<LocationPickerMap>
 
       int attempts = 0;
       while (locationName.isEmpty && attempts < 30) {
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(const Duration(milliseconds: 500));
         locationName = _searchControllerlite.text;
         attempts++;
       }

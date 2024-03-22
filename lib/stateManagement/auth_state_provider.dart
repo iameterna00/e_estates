@@ -7,6 +7,7 @@ final firebaseAuthProvider =
 final authStateChangesProvider = StreamProvider<User?>((ref) {
   return ref.watch(firebaseAuthProvider).authStateChanges();
 });
+
 final userProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
   return UserNotifier(ref.watch(authStateChangesProvider));
 });
@@ -14,15 +15,21 @@ final userProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
 class UserState {
   final String? name;
   final String? photoURL;
+  final String? uid;
 
-  UserState({this.name, this.photoURL});
+  UserState({
+    this.name,
+    this.photoURL,
+    this.uid,
+  });
 }
 
 class UserNotifier extends StateNotifier<UserState> {
   final AsyncValue<User?> user;
   UserNotifier(this.user) : super(UserState()) {
     user.whenData((user) {
-      state = UserState(name: user?.displayName, photoURL: user?.photoURL);
+      state = UserState(
+          name: user?.displayName, photoURL: user?.photoURL, uid: user?.uid);
     });
   }
 }

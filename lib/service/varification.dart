@@ -1,31 +1,66 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
-class VerificationWaitingScreen extends StatelessWidget {
+import '../models/usermodel.dart';
+
+class VerificationWaitingScreen extends StatefulWidget {
+  final String? username;
+
+  const VerificationWaitingScreen({super.key, this.username});
+
+  @override
+  State<VerificationWaitingScreen> createState() =>
+      _VerificationWaitingScreenState();
+}
+
+class _VerificationWaitingScreenState extends State<VerificationWaitingScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  VerificationWaitingScreen({super.key});
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<UserModel> getUserDetails() async {
+    User currentUser = _auth.currentUser!;
+    DocumentSnapshot snap =
+        await _firestore.collection('users').doc(currentUser.email).get();
+    return UserModel.fromSnap(snap);
+  }
 
   @override
   Widget build(BuildContext context) {
     Future<void> checkEmailVerified() async {
-      // Force a reload of the user's profile to refresh the emailVerified status
       User? user = _auth.currentUser;
       await user?.reload();
       user = _auth.currentUser; // Re-fetch the updated user
 
       if (user != null && user.emailVerified) {
-        // Navigate to the homepage if verified
-        Navigator.of(context).pushReplacementNamed('/homepage');
-      } else {
-        // Show a message if not verified yet
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-                'Your email has not been verified yet. Please check your inbox.'),
-            duration: Duration(seconds: 5),
-          ),
+        String username = widget.username!;
+        final User currentUser = _auth.currentUser!; // Corrected class name
+
+        UserModel user = UserModel(
+          email: currentUser.email ?? '',
+          photoUrl: '',
+          username: username,
+          uid: currentUser.uid,
+          followers: [],
+          following: [],
         );
+        await _firestore.collection('users').doc(user.email).set(user.toJson());
+
+        if (mounted) {
+          Navigator.of(context).pushReplacementNamed('/homepage');
+        } else {
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text(
+                    'Your email has not been verified yet. Please check your inbox.'),
+                duration: Duration(seconds: 5),
+              ),
+            );
+          }
+        }
       }
     }
 
@@ -48,7 +83,8 @@ class VerificationWaitingScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('A verification email has been sent to your email address.'),
+            const Text(
+                'A verification email has been sent to your email address.'),
             ElevatedButton(
               onPressed: checkEmailVerified,
               child: const Text('I have verified my email'),

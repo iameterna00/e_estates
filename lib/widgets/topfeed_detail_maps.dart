@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:e_estates/service/image_post.dart';
+import 'package:e_estates/models/image_post.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/stateManagement/tile_provider.dart';
@@ -21,8 +21,13 @@ class TopFeedMaps extends StatefulWidget {
   final LatLng? singleHomeLocation;
 
   final ImagePost? singleHome;
+  final bool longPressed;
 
-  const TopFeedMaps({super.key, this.singleHomeLocation, this.singleHome});
+  const TopFeedMaps(
+      {super.key,
+      this.singleHomeLocation,
+      this.singleHome,
+      required this.longPressed});
 
   @override
   _TopFeedMaps createState() => _TopFeedMaps();
@@ -244,12 +249,15 @@ class _TopFeedMaps extends State<TopFeedMaps> with TickerProviderStateMixin {
                 return FlutterMap(
                   mapController: _mapController.mapController,
                   options: MapOptions(
-                      initialCenter:
-                          myhomelocation ?? const LatLng(27.700769, 85.300140),
-                      initialZoom: 15,
-                      maxZoom: 16,
-                      interactiveFlags: InteractiveFlag.drag,
-                      maxBounds: bounds),
+                    initialCenter:
+                        myhomelocation ?? const LatLng(27.700769, 85.300140),
+                    initialZoom: 15,
+                    maxZoom: 16,
+                    interactiveFlags: widget.longPressed
+                        ? InteractiveFlag.drag
+                        : InteractiveFlag.none,
+                    maxBounds: bounds,
+                  ),
                   children: <Widget>[
                     TileLayer(
                       tileProvider: CachedTileProvider(

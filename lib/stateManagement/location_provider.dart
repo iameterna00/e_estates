@@ -87,7 +87,7 @@ class LocationNotifier extends StateNotifier<LocationData?> {
     }
 
     var userLocation = await location.getLocation();
-    print('Fetched location: $userLocation'); // Add this line
+    // Add this line
     state = userLocation;
     _storeLocationInHive(userLocation);
   }
@@ -129,7 +129,7 @@ class LocationNotifier extends StateNotifier<LocationData?> {
       return 0.0;
     }
 
-    const double radius = 1.0;
+    const double radius = 1.5;
     double straightLineDistance = Geolocator.distanceBetween(
           state!.latitude!,
           state!.longitude!,
@@ -156,7 +156,6 @@ class LocationNotifier extends StateNotifier<LocationData?> {
       var distanceInMeters = 0.0;
       for (var leg in jsonResponse['routes'][0]['legs']) {
         distanceInMeters += leg['distance'] as double;
-        print("Total distance in meters: $distanceInMeters");
       }
 
       final distanceInKm = distanceInMeters / 1000.0;
