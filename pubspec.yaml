@@ -78,6 +78,7 @@ dependencies:
   pin_code_fields: ^8.0.1
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
+  image_cropper: ^5.0.1
 
 dev_dependencies:
   flutter_test:

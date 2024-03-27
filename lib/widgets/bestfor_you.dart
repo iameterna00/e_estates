@@ -1,10 +1,16 @@
+import 'package:e_estates/models/usermodel.dart';
+import 'package:e_estates/pages/my_profilepage.dart';
 import 'package:e_estates/pages/topfeed_detaipage.dart';
 import 'package:e_estates/models/image_post.dart';
+import 'package:e_estates/pages/user_profile.dart';
 import 'package:e_estates/service/commentmodel.dart';
 import 'package:e_estates/service/likemodel.dart';
+import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
+import 'package:e_estates/stateManagement/fetch_user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -71,6 +77,8 @@ class BestForYou extends ConsumerWidget {
 
   Widget buildPostItem(BuildContext context, ImagePost post, WidgetRef ref,
       String distanceDisplay) {
+    bool isNavigating = false;
+    final user = ref.watch(userProvider).uid;
     bool isLikedLocally = post.isLikedByCurrentUser;
 
     int likesCount = post.likedUsers.length;
@@ -79,159 +87,185 @@ class BestForYou extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(post.uploaderProfilePicture)),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        post.uploaderName,
-                        style: const TextStyle(
-                          fontSize: 12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () {},
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                color: Colors.transparent,
-              ),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TopFeedDetail(
-                        detailpagepost: post,
-                        distance: distanceDisplay,
-                      ),
-                    ),
-                  );
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () async {
+                  String userUid = post.uid;
+                  String currentUserId = user as String;
+                  if (isNavigating) return;
+                  isNavigating = true;
+
+                  try {
+                    if (userUid == currentUserId) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const MyProfilePage(),
+                      ));
+                    } else {
+                      UserModel userModel = await fetchUserModelByUid(userUid);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => UserProfilePage(user: userModel),
+                      ));
+                    }
+                  } finally {
+                    isNavigating = false;
+                  }
                 },
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        post.imageUrls[0],
-                        fit: BoxFit.cover,
-                        width: MediaQuery.of(context).size.width,
-                        height: 350,
-                      ),
-                    ),
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: distanceDisplay.isNotEmpty
-                          ? Container(
-                              decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/IC_Location.png',
-                                    scale: 1.5,
-                                  ),
-                                  const SizedBox(width: 1),
-                                  Text(distanceDisplay,
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 8)),
-                                ],
-                              ),
-                            )
-                          : Container(),
-                    ),
-                    Positioned(
-                      bottom: 10,
-                      left: 0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.5),
-                          borderRadius: const BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
-                          child: InkWell(
-                            child: const Icon(
-                              Icons.message,
-                              size: 25,
-                            ),
-                            onTap: () =>
-                                showCommentsBottomSheet(context, post.id),
-                          ),
+                borderRadius: BorderRadius.circular(30),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                          backgroundImage: post.uploaderProfilePicture != null
+                              ? NetworkImage(post.uploaderProfilePicture)
+                              : const AssetImage('assets/icons/noProfile.png')
+                                  as ImageProvider),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(
+                          post.uploaderName,
+                          style: const TextStyle(fontSize: 12),
                         ),
                       ),
+                    ],
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.more_vert),
+                onPressed: () {},
+              )
+            ],
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(14),
+              color: Colors.transparent,
+            ),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TopFeedDetail(
+                      detailpagepost: post,
+                      distance: distanceDisplay,
                     ),
-                    Positioned(
-                      bottom: 10,
-                      right: 0,
-                      child: StatefulBuilder(
-                        builder: (BuildContext context, StateSetter setState) {
-                          return Container(
+                  ),
+                );
+              },
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      post.imageUrls[0],
+                      fit: BoxFit.cover,
+                      width: MediaQuery.of(context).size.width,
+                      height: 350,
+                    ),
+                  ),
+                  Positioned(
+                    top: 10,
+                    left: 10,
+                    child: distanceDisplay.isNotEmpty
+                        ? Container(
                             decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.5),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                bottomLeft: Radius.circular(20),
-                              ),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                child: Row(
-                                  children: [
-                                    LikeButtonWidget(
-                                      onLikePressed: () {
-                                        setState(() {
-                                          isLikedLocally = !isLikedLocally;
-
-                                          if (isLikedLocally) {
-                                            likesCount++;
-                                          } else {
-                                            likesCount--;
-                                          }
-                                        });
-                                        toggleLikeStatus(post, ref)
-                                            .then((newIsLiked) {});
-                                      },
-                                      isLiked: isLikedLocally,
-                                      likesCount: likesCount,
-                                    ),
-                                  ],
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/icons/IC_Location.png',
+                                  scale: 1.5,
                                 ),
+                                const SizedBox(width: 1),
+                                Text(distanceDisplay,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 8)),
+                              ],
+                            ),
+                          )
+                        : Container(),
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    left: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        child: InkWell(
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.message,
+                                color: Colors.white,
+                                size: 25,
+                              ),
+                            ],
+                          ),
+                          onTap: () =>
+                              showCommentsBottomSheet(context, post.id),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 10,
+                    right: 0,
+                    child: StatefulBuilder(
+                      builder: (BuildContext context, StateSetter setState) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.5),
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              bottomLeft: Radius.circular(20),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              child: Row(
+                                children: [
+                                  LikeButtonWidget(
+                                    onLikePressed: () {
+                                      setState(() {
+                                        isLikedLocally = !isLikedLocally;
+
+                                        if (isLikedLocally) {
+                                          likesCount++;
+                                        } else {
+                                          likesCount--;
+                                        }
+                                      });
+                                      toggleLikeStatus(post, ref)
+                                          .then((newIsLiked) {});
+                                    },
+                                    isLiked: isLikedLocally,
+                                    likesCount: likesCount,
+                                  ),
+                                ],
                               ),
                             ),
-                          );
-                        },
-                      ),
-                    )
-                  ],
-                ),
+                          ),
+                        );
+                      },
+                    ),
+                  )
+                ],
               ),
             ),
           ),

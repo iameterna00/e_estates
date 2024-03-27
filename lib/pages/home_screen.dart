@@ -91,7 +91,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final providerContainer = ProviderScope.containerOf(context);
     final address =
         providerContainer.read(locationNotifierProvider.notifier).address ??
-            'Fetching location...';
+            'Nepal...';
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () => refreshData(ref),
@@ -115,14 +115,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MyProfilePage()));
+                                    builder: (context) =>
+                                        const MyProfilePage()));
                           },
                           child: CircleAvatar(
                             radius: 50,
                             backgroundImage: photoUrl != null
                                 ? NetworkImage(photoUrl)
-                                : const AssetImage(
-                                        'path/to/your/default/image.png')
+                                : const AssetImage('assets/icons/noProfile.png')
                                     as ImageProvider,
                           ),
                         ),
@@ -239,8 +239,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         scrollDirection: Axis.horizontal,
                         itemCount: _tags.length,
                         itemBuilder: (context, index) {
-                          bool isSelected = _tags[index] ==
-                              _selectedTag; // Check if the tag is selected
+                          bool isSelected = _tags[index] == _selectedTag;
                           return Padding(
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),

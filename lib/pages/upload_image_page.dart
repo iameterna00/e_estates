@@ -14,7 +14,6 @@ import 'package:permission_handler/permission_handler.dart';
 class ImageUpload extends StatefulWidget {
   const ImageUpload({
     super.key,
-    // Removed 'required' to make it truly optional and nullable
   });
 
   @override
@@ -253,7 +252,6 @@ class ImageUploadState extends State<ImageUpload> {
                                     child: Image.file(
                                       File(_selectedImages![index].path),
                                       width: double.infinity,
-                                      //  height: double.infinity,
                                     ),
                                   );
                                 },

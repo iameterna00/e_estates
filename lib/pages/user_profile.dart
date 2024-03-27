@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_estates/pages/post_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:e_estates/models/usermodel.dart'; // Ensure this path matches your UserModel location
+import 'package:e_estates/models/usermodel.dart';
 
 class UserProfilePage extends StatefulWidget {
   final UserModel user;
 
-  UserProfilePage({Key? key, required this.user}) : super(key: key);
+  const UserProfilePage({super.key, required this.user});
 
   @override
   _UserProfilePageState createState() => _UserProfilePageState();
@@ -14,53 +15,52 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   bool isFollowing = false;
+  late ValueNotifier<bool> isFollowingNotifier;
 
   @override
   void initState() {
     super.initState();
-    checkIfFollowing();
-  }
-
-  void checkIfFollowing() {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      setState(() {
-        isFollowing = widget.user.followers.contains(currentUser.uid);
-      });
-    }
+    isFollowingNotifier = ValueNotifier(
+        widget.user.followers.contains(FirebaseAuth.instance.currentUser?.uid));
   }
 
   void toggleFollow() async {
     final currentUser = FirebaseAuth.instance.currentUser;
-    final usersRef = FirebaseFirestore.instance.collection('users');
+    final userRef = FirebaseFirestore.instance.collection('users');
     if (currentUser == null) return;
 
-    if (isFollowing) {
-      // Unfollow User
-      await usersRef.doc(currentUser.uid).update({
-        'following': FieldValue.arrayRemove([widget.user.uid]),
-      });
-      await usersRef.doc(widget.user.uid).update({
-        'followers': FieldValue.arrayRemove([currentUser.uid]),
-      });
-    } else {
-      // Follow User
-      await usersRef.doc(currentUser.uid).update({
-        'following': FieldValue.arrayUnion([widget.user.uid]),
-      });
-      await usersRef.doc(widget.user.uid).update({
-        'followers': FieldValue.arrayUnion([currentUser.uid]),
-      });
-    }
+    bool newFollowingStatus = !isFollowingNotifier.value;
+    isFollowingNotifier.value = newFollowingStatus;
 
-    setState(() {
-      isFollowing = !isFollowing;
-    });
+    try {
+      if (newFollowingStatus) {
+        await userRef.doc(widget.user.uid).update({
+          'followers': FieldValue.arrayUnion([currentUser.uid])
+        });
+        await userRef.doc(currentUser.uid).update({
+          'following': FieldValue.arrayUnion([widget.user.uid])
+        });
+      } else {
+        await userRef.doc(widget.user.uid).update({
+          'followers': FieldValue.arrayRemove([currentUser.uid])
+        });
+        await userRef.doc(currentUser.uid).update({
+          'following': FieldValue.arrayRemove([widget.user.uid])
+        });
+      }
+    } catch (e) {
+      isFollowingNotifier.value = !newFollowingStatus;
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("An error occured. Please try again")));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : Colors.white,
       appBar: AppBar(
         title: Text(widget.user.username),
       ),
@@ -74,12 +74,20 @@ class _UserProfilePageState extends State<UserProfilePage> {
             const SizedBox(height: 20),
             Text("Followers: ${widget.user.followers.length}"),
             Text("Following: ${widget.user.following.length}"),
-            ElevatedButton(
-              onPressed: () => toggleFollow(),
-              child: Text(isFollowing ? 'Unfollow' : 'Follow'),
+            ValueListenableBuilder<bool>(
+              valueListenable: isFollowingNotifier,
+              builder: (context, isFollowing, _) {
+                return ElevatedButton(
+                  onPressed: toggleFollow,
+                  child: Text(isFollowing ? 'Unfollow' : 'Follow'),
+                );
+              },
             ),
             const SizedBox(height: 20),
-            const Text("Posts"),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text("Posts"),
+            ),
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
                   .collection('image')
@@ -90,7 +98,13 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(child: Text('No posts found'));
+                  return const SizedBox(
+                      height: 300,
+                      child: Center(
+                          child: Text(
+                        'No posts found',
+                        style: TextStyle(color: Colors.grey),
+                      )));
                 }
                 var posts = snapshot.data!.docs;
                 return GridView.builder(
@@ -105,7 +119,24 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   itemCount: posts.length,
                   itemBuilder: (context, index) {
                     var post = posts[index].data() as Map<String, dynamic>;
-                    return Image.network(post['urls'][0], fit: BoxFit.cover);
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PostDetailPage(
+                                postData:
+                                    posts[index].data() as Map<String, dynamic>,
+                                allPosts: posts
+                                    .map((doc) =>
+                                        doc.data() as Map<String, dynamic>)
+                                    .toList(),
+                              ),
+                            ),
+                          );
+                        },
+                        child:
+                            Image.network(post['urls'][0], fit: BoxFit.cover));
                   },
                 );
               },

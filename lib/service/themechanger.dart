@@ -23,8 +23,14 @@ class AppThemes {
       iconTheme: const IconThemeData(color: Colors.black),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(Colors.white),
-              backgroundColor: MaterialStateProperty.all(Colors.blue))),
+        foregroundColor: MaterialStateProperty.all(Colors.white),
+        backgroundColor: MaterialStateProperty.all(Colors.blue),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+      )),
       appBarTheme: AppBarTheme(
         color: const Color.fromRGBO(245, 245, 245, 1),
         titleTextStyle: GoogleFonts.raleway(
@@ -47,37 +53,44 @@ class AppThemes {
 
   // Define the dark theme
   static ThemeData darkTheme = ThemeData(
-    useMaterial3: true,
-    brightness: Brightness.dark,
-    scaffoldBackgroundColor: const Color.fromARGB(31, 79, 79, 79),
-    textTheme: GoogleFonts.ralewayTextTheme(TextTheme(
-      bodyMedium: GoogleFonts.raleway(color: Colors.white),
-      titleLarge: GoogleFonts.raleway(color: Colors.white),
-      bodySmall: GoogleFonts.raleway(color: Colors.white),
-      bodyLarge: GoogleFonts.raleway(
-          color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-    )),
-    cardTheme: const CardTheme(
-      color: Colors.black,
-    ),
-    //iconTheme: const IconThemeData(color: Colors.blue),
-    bottomAppBarTheme:
-        const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
-    textButtonTheme: TextButtonThemeData(
+      useMaterial3: true,
+      brightness: Brightness.dark,
+      scaffoldBackgroundColor: const Color.fromARGB(31, 79, 79, 79),
+      textTheme: GoogleFonts.ralewayTextTheme(TextTheme(
+        bodyMedium: GoogleFonts.raleway(color: Colors.white),
+        titleLarge: GoogleFonts.raleway(color: Colors.white),
+        bodySmall: GoogleFonts.raleway(color: Colors.white),
+        bodyLarge: GoogleFonts.raleway(
+            color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+      )),
+      cardTheme: const CardTheme(
+        color: Colors.black,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-            foregroundColor: const MaterialStatePropertyAll(
-                Color.fromARGB(255, 255, 255, 255)),
-            elevation: MaterialStateProperty.all(4),
-            backgroundColor: const MaterialStatePropertyAll(Colors.black))),
-    floatingActionButtonTheme:
-        const FloatingActionButtonThemeData(backgroundColor: Colors.blue),
-    appBarTheme: AppBarTheme(
-      color: Colors.transparent,
-      titleTextStyle: GoogleFonts.raleway(
-          color: Colors.white,
-          fontSize: 20), // Color of the AppBar in the light theme
-      iconTheme: const IconThemeData(
-          color: Colors.white), // Color of icons in the AppBar
-    ),
-  );
+          foregroundColor: MaterialStateProperty.all(Colors.white),
+          backgroundColor:
+              MaterialStateProperty.all(const Color.fromARGB(31, 79, 79, 79)),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      ),
+      bottomAppBarTheme:
+          const BottomAppBarTheme(color: Colors.transparent, elevation: 0),
+      textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+              foregroundColor: const MaterialStatePropertyAll(
+                  Color.fromARGB(255, 255, 255, 255)),
+              elevation: MaterialStateProperty.all(4),
+              backgroundColor: const MaterialStatePropertyAll(Colors.black))),
+      floatingActionButtonTheme:
+          const FloatingActionButtonThemeData(backgroundColor: Colors.blue),
+      appBarTheme: AppBarTheme(
+        color: Colors.transparent,
+        titleTextStyle: GoogleFonts.raleway(color: Colors.white, fontSize: 20),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ));
 }

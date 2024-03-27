@@ -34,12 +34,14 @@ class CustomBottomAppBar extends ConsumerWidget {
             onPressed: onExplore,
           ),
           IconButton(
-            icon: const Icon(Icons.notifications_rounded, size: 25),
+            icon: const Icon(Icons.search_rounded, size: 25),
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => UsersListPage(),
+                  builder: (context) => UsersListPage(
+                    curentUserid: userid,
+                  ),
                 ),
               );
             },
@@ -69,7 +71,7 @@ class CustomBottomAppBar extends ConsumerWidget {
                 radius: 15,
                 backgroundImage: photoUrl != null
                     ? NetworkImage(photoUrl)
-                    : const AssetImage('path/to/your/default/image.png')
+                    : const AssetImage('assets/icons/noProfile.png')
                         as ImageProvider,
               ),
             ),

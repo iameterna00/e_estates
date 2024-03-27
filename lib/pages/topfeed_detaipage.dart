@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_estates/models/image_post.dart';
 import 'package:e_estates/widgets/topfeed_detail_maps.dart';
@@ -102,7 +103,7 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
                                                               int index) {
                                                         return PhotoView(
                                                           imageProvider:
-                                                              NetworkImage(widget
+                                                              CachedNetworkImageProvider(widget
                                                                   .detailpagepost
                                                                   .imageUrls[index]),
                                                         );
@@ -156,11 +157,19 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
                                         },
                                         child: Stack(
                                           children: [
-                                            Image.network(
-                                              detailpagepost.imageUrls[index],
+                                            CachedNetworkImage(
+                                              imageUrl: detailpagepost
+                                                  .imageUrls[index],
                                               fit: BoxFit.cover,
                                               width: double.infinity,
                                               height: double.infinity,
+                                              placeholder: (context, url) =>
+                                                  const Center(
+                                                      child:
+                                                          CircularProgressIndicator()),
+                                              errorWidget:
+                                                  (context, url, error) =>
+                                                      Icon(Icons.error),
                                             ),
                                             Positioned.fill(
                                               child: Align(

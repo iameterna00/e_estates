@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/models/usermodel.dart';
 import 'package:e_estates/pages/user_profile.dart';
+import 'package:e_estates/stateManagement/Myprofile_provider.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyProfilePage extends ConsumerWidget {
@@ -32,76 +34,76 @@ class MyProfilePage extends ConsumerWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center();
               }
-              if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return const Center(child: Text('No posts found'));
-              }
+
               final posts = snapshot.data!.docs;
-              return CustomScrollView(
-                slivers: <Widget>[
-                  SliverToBoxAdapter(
-                    child: _buildProfileHeader(
-                        context, user, posts.length), // Include post count
-                  ),
-                  _buildPostsGrid(context, posts), // Pass the posts directly
-                ],
+              return RefreshIndicator(
+                onRefresh: () => refreshUserData(ref, user.uid),
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverToBoxAdapter(
+                      child: _buildProfileHeader(
+                          context, ref, user.uid, posts.length),
+                    ),
+                    _buildPostsGrid(context, posts),
+                  ],
+                ),
               );
             },
           );
         },
-        loading: () => const CircularProgressIndicator(),
+        loading: () => Container(),
         error: (error, stack) => Text('Error: $error'),
       ),
     );
   }
 
-  Widget _buildProfileHeader(BuildContext context, User user, int postCount) {
-    final usersRef = FirebaseFirestore.instance.collection('users');
+  Widget _buildProfileHeader(
+      BuildContext context, WidgetRef ref, String userId, int postCount) {
+    final userProfileAsyncValue = ref.watch(userProfileProvider(userId));
 
-    return FutureBuilder<DocumentSnapshot>(
-      future: usersRef.doc(user.uid).get(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Container();
-        }
-
-        Map<String, dynamic> userData =
-            snapshot.data!.data() as Map<String, dynamic>;
-
-        int followersCount = userData['followers']?.length ?? 0;
-        int followingCount = userData['following']?.length ?? 0;
-        List<String> followers = List<String>.from(userData['followers'] ?? []);
-        List<String> following = List<String>.from(userData['following'] ?? []);
-
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(
-                    user.photoURL ?? 'https://via.placeholder.com/150'),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(user.displayName ?? 'Username',
-                    style: Theme.of(context).textTheme.titleLarge),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildProfileStat(context, "Posts", postCount, [], ""),
-                  _buildProfileStat(context, "Followers", followersCount,
-                      followers, "Followers"),
-                  _buildProfileStat(context, "Following", followingCount,
-                      following, "Followers"),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
+    return userProfileAsyncValue.when(
+      data: (userProfile) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(
+                  userProfile.photoUrl ?? 'https://via.placeholder.com/150'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(userProfile.username ?? 'Username',
+                  style: Theme.of(context).textTheme.titleLarge),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Ensure postCount and the lists are passed correctly
+                _buildProfileStat(context, "Posts", postCount, [], "Posts"),
+                _buildProfileStat(
+                  context,
+                  "Followers",
+                  userProfile.followers.length,
+                  userProfile.followers.cast<String>(),
+                  "Followers",
+                ),
+                _buildProfileStat(
+                  context,
+                  "Following",
+                  userProfile.following.length,
+                  userProfile.following.cast<String>(),
+                  "Following",
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Text('Error: $error'),
     );
   }
 
@@ -113,7 +115,7 @@ class MyProfilePage extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('$count', style: Theme.of(context).textTheme.titleLarge),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(label),
         ],
       ),
@@ -122,6 +124,11 @@ class MyProfilePage extends ConsumerWidget {
 
   Widget _buildPostsGrid(
       BuildContext context, List<QueryDocumentSnapshot> posts) {
+    if (posts.isEmpty) {
+      return const SliverFillRemaining(
+        child: Center(child: Text('No posts found')),
+      );
+    }
     return SliverPadding(
       padding: const EdgeInsets.all(4),
       sliver: SliverGrid(
@@ -202,17 +209,20 @@ class MyProfilePage extends ConsumerWidget {
 
 void _showUserList(BuildContext context, List<String> userIds, String title) {
   showModalBottomSheet(
+    backgroundColor: Theme.of(context).brightness == Brightness.dark
+        ? Colors.black
+        : Colors.white,
     context: context,
     builder: (BuildContext context) {
       return Column(
         children: [
+          IconButton(
+            icon: const Icon(Icons.drag_handle_rounded),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           AppBar(
             title: Text(title),
             automaticallyImplyLeading: false,
-            leading: IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
           ),
           Expanded(
             child: ListView.builder(
