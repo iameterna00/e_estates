@@ -10,10 +10,10 @@ class UserProfilePage extends StatefulWidget {
   const UserProfilePage({super.key, required this.user});
 
   @override
-  _UserProfilePageState createState() => _UserProfilePageState();
+  UserProfilePageState createState() => UserProfilePageState();
 }
 
-class _UserProfilePageState extends State<UserProfilePage> {
+class UserProfilePageState extends State<UserProfilePage> {
   bool isFollowing = false;
   late ValueNotifier<bool> isFollowingNotifier;
 

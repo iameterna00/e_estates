@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class homeAmanities extends StatefulWidget {
-  const homeAmanities({
+class HomeAmanities extends StatefulWidget {
+  const HomeAmanities({
     super.key,
     required this.selectedItems,
   });
@@ -9,10 +9,10 @@ class homeAmanities extends StatefulWidget {
   final List<String> selectedItems;
 
   @override
-  State<homeAmanities> createState() => _homeAmanitiesState();
+  State<HomeAmanities> createState() => _HomeAmanitiesState();
 }
 
-class _homeAmanitiesState extends State<homeAmanities> {
+class _HomeAmanitiesState extends State<HomeAmanities> {
   @override
   Widget build(BuildContext context) {
     return Padding(

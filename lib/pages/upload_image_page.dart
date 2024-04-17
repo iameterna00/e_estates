@@ -4,6 +4,7 @@ import 'package:e_estates/widgets/location_picker.dart';
 import 'package:e_estates/widgets/upload_widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image/image.dart' as imglib;
 import 'package:image_picker/image_picker.dart';
@@ -28,7 +29,7 @@ class ImageUploadState extends State<ImageUpload> {
 
   List<XFile>? _selectedImages;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  List<String> tags = ["Rent", "Apartment", "Hotel"];
+  List<String> tags = ["Rent", "Apartment", "Hostel"];
   String? selectedTag;
   bool highlightedlocationButton = false;
   bool highlightedAmanitiesButton = false;
@@ -54,9 +55,84 @@ class ImageUploadState extends State<ImageUpload> {
 
   Future<void> pickImages() async {
     final List<XFile> pickedImages = await _picker.pickMultiImage();
-    if (pickedImages.isNotEmpty) {
+    List<XFile> croppedFiles = [];
+
+    for (var image in pickedImages) {
+      final croppedImage = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Crop Image',
+              toolbarColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.white,
+              toolbarWidgetColor:
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+              activeControlsWidgetColor: Colors.grey,
+              statusBarColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.white,
+              dimmedLayerColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.white,
+              initAspectRatio: CropAspectRatioPreset.ratio16x9,
+              lockAspectRatio: true,
+            ),
+          ]);
+      if (croppedImage != null) {
+        croppedFiles.add(XFile(croppedImage.path));
+      }
+    }
+
+    if (croppedFiles.isNotEmpty) {
       setState(() {
-        _selectedImages = pickedImages;
+        _selectedImages = croppedFiles;
+      });
+    }
+  }
+
+  Future<void> captureImage() async {
+    final XFile? pickedImage =
+        await _picker.pickImage(source: ImageSource.camera);
+    List<XFile> croppedFiles = [];
+
+    if (pickedImage != null) {
+      final croppedImage = await ImageCropper().cropImage(
+        sourcePath: pickedImage.path,
+        aspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Crop Image',
+            toolbarColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
+            toolbarWidgetColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
+            activeControlsWidgetColor: Colors.grey,
+            statusBarColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
+            dimmedLayerColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
+            initAspectRatio: CropAspectRatioPreset.ratio16x9,
+            lockAspectRatio: true,
+          ),
+        ],
+      );
+
+      if (croppedImage != null) {
+        croppedFiles.add(XFile(croppedImage.path));
+      }
+    }
+
+    if (croppedFiles.isNotEmpty) {
+      setState(() {
+        _selectedImages = croppedFiles;
       });
     }
   }
@@ -232,7 +308,35 @@ class ImageUploadState extends State<ImageUpload> {
                 InkWell(
                   onTap: () async {
                     await requestPermission();
-                    await pickImages();
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return SafeArea(
+                          child: Wrap(
+                            children: <Widget>[
+                              ListTile(
+                                leading: const Icon(Icons.photo_library),
+                                title: const Text('Select from Gallery'),
+                                onTap: () async {
+                                  Navigator.pop(
+                                      context); // Close the modal bottom sheet
+                                  await pickImages();
+                                },
+                              ),
+                              ListTile(
+                                leading: const Icon(Icons.camera_alt),
+                                title: const Text('Capture with Camera'),
+                                onTap: () async {
+                                  Navigator.pop(
+                                      context); // Close the modal bottom sheet
+                                  await captureImage();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: Container(
                     height: 300,
@@ -273,7 +377,7 @@ class ImageUploadState extends State<ImageUpload> {
                         case "Apartment":
                           iconData = Icons.apartment;
                           break;
-                        case "Hotel":
+                        case "Hostel":
                           iconData = Icons.hotel;
                           break;
                       }
@@ -285,7 +389,7 @@ class ImageUploadState extends State<ImageUpload> {
                             ? BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.red.withOpacity(0.2),
+                                    color: Colors.red.withOpacity(0.5),
                                     spreadRadius: 0.5,
                                     blurRadius: 3,
                                   ),

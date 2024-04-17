@@ -169,7 +169,7 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
                                                           CircularProgressIndicator()),
                                               errorWidget:
                                                   (context, url, error) =>
-                                                      Icon(Icons.error),
+                                                      const Icon(Icons.error),
                                             ),
                                             Positioned.fill(
                                               child: Align(

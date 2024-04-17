@@ -142,15 +142,14 @@ Future<void> _submitComment(
 
   String userProfileUrl = '';
   String username = '';
-  try {
-    DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(userId).get();
-    final data = userDoc.data();
-    if (data is Map<String, dynamic>) {
-      userProfileUrl = data['profileUrl'] ?? '';
-      username = data['username'];
-    }
-  } catch (e) {}
+
+  DocumentSnapshot userDoc =
+      await FirebaseFirestore.instance.collection('users').doc(userId).get();
+  final data = userDoc.data();
+  if (data is Map<String, dynamic>) {
+    userProfileUrl = data['profileUrl'] ?? '';
+    username = data['username'];
+  }
 
   await FirebaseFirestore.instance.collection('comments').add({
     'postId': postId,

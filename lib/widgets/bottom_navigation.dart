@@ -1,3 +1,4 @@
+import 'package:e_estates/pages/chat_lists.dart';
 import 'package:e_estates/pages/discover_page.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:flutter/material.dart';
@@ -53,12 +54,13 @@ class CustomBottomAppBar extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.chat_rounded, size: 25),
             onPressed: () {
-              /*     Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChatListPage(currentUserId: userid),
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ProviderScope(
+                  child: ChatAndFollowersPage(
+                    userID: userid,
+                  ),
                 ),
-              ); */
+              ));
             },
           ),
           Container(

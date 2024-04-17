@@ -40,7 +40,6 @@ class AppRoutes {
       uploadimage: (BuildContext context) => const ImageUpload(),
       locationPicker: (BuildContext context) => const LocationPickerMap(),
       explore: (BuildContext context) => const ExplorePage(),
-      //  mobilescreen: (BuildContext context) => const MobileScreenLayout(),
     };
   }
 }

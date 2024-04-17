@@ -13,6 +13,7 @@ class UploadWidgets extends StatefulWidget {
   final bool checkedLocationButton;
   final bool highlightedAmanitiesButton;
   final bool highlightedPrefrencesButton;
+
   final Function(String?) onPaymentFrequencyChanged;
   final Function(List<String>) homeAminities;
   final Function(List<String>) tenentPreferences;
@@ -38,10 +39,24 @@ class UploadWidgets extends StatefulWidget {
 class _UploadWidgetsState extends State<UploadWidgets> {
   bool amanitiesChecker = false;
   bool prefrencesChecker = false;
+  bool isStudent = false;
+  String? selectedCollege;
+  String? selectedCourse;
   String? paymentFrequency = 'Monthly';
   List<String> selectedItems = [];
   List<String> selectedPreference = [];
   String dropdownValue = 'Monthly';
+  String lableText = "hello";
+
+  Map<String, List<String>> collegeCourses = {
+    'Tribhuvan University': ['BSc CSIT', 'BBA', 'BE Civil'],
+    'Kathmandu University': ['B.Tech', 'BSc', 'MBA'],
+    'Pokhara University': ['BBA', 'BE Computer', 'BHM'],
+  };
+
+  List<String> get courses =>
+      selectedCollege != null ? collegeCourses[selectedCollege] ?? [] : [];
+
   @override
   void initState() {
     super.initState();
@@ -176,7 +191,7 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  homeAmanities(selectedItems: selectedItems),
+                                  HomeAmanities(selectedItems: selectedItems),
                                   Center(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -359,6 +374,86 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                 )),
           ),
         ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    isStudent = !isStudent;
+                  });
+                },
+                child: Text(
+                  "I am a student searching for roommates",
+                  style: GoogleFonts.raleway(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 14,
+                      color: Colors.grey),
+                ),
+              ),
+            ),
+            Checkbox(
+              checkColor: Colors.black,
+              activeColor: Colors.blue,
+              value: isStudent,
+              onChanged: (bool? newValue) {
+                setState(() {
+                  isStudent = newValue!;
+                  selectedCollege = null;
+                  selectedCourse = null;
+                });
+              },
+            ),
+          ],
+        ),
+        if (isStudent) ...[
+          DropdownButton<String>(
+            value: selectedCollege,
+            hint: const Text('Select your college'),
+            items: collegeCourses.keys
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                selectedCollege = newValue;
+                selectedCourse = null;
+              });
+            },
+          ),
+          if (selectedCollege != null) ...[
+            DropdownButton<String>(
+              value: selectedCourse,
+              hint: const Text('Select your course'),
+              items: courses.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedCourse = newValue;
+                });
+              },
+            ),
+          ],
+        ],
+        if (isStudent && selectedCollege != null && selectedCourse != null)
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: ElevatedButton(
+              onPressed: () {
+                // Implement your submission logic here.
+                print('Selected College: $selectedCollege');
+                print('Selected Course: $selectedCourse');
+              },
+              child: Text('Submit'),
+            ),
+          ),
         Row(
           children: <Widget>[
             Expanded(

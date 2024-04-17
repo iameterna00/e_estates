@@ -39,15 +39,12 @@ class UserModel {
   static UserModel fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
     return UserModel(
-      username: snapshot['username'] ?? '', // Provide a default empty string
-      uid: snapshot['uid'] ?? '', // Provide a default empty string
-      email: snapshot['email'] ?? '', // Provide a default empty string
-      photoUrl: snapshot['profileUrl'] ??
-          'https://via.placeholder.com/150', // Provide a default placeholder URL
+      username: snapshot['username'] ?? '',
+      uid: snapshot['uid'] ?? '',
+      email: snapshot['email'] ?? '',
+      photoUrl: snapshot['profileUrl'] ?? 'https://via.placeholder.com/150',
       followers: snapshot['followers'] ?? [],
       following: snapshot['following'] ?? [],
     );
   }
-
-  static fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> doc) {}
 }

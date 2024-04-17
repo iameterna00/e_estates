@@ -7,11 +7,11 @@ class FollowersInfoWidget extends StatelessWidget {
   final VoidCallback onToggleFollow;
 
   const FollowersInfoWidget({
-    Key? key,
+    super.key,
     required this.user,
     required this.isFollowing,
     required this.onToggleFollow,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

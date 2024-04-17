@@ -3,6 +3,7 @@ import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
 import 'package:e_estates/widgets/bestfor_you.dart';
 import 'package:e_estates/widgets/bottom_navigation.dart';
+
 import 'package:e_estates/widgets/top_feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,10 @@ class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends ConsumerState<HomeScreen> {
+class HomeScreenState extends ConsumerState<HomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final String userLocation = "Your Location";
   final TextEditingController _locationController = TextEditingController();
@@ -25,7 +26,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     "Rent",
     "Houses",
     "Apartment",
-    "Hotel",
+    "Hostel",
   ];
   String _selectedTag = "All";
 
@@ -181,46 +182,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ))
                   ],
                 ),
-                /*          Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? Colors.black
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Image.asset(
-                              "assets/icons/findPerson.png",
-                              scale: 5,
-                            )),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? Colors.black
-                                    : Colors.white,
-                                borderRadius: BorderRadius.circular(12)),
-                            child: Image.asset(
-                              "assets/icons/rent.png",
-                              scale: 5,
-                            )),
-                      )
-                    ],
-                  ),
-                ), */
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -334,6 +295,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _selectedTag == "Rent";
+          });
+        },
+        child: const Icon(Icons.person),
       ),
       bottomNavigationBar: CustomBottomAppBar(
           onExplore: () {

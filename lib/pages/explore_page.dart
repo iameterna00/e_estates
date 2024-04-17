@@ -6,10 +6,10 @@ class ExplorePage extends StatefulWidget {
   const ExplorePage({super.key});
 
   @override
-  _ExplorePageState createState() => _ExplorePageState();
+  ExplorePageState createState() => ExplorePageState();
 }
 
-class _ExplorePageState extends State<ExplorePage> {
+class ExplorePageState extends State<ExplorePage> {
   late SlidingUpPanelController panelController;
 
   @override

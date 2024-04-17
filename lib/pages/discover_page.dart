@@ -1,19 +1,17 @@
 import 'package:e_estates/models/usermodel.dart';
 import 'package:e_estates/pages/user_profile.dart';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/widgets.dart';
 
 class UsersListPage extends StatefulWidget {
   final dynamic curentUserid;
 
   const UsersListPage({super.key, required this.curentUserid});
   @override
-  _UsersListPageState createState() => _UsersListPageState();
+  UsersListPageState createState() => UsersListPageState();
 }
 
-class _UsersListPageState extends State<UsersListPage> {
+class UsersListPageState extends State<UsersListPage> {
   String searchQuery = '';
 
   @override

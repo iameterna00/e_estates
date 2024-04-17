@@ -42,7 +42,6 @@ class TopFeedNotifier extends StateNotifier<AsyncValue<List<ImagePost>>> {
   }
 
   Future<void> refreshPosts() async {
-    print('refreshing posts...');
     fetchhPosts();
   }
 }

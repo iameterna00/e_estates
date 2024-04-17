@@ -70,12 +70,11 @@ class MyProfilePage extends ConsumerWidget {
           children: [
             CircleAvatar(
               radius: 40,
-              backgroundImage: NetworkImage(
-                  userProfile.photoUrl ?? 'https://via.placeholder.com/150'),
+              backgroundImage: NetworkImage(userProfile.photoUrl),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(userProfile.username ?? 'Username',
+              child: Text(userProfile.username,
                   style: Theme.of(context).textTheme.titleLarge),
             ),
             Row(
@@ -186,9 +185,7 @@ class MyProfilePage extends ConsumerWidget {
           '');
       filePath = Uri.decodeFull(filePath.split('?').first);
 
-      try {
-        await storage.ref(filePath).delete();
-      } catch (error) {}
+      await storage.ref(filePath).delete();
     }
 
     FirebaseFirestore.instance

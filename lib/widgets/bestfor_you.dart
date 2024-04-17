@@ -1,16 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/models/usermodel.dart';
 import 'package:e_estates/pages/my_profilepage.dart';
 import 'package:e_estates/pages/topfeed_detaipage.dart';
 import 'package:e_estates/models/image_post.dart';
 import 'package:e_estates/pages/user_profile.dart';
 import 'package:e_estates/service/commentmodel.dart';
+import 'package:e_estates/service/customtime.dart';
 import 'package:e_estates/service/likemodel.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
+import 'package:e_estates/stateManagement/fetch_user_uid.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
-import 'package:e_estates/stateManagement/fetch_user.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
@@ -77,6 +78,18 @@ class BestForYou extends ConsumerWidget {
 
   Widget buildPostItem(BuildContext context, ImagePost post, WidgetRef ref,
       String distanceDisplay) {
+    DateTime uploadedAtDateTime;
+
+    if (post.uploadedAt is Timestamp) {
+      uploadedAtDateTime = (post.uploadedAt as Timestamp).toDate();
+    } else if (post.uploadedAt is DateTime) {
+      uploadedAtDateTime = post.uploadedAt;
+    } else {
+      uploadedAtDateTime = DateTime.now();
+    }
+
+    final uploadTimeAgo = customTimeAgo(uploadedAtDateTime);
+
     bool isNavigating = false;
     final user = ref.watch(userProvider).uid;
     bool isLikedLocally = post.isLikedByCurrentUser;
@@ -118,7 +131,8 @@ class BestForYou extends ConsumerWidget {
                   child: Row(
                     children: [
                       CircleAvatar(
-                          backgroundImage: post.uploaderProfilePicture != null
+                          backgroundImage: post
+                                  .uploaderProfilePicture.isNotEmpty
                               ? NetworkImage(post.uploaderProfilePicture)
                               : const AssetImage('assets/icons/noProfile.png')
                                   as ImageProvider),
@@ -179,19 +193,40 @@ class BestForYou extends ConsumerWidget {
                             ),
                             child: Row(
                               children: [
+                                const SizedBox(width: 1),
                                 Image.asset(
                                   'assets/icons/IC_Location.png',
                                   scale: 1.5,
                                 ),
                                 const SizedBox(width: 1),
-                                Text(distanceDisplay,
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 8)),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  child: Text(distanceDisplay,
+                                      style: const TextStyle(
+                                          color: Colors.white, fontSize: 8)),
+                                ),
                               ],
                             ),
                           )
                         : Container(),
                   ),
+                  Positioned(
+                      top: 10,
+                      right: 10,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            uploadTimeAgo,
+                            style: const TextStyle(fontSize: 10),
+                          ),
+                        ),
+                      )),
                   Positioned(
                     bottom: 10,
                     left: 0,

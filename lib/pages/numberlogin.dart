@@ -7,10 +7,10 @@ class PhoneAuthPage extends StatefulWidget {
   const PhoneAuthPage({super.key});
 
   @override
-  _PhoneAuthPageState createState() => _PhoneAuthPageState();
+  PhoneAuthPageState createState() => PhoneAuthPageState();
 }
 
-class _PhoneAuthPageState extends State<PhoneAuthPage> {
+class PhoneAuthPageState extends State<PhoneAuthPage> {
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
   final _auth = FirebaseAuth.instance;
@@ -23,17 +23,11 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       setState(() {
         _isOTPSent = true;
       });
-      print(
-          'Phone number automatically verified and user signed in: ${_auth.currentUser!.uid}');
     }
 
-    verificationFailed(FirebaseAuthException e) {
-      print(
-          'Phone number verification failed. Code: ${e.code}. Message: ${e.message}');
-    }
+    verificationFailed(FirebaseAuthException e) {}
 
     codeSent(String verificationId, int? resendToken) async {
-      print('Please check your phone for the verification code.');
       _verificationId = verificationId;
     }
 
@@ -51,18 +45,10 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   }
 
   Future<void> _signInWithPhoneNumber() async {
-    try {
-      final AuthCredential credential = PhoneAuthProvider.credential(
-        verificationId: _verificationId!,
-        smsCode: _codeController.text,
-      );
-
-      final User? user = (await _auth.signInWithCredential(credential)).user;
-
-      print("Successfully signed in UID: ${user!.uid}");
-    } catch (e) {
-      print("Failed to sign in: " + e.toString());
-    }
+    PhoneAuthProvider.credential(
+      verificationId: _verificationId!,
+      smsCode: _codeController.text,
+    );
   }
 
   @override
@@ -109,7 +95,6 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
             TextButton(
               onPressed: _verifyPhoneNumber,
               child: const Text("Generate OTP"),
-              //style: TextButton.styleFrom(backgroundColor: Colors.blue),
             ),
             if (_isOTPSent)
               Padding(
@@ -119,28 +104,21 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   appContext: context,
                   length: 6,
-                  keyboardType:
-                      TextInputType.number, // restrict input to numbers
+                  keyboardType: TextInputType.number,
                   obscureText: false,
-                  animationType: AnimationType.none, // remove animation
+                  animationType: AnimationType.none,
                   pinTheme: PinTheme(
                     shape: PinCodeFieldShape.box,
                     borderRadius: BorderRadius.circular(5),
                     fieldHeight: 40,
                     fieldWidth: 40,
-                    activeColor: Colors.blue, // simple color for active field
-                    inactiveColor:
-                        Colors.grey, // simple color for inactive field
-                    selectedColor:
-                        Colors.grey, // simple color for selected field
+                    activeColor: Colors.blue,
+                    inactiveColor: Colors.grey,
+                    selectedColor: Colors.grey,
                   ),
                   controller: _codeController,
-                  onCompleted: (v) {
-                    print("Completed");
-                  },
-                  onChanged: (value) {
-                    print(value);
-                  },
+                  onCompleted: (v) {},
+                  onChanged: (value) {},
                 ),
               ),
             if (_isOTPSent)

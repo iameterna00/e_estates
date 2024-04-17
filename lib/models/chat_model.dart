@@ -1,44 +1,45 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChatMessage {
-  final String messageId;
-  final String senderId;
-  final String receiverId;
-  final String messageContent;
-  final Timestamp timestamp;
-  final bool isSeen;
-  final List<String> participants; // Add this line
+class ChatModel {
+  final String id;
+  final List<String> participantIds;
+  final String lastMessage;
+  final DateTime lastMessageTime;
+  final bool hasUnseenMessages;
 
-  ChatMessage({
-    required this.messageId,
-    required this.senderId,
-    required this.receiverId,
-    required this.messageContent,
-    required this.timestamp,
-    required this.isSeen,
-    required this.participants, // Add this
+  ChatModel({
+    required this.id,
+    required this.participantIds,
+    required this.lastMessage,
+    required this.lastMessageTime,
+    required this.hasUnseenMessages,
   });
 
   Map<String, dynamic> toJson() => {
-        'messageId': messageId,
-        'senderId': senderId,
-        'receiverId': receiverId,
-        'messageContent': messageContent,
-        'timestamp': timestamp,
-        'isSeen': isSeen,
-        'participants': participants, // Add this
+        'participantIds': participantIds,
+        'lastMessage': lastMessage,
+        'lastMessageTime': Timestamp.fromDate(lastMessageTime),
+        'hasUnseenMessages': hasUnseenMessages,
       };
 
-  static ChatMessage fromSnap(DocumentSnapshot snap) {
-    var snapshot = snap.data() as Map<String, dynamic>;
-    return ChatMessage(
-      messageId: snapshot['messageId'] ?? '',
-      senderId: snapshot['senderId'] ?? '',
-      receiverId: snapshot['receiverId'] ?? '',
-      messageContent: snapshot['messageContent'] ?? '',
-      timestamp: snapshot['timestamp'],
-      isSeen: snapshot['isSeen'] ?? false,
-      participants: List<String>.from(snapshot['participants']), // Add this
+  static ChatModel fromMap(Map<String, dynamic> map, String documentId) {
+    return ChatModel(
+      id: documentId,
+      participantIds: List<String>.from(map['participantIds']),
+      lastMessage: map['lastMessage'] ?? '',
+      lastMessageTime: (map['lastMessageTime'] as Timestamp).toDate(),
+      hasUnseenMessages: map['hasUnseenMessages'] ?? false,
+    );
+  }
+
+  static ChatModel fromFirestore(QueryDocumentSnapshot<Object?> doc) {
+    var data = doc.data() as Map<String, dynamic>;
+    return ChatModel(
+      id: doc.id,
+      participantIds: List<String>.from(data['participantIds']),
+      lastMessage: data['lastMessage'] ?? '',
+      lastMessageTime: (data['lastMessageTime'] as Timestamp).toDate(),
+      hasUnseenMessages: data['hasUnseenMessages'] ?? false,
     );
   }
 }

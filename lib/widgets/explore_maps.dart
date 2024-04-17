@@ -227,8 +227,6 @@ class _ExploreMaps extends State<ExploreMaps> with TickerProviderStateMixin {
                               ref.watch(topFeedProvider);
                           return imagePostsAsyncValue.when(
                             data: (imagePosts) {
-                              print(
-                                  "Number of image posts: ${imagePosts.length}");
                               return MarkerLayer(
                                 rotate: true,
                                 markers: [

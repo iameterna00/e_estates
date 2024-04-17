@@ -489,11 +489,9 @@ class _LocationPickerMapState extends State<LocationPickerMap>
         attempts++;
       }
 
-      // Once the location name is fetched, dismiss the dialog
       Navigator.of(context).pop();
     }
 
-    // Confirm the location and navigate back
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Location confirmed!')),
     );

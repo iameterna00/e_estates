@@ -16,28 +16,31 @@ class ImagePost {
   final String uploaderName;
   final String uid;
   final String uploaderProfilePicture;
+  final dynamic uploadedAt;
 
   bool isLikedByCurrentUser;
   final List<String> likedUsers;
 
-  ImagePost(
-      {required this.id,
-      required this.title,
-      required this.imageUrls,
-      required this.description,
-      required this.latitude,
-      required this.longitude,
-      required this.tags,
-      required this.price,
-      required this.location,
-      this.paymentfrequency,
-      this.homeAminities,
-      this.ownerPreferences,
-      required this.uploaderName,
-      required this.uid,
-      required this.uploaderProfilePicture,
-      required this.likedUsers,
-      required this.isLikedByCurrentUser});
+  ImagePost({
+    required this.id,
+    required this.title,
+    required this.imageUrls,
+    required this.description,
+    required this.latitude,
+    required this.longitude,
+    required this.tags,
+    required this.price,
+    required this.location,
+    this.paymentfrequency,
+    this.homeAminities,
+    this.ownerPreferences,
+    required this.uploaderName,
+    required this.uid,
+    required this.uploaderProfilePicture,
+    required this.likedUsers,
+    required this.isLikedByCurrentUser,
+    required this.uploadedAt,
+  });
 
   factory ImagePost.fromDocument(DocumentSnapshot doc, String currentUserId) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>? ?? {};
@@ -45,22 +48,24 @@ class ImagePost {
         (data['likedUsers'] as List<dynamic>? ?? []).contains(currentUserId);
 
     return ImagePost(
-        id: doc.id,
-        title: data['Title'] ?? '',
-        imageUrls: List<String>.from(data['urls']),
-        description: data['Description'] ?? '',
-        latitude: data['latitude'] ?? 0.0,
-        longitude: data['longitude'] ?? 0.0,
-        tags: List<String>.from(data['Tags'] ?? []),
-        price: data['Price']?.toDouble() ?? 0.0,
-        location: data['Location'] ?? '',
-        paymentfrequency: data['PaymentFrequency'],
-        homeAminities: List<String>.from(data['HomeAmanities'] ?? []),
-        uploaderName: data['Name'],
-        uid: data['UID'],
-        uploaderProfilePicture: data['ProfilePicture'],
-        ownerPreferences: List<String>.from(data['OwnerPreferences'] ?? []),
-        isLikedByCurrentUser: isLiked,
-        likedUsers: List<String>.from(data['likedUsers'] ?? []));
+      id: doc.id,
+      title: data['Title'] ?? '',
+      imageUrls: List<String>.from(data['urls']),
+      description: data['Description'] ?? '',
+      latitude: data['latitude'] ?? 0.0,
+      longitude: data['longitude'] ?? 0.0,
+      tags: List<String>.from(data['Tags'] ?? []),
+      price: data['Price']?.toDouble() ?? 0.0,
+      location: data['Location'] ?? '',
+      paymentfrequency: data['PaymentFrequency'],
+      homeAminities: List<String>.from(data['HomeAmanities'] ?? []),
+      uploaderName: data['Name'],
+      uid: data['UID'],
+      uploaderProfilePicture: data['ProfilePicture'],
+      ownerPreferences: List<String>.from(data['OwnerPreferences'] ?? []),
+      isLikedByCurrentUser: isLiked,
+      likedUsers: List<String>.from(data['likedUsers'] ?? []),
+      uploadedAt: data['uploadedAt'],
+    );
   }
 }
