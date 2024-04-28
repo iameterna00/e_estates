@@ -351,7 +351,7 @@ class _TopFeedMaps extends State<TopFeedMaps> with TickerProviderStateMixin {
                                     builder: (BuildContext context,
                                         WidgetRef ref, Widget? child) {
                                       final photoUrl =
-                                          ref.watch(userProvider).photoURL;
+                                          ref.watch(userProvider)?.photoUrl;
                                       return Stack(
                                         alignment: Alignment.center,
                                         children: [

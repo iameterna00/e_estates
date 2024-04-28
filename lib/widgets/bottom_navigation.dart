@@ -22,8 +22,8 @@ class CustomBottomAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final photoUrl = ref.watch(userProvider).photoURL;
-    final userid = ref.watch(userProvider).uid;
+    final photoUrl = ref.watch(userProvider)?.photoUrl;
+    final userid = ref.watch(userProvider)?.uid;
 
     return BottomAppBar(
       height: 60,

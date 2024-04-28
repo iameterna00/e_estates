@@ -91,7 +91,7 @@ class BestForYou extends ConsumerWidget {
     final uploadTimeAgo = customTimeAgo(uploadedAtDateTime);
 
     bool isNavigating = false;
-    final user = ref.watch(userProvider).uid;
+    final user = ref.watch(userProvider)?.uid;
     bool isLikedLocally = post.isLikedByCurrentUser;
 
     int likesCount = post.likedUsers.length;

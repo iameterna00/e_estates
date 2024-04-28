@@ -1,0 +1,4601 @@
+{
+    "colleges": [
+      {
+        "name": "Certified College of Accountancy (CCA), Kathmandu",
+        "courses": ["ACCA", "Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "ISMT College, Kathmandu",
+        "courses": [
+          "BA (Hons) Business and Management (BBA)",
+          "BSc. (Hons) Computer Systems Engineering",
+          "BHM - BSc. (Hons) International Tourism and Hospitality Management",
+          "BSc (Hons) Cyber Security and Digital Forensics"
+        ]
+      },
+      {
+        "name": "Model Institute of Technology (MIT), Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)",
+          "Bachelor of Information Technology (BIT)"
+        ]
+      },
+      {
+        "name": "Padmashree College, Kathmandu",
+        "courses": [
+          "B.Tech Food Technology",
+          "Bachelor of Information Technology (Hons) BIT",
+          "BA (Hons) in Business & Hospitality Management (BABHM)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "The British College, Kathmandu",
+        "courses": [
+          "BBA (Hons) Business and Management",
+          "BSc (Hons) Computing",
+          "MBA (Executive)",
+          "ACCA"
+        ]
+      },
+      {
+        "name": "Tribhuvan University (TU), Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Acme Engineering College, Kathmandu",
+        "courses": [
+          "Bachelor of Civil Engineering (BE Civil)",
+          "B.E. Computer Engineering",
+          "Bachelor Of Architecture (B.Arch)",
+          "M.Sc. Information System Engineering"
+        ]
+      },
+      {
+        "name": "Amrit Science Campus - ASCOL, Kathmandu",
+        "courses": [
+          "BSc Computer Science and Information Technology (BSc CSIT)",
+          "BSc Environmental Science",
+          "BSc in Physics",
+          "MSc in Physics"
+        ]
+      },
+      {
+        "name": "Bhanubhakta Memorial College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two Humanities",
+          "Ten Plus Two Management",
+          "Ten Plus Two Science"
+        ]
+      },
+      {
+        "name": "Central Department of Chemistry, Tribhuvan University, Kathmandu",
+        "courses": ["MSc in Chemistry", "PhD in Chemistry"]
+      },
+      {
+        "name": "Central Department of Computer Science and Information Technology, TU, Kathmandu",
+        "courses": ["Masters of Science in Computer Science and Information Technology (MSc CSIT)", "Master of Information Technology (MIT)"]
+      },
+      {
+        "name": "Central Department of Education, Tribhuvan University, Kathmandu",
+        "courses": [
+          "Master of Education (M.Ed) in Economics Education",
+          "Master of Education (M.Ed) in Geography Education",
+          "Master of Education (M.Ed) in Health Education",
+          "Master of Education (M.Ed) in History Education"
+        ]
+      },
+      {
+        "name": "Central Department of English Tribhuvan University, Kathmandu",
+        "courses": ["MA English", "M.Phil in English", "PhD in English"]
+      },
+      {
+        "name": "Central Department of Geology Tribhuvan University, Kathmandu",
+        "courses": ["MSc in Engineering Geology", "MSc in Geology", "PhD in Geology"]
+      },
+      {
+        "name": "Central Department of Hydrology and Meteorology, Tribhuvan University, Kathmandu",
+        "courses": ["MSc in Meteorology", "PhD in Hydrology and Meteorology"]
+      },
+      {
+        "name": "Central Department of Physics Tribhuvan University, Kathmandu",
+        "courses": ["MSc in Physics", "PhD in Physics"]
+      },
+      {
+        "name": "Central Department of Sociology Tribhuvan University, Kathmandu",
+        "courses": ["M.Phil in Sociology", "MA in Sociology"]
+      },
+      {
+        "name": "Central Department of Zoology Tribhuvan University, Kathmandu",
+        "courses": ["MSc Zoology", "Ph.D. in Zoology"]
+      },
+      {
+        "name": "College of Nursing NAIHS, Kathmandu",
+        "courses": ["Bachelor of Nursing Science (BNS)", "B.Sc Nursing", "PCL Nursing (Staff Nurse)", "Master of Nursing (MN)"]
+      },
+      {
+        "name": "Department of Conflict, Peace and Development Studies, Tribhuvan University, Kathmandu",
+        "courses": ["MA in Conflict, Peace and Development Studies"]
+      },
+      {
+        "name": "Dillibazar Kanya Multiple Campus, Kathmandu",
+        "courses": ["Bachelor of Arts (BA)", "Bachelor of Business Studies (BBS)", "Bachelor of Education (B.Ed)", "MA English"]
+      },
+      {
+        "name": "Kailashkut Multiple Campus, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Kantipur International College, Kathmandu",
+        "courses": ["Bachelor of Architecture (B.Arch.)", "Bachelor of Business Administration (BBA)", "B.E. in Civil Engineering", "Bachelor of Hospitality and Catering Management (BHCM)"]
+      },
+      {
+        "name": "Kathmandu Nursing Campus, Kathmandu",
+        "courses": ["PCL Nursing (Staff Nurse)"]
+      },
+      {
+        "name": "KFA Business School, Kathmandu",
+        "courses": ["Master in Business Administration (MBA)", "Bachelor of Computer Science (Hons.) BCS.IT", "Bachelor of Science (Hons.) in Hospitality Management (BHM)"]
+      },
+      {
+        "name": "Maharajgunj Medical Campus, Kathmandu",
+        "courses": ["Bachelor of Medicine, Bachelor of Surgery (MBBS)", "Bachelor of Pharmacy"]
+      },
+      {
+        "name": "Mahendra Ratna Campus, Kathmandu",
+        "courses": ["Bachelor of Education (B.Ed)", "B.Ed. Information Communication Technology (BICTE)", "Master of Education (M.Ed) General", "Post Graduate Diploma in Social Studies"]
+      },
+      {
+        "name": "National Academy of Medical Sciences (NAMS), Kathmandu",
+        "courses": ["Bachelor in Midwifery Sciences", "Bachelor of Science in Medical Imaging Technology (B.Sc. MIT)", "DM in Hepatology", "DM in Medical Oncology"]
+      },
+      {
+        "name": "Nepal Academy of Tourism and Hotel Management (NATHM), Kathmandu",
+        "courses": ["Bachelor in Travel and Tourism Management (BTTM)", "Bachelor of Hotel Management (BHM)", "Master of Hospitality Management (MHM)"]
+      },
+      {
+        "name": "Nepal Commerce Campus, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Information Management (BIM)", "Bachelor of Business Management (BBM)", "Master of Business Studies (MBS)"]
+      },
+      {
+        "name": "Nepal Institute of Health Science (Stupa College), Kathmandu",
+        "courses": ["Bachelor of Public Health (BPH)", "Bachelor of Science (B.Sc) in Nursing", "Certificate in Medical Laboratory Technology (CMLT)", "Diploma in Pharmacy"]
+      },
+      {
+        "name": "Nepal Law Campus, Kathmandu",
+        "courses": ["Bachelor of Laws (LLB)", "Bachelor of Arts Bachelor of Laws (BA LLB)", "Master of Laws (LLM)", "Three year Master of Laws (LL.M.)"]
+      },
+      {
+        "name": "Nepal Medical College, Kathmandu",
+        "courses": ["Bachelor of Dental Surgery (BDS)", "Bachelor of Medicine, Bachelor of Surgery (MBBS)", "Bachelor of Science (B.Sc) in Nursing", "DM Nephrology"]
+      },
+      {
+        "name": "Nepal Mountain Academy, Kathmandu",
+        "courses": ["Bachelor of Mountaineering Studies (BMS)", "Master of Adventure Tourism Studies (MATS)", "MSc in Mountain and Mountaineering Science (MSc MMS)"]
+      },
+      {
+        "name": "Nepal Rastriya College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Education (B.Ed)", "Master of Business Studies (MBS)"]
+      },
+      {
+        "name": "Nepal Rastriya Nirman Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "New Himalayan Vidya Mandir Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "New Millennium College, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Arts (BA)", "Master of Arts in English (MA)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "New Zenith English Model Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Newton International College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Social Works (BSW)"]
+      },
+      {
+        "name": "Northern Light Academy of Aviation and Technology (NAAT), Kathmandu",
+        "courses": [
+          "Basic Air Cabin Crew / Airhostess Training",
+          "Level 2 Diploma in Air Cabin Crew",
+          "Basic Airport Ground Handling Training",
+          "Level 2 Diploma in Airport Ground Handling"
+        ]
+      },
+      {
+        "name": "Olympia World Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Om Health Campus, Kathmandu",
+        "courses": ["Bachelor of Public Health (BPH)", "Bachelor of Science (B.Sc) in Nursing", "PCL Nursing (Staff Nurse)", "Post Basic Bachelor in Nursing (PBBN)"]
+      },
+      {
+        "name": "Oxford Advanced Engineering College, Kathmandu",
+        "courses": ["Diploma in Civil Engineering", "Diploma in Computer Engineering"]
+      },
+      {
+        "name": "Padmakanya Multiple Campus, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Business Studies (BBS)", "Bachelor of Business Management (BBM)", "Bachelor of Arts (BA)"]
+      },
+      {
+        "name": "Padmodaya Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Panga Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Paropakar Hospital Nursing Campus, Kathmandu",
+        "courses": ["PCL Nursing (Staff Nurse)"]
+      },
+      {
+        "name": "Pasang Lhamu Sherpa Memorial College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Education (B.Ed)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Pashupati Mitra Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Pashupati Multiple Campus, Kathmandu",
+        "courses": ["Bachelor of Arts (BA)", "Bachelor of Business Studies (BBS)", "Bachelor of Education (B.Ed)", "MA Nepali"]
+      },
+      {
+        "name": "People's Campus, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Arts (BA)", "Bachelor of Business Studies (BBS)", "Master of Business Studies (MBS)"]
+      },
+      {
+        "name": "Peoples Dental College, Kathmandu",
+        "courses": [
+          "Bachelor of Dental Surgery (BDS)",
+          "Master of Dental Surgery (MDS) in Conservative and Endodontics",
+          "MDS in Orthodontics and Dentofacial Orthopedics",
+          "Master of Dental Surgery(MDS) in Peridontology and Impantology"
+        ]
+      },
+      {
+        "name": "Platinum Management College, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Hotel Management (BHM)"]
+      },
+      {
+        "name": "Polygon College, Kathmandu",
+        "courses": ["MA in Mass Communication and Journalism"]
+      },
+      {
+        "name": "Precious National College, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Education", "Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Premier Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Princeton Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Prolific Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Public Administration Campus, Kathmandu",
+        "courses": ["Bachelor of Public Administration (BPA)", "M.Phil in Public Administration", "Master of Public Administration (MPA)"]
+      },
+      {
+        "name": "Public Youth Campus, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Business Administration (BBA)", "Bachelor in Travel and Tourism Management (BTTM)", "Master of Business Studies (MBS)"]
+      },
+      {
+        "name": "Pushpalal Memorial College (PLMC), Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Education (B.Ed)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Pushpasadan Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Ratna Rajya Laxmi Campus - RR Campus, Kathmandu",
+        "courses": ["Bachelor of Arts (BA)", "MA English", "MA Nepali", "MA Population Studies"]
+      },
+      {
+        "name": "Rising Star College of Management, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Riviera International Academy, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Rose Bud Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Rupys International School, Kathmandu",
+        "courses": ["GCE A level- Science", "GCE A level Non-Science"]
+      },
+      {
+        "name": "Rural Health Education and Service Center, Kathmandu",
+        "courses": ["PCL in Acupuncture Acupressure and Moxibustion"]
+      },
+      {
+        "name": "Saipal Academy, Kathmandu",
+        "courses": ["GCE A level Non-Science", "GCE A level- Science", "Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "SANN Institute of Nursing, Kathmandu",
+        "courses": ["Bachelor of Science (B.Sc) in Nursing"]
+      },
+      {
+        "name": "Santwona College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts in Social Works (BASW)", "BA in Sociology", "BA in English"]
+      },
+      {
+        "name": "Saraswati Multiple Campus, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Business Management (BBM)", "MA English"]
+      },
+      {
+        "name": "Saurya International College, Kathmandu",
+        "courses": ["Ten Plus Two (10+2) Management", "Ten Plus Two (10+2) Science", "Ten Plus Two (10+2) Humanities", "GCE A level Non-Science"]
+      },
+      {
+        "name": "Scholars Home Academy, Kathmandu",
+        "courses": ["Ten Plus Two (10+2) Management", "Ten Plus Two (10+2) Science"]
+      },
+      {
+        "name": "School of Environmental Management and Sustainable Development (SchEMS), Kathmandu",
+        "courses": ["Bachelor of Science in Environmental Management", "Masters of Science in Environmental Management", "Bachelors of Business Administration (BBA)", "Master of Business Administration (MBA)"]
+      },
+      {
+        "name": "School of Forestry and Natural Resource Management, Institute of Forestry, Kathmandu",
+        "courses": ["MSc in Wildlife Management and Biodiversity Conservation", "MSc Mountain Environment and Development Studies", "MSc in Forestry"]
+      },
+      {
+        "name": "School of Geomatics, Kathmandu",
+        "courses": ["Diploma in Geomatics Engineering", "TSLC in Survey Engineering (AMIN)"]
+      },
+      {
+        "name": "School of Management - Tribhuvan University (SOMTU), Kathmandu",
+        "courses": ["MBA in Global Leadership and Management", "Master of Business Administration (MBA)", "MBA in Information Technology (MBA IT)", "Master of Finance and Control (MFC)"]
+      },
+      {
+        "name": "School of Medical Sciences (SMS), Kathmandu",
+        "courses": ["Certificate in Medical Laboratory Technology (CMLT)", "Diploma in Pharmacy", "TSLC in Medical Lab Technology (Lab Assistant)"]
+      },
+      {
+        "name": "Shahid Smarak College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Shankarapur Hospital and Academy, Kathmandu",
+        "courses": ["Certificate in Medical Laboratory Technology (CMLT)", "PCL Nursing (Staff Nurse)", "PCL in General Medicine-Health Assistant (HA)"]
+      },
+      {
+        "name": "Shanker Dev Campus, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Business Management (BBM)", "Bachelor of Information Management (BIM)", "Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Shankharapur Polytechnic Institute, Kathmandu",
+        "courses": ["Pre-Diploma in Civil Engineering (Civil Sub-Overseer)", "Diploma in Civil Engineering", "Diploma in Geometrics Engineering", "Diploma in Hydropower Engineering"]
+      },
+      {
+        "name": "Shanti Vidya Griha Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Shepherd College, Kathmandu",
+        "courses": ["Bachelor of Media Technology (BMT)", "Master of Media Technology (MMT)", "Diploma in Broadcasting Journalism"]
+      },
+      {
+        "name": "Shivapuri Secondary School and College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Siddhartha Academy Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Siddhartha Multiple College, Kathmandu",
+        "courses": ["Bachelor of Social Works (BSW)", "Diploma in Ayurveda (AHA)", "Bachelor of Business Studies (BBS)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Siddhartha Vanasthali Institute, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Siddhi Ganesh Secondary School, Kathmandu, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Sigma College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Education (B.Ed)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Silkroad International College, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)"]
+      },
+      {
+        "name": "Sirius College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Sirjana College of Fine Arts, Kathmandu",
+        "courses": ["Bachelor of Fine Arts (BFA)", "Ten Plus Two (+2) Music", "Ten Plus Two (+2) Dance", "Ten Plus Two (+2) Painting"]
+      },
+      {
+        "name": "SitaRam Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Stamford College Kathmandu, Kathmandu",
+        "courses": ["BSc (Hons) Computer Science (BIT)", "BSc (Hons) Data Science and Artificial Intelligence"]
+      },
+      {
+        "name": "Supreme College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Arts (BA)", "Bachelor of Social Works (BSW)", "Bachelor Arts in English (BA)"]
+      },
+      {
+        "name": "Sushma Koirala Memorial Nursing Campus, Kathmandu",
+        "courses": ["Bachelor of Science (B.Sc) in Nursing", "PCL Nursing (Staff Nurse)"]
+      },
+      {
+        "name": "Swapna Vatika School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Swati Sadan College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Takshashila Academy, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Taudaha Rastriya Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Thapathali Campus - Institute of Engineering, Kathmandu",
+        "courses": ["Bachelor of Civil Engineering", "Bachelor in Industrial Engineering", "Bachelor in Automobile Engineering", "Bachelor of Architecture"]
+      },
+      {
+        "name": "The London College, Kathmandu",
+        "courses": ["BSc (Hons) Computer Science", "BSc. (Hons) Cyber Security and Networks"]
+      },
+      {
+        "name": "Theravada Buddhist Academy, Kathmandu",
+        "courses": ["Master of Arts (MA) in Theravada Buddhism"]
+      },
+      {
+        "name": "Tilganga Institute of Ophthalmology, Kathmandu",
+        "courses": ["Diploma in Ophthalmic Science"]
+      },
+      {
+        "name": "Tilingtar Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Science", "Junior Computer Technician (JCT)"]
+      },
+      {
+        "name": "Tri-Chandra College, Kathmandu",
+        "courses": ["Bachelor of Arts (BA)", "Bachelor of Science (B.Sc) in Environmental Science", "Bachelor of Science (B.Sc) in Microbiology", "Bachelor of Science (B.Sc) in Physics"]
+      },
+      {
+        "name": "TriJyoti Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Triyog High School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Trungram International Academy Secondary School (TIA), Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "TU School of Mathematical Sciences, Kathmandu",
+        "courses": ["Bachelor in Mathematical Sciences", "Master in Mathematical Sciences"]
+      },
+      {
+        "name": "Ujjwal Vidhya Vikash Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Universal Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Valley College of Engineering, Kathmandu",
+        "courses": ["Diploma in Civil Engineering"]
+      },
+      {
+        "name": "Valley College of Technical Sciences, Kathmandu",
+        "courses": ["Bachelor of Pharmacy", "Bachelor of Public Health (BPH)"]
+      },
+      {
+        "name": "Valley Public Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "Valmeeki Vidyapeeth, Kathmandu",
+        "courses": ["Uttar Madhyama", "Shastri", "Bachelor of Education one year (Sanskrit)"]
+      },
+      {
+        "name": "Venus Public School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Vijaya Memorial Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Vinayak College of Health Science, Kathmandu",
+        "courses": ["Certificate in Medical Laboratory Technology (CMLT)", "Diploma in Pharmacy", "PCL Nursing (Staff Nurse)", "PCL in General Medicine-Health Assistant (HA)"]
+      },
+      {
+        "name": "Viswa Deep Multiple Campus, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Viswa Niketan Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Law"]
+      },
+      {
+        "name": "VS Niketan Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science", "Ten Plus Two (+2) Humanities"]
+      },
+      {
+        "name": "WLC College Nepal (WLCN), Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Yeti Health Science Academy, Kathmandu",
+        "courses": ["Bachelor of Science (B.Sc) in Nursing", "Bachelor of Public Health (BPH)", "Certificate in Diagnostic Radiography", "Certificate in Medical Laboratory Technology (CMLT)"]
+      },
+      {
+        "name": "A La Carte Hospitality Nepal, Kathmandu",
+        "courses": ["Diploma in Global Culinary Arts (DGCA)", "Certificate in Food and Beverage", "Certificate in House Keeping", "Certificate in Flair Bar Tending"]
+      },
+      {
+        "name": "Aadim National College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "Bachelor of Computer Application (BCA)", "Ten Plus Two in Management", "Ten Plus Two in Law"]
+      },
+      {
+        "name": "Ace Higher Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Ace Institute of Management, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Administration in Banking and Insurance (BBA-BI)",
+          "Executive MBA",
+          "GCE A level Non-Science"
+        ]
+      },
+      {
+        "name": "Ace International Business School, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)"
+        ]
+      },
+      {
+        "name": "Active Academy College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Social Work (BSW)",
+          "Bachelor of Arts (B.A.)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "Adharsheela College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Social Works (BSW)"
+        ]
+      },
+      {
+        "name": "Advanced College of Engineering and Management (ACEM), Kathmandu",
+        "courses": [
+          "BE in Civil Engineering",
+          "B.E. in Electrical Engineering",
+          "B.E. in Computer Engineering",
+          "B.E. in Electronics and Communication Engineering"
+        ]
+      },
+      {
+        "name": "All Nepal College of Technical Education, Kathmandu",
+        "courses": [
+          "Diploma in Pharmacy",
+          "Pre-Diploma in Agriculture (Plant Science)",
+          "PCL in General Medicine-Health Assistant (HA)",
+          "Pre-Diploma in Veterinary Science"
+        ]
+      },
+      {
+        "name": "Alok Vidyashram, Kathmandu",
+        "courses": [
+          "Class 11 and 12 (Science) - CBSE",
+          "Class 11 and 12 (Commerce) - CBSE"
+        ]
+      },
+      {
+        "name": "Amar Jyoti Secondary School Kathmandu, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Ambition College, Kathmandu",
+        "courses": [
+          "BSc Computer Science and Information Technology (BSc CSIT)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Amity Global Education (Lord Buddha College), Kathmandu",
+        "courses": [
+          "Diploma in Forestry",
+          "Diploma in Pharmacy",
+          "PCL in General Medicine-Health Assistant (HA)"
+        ]
+      },
+      {
+        "name": "Andrew J Wild College, Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Angels Heart Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Annapurna Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Hotel Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Computer Science"
+        ]
+      },
+      {
+        "name": "Apex College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Administration - Travel and Tourism (BBA-TT)",
+          "Bachelor of Business Administration in Banking and Insurance (BBA-BI)",
+          "Bachelor of Computer Information Systems (BCIS)"
+        ]
+      },
+      {
+        "name": "Apollo International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "BBA in Banking and Insurance (BBA-BI)",
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "Arunima College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Arunodaya Academy, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Aryan School of Engineering and Management, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Civil Engineering (BE Civil)",
+          "Bachelor of Computer Application (BCA)",
+          "Bachelor of Information Technology (BIT)"
+        ]
+      },
+      {
+        "name": "Ashirwad College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two Management",
+          "Bachelor of Business Management (BBM)"
+        ]
+      },
+      {
+        "name": "Asian Byabasthapan College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "Asian College of Management and Technology (ACMT), Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)"
+        ]
+      },
+      {
+        "name": "Asian School of Management and Technology, Kathmandu",
+        "courses": [
+          "BSc Computer Science and Information Technology (BSc CSIT)",
+          "Bachelor of Information Management (BIM)",
+          "Bachelor of Computer Application (BCA)",
+          "Bachelor of Business Management (BBM)"
+        ]
+      },
+      {
+        "name": "Atharva Business College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Hotel Management (BHM)",
+          "Bachelor of Health Care Management (BHCM)"
+        ]
+      },
+      {
+        "name": "Atlantic International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "BBA in Banking and Insurance (BBA-BI)"
+        ]
+      },
+      {
+        "name": "Ayurveda Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Ayurvedic Medicine and Surgery (BAMS)",
+          "MD Ayurveda (Kayachikitsa)"
+        ]
+      },
+      {
+        "name": "Bagmati College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Plus Two Humanities",
+          "Plus Two Management",
+          "Plus Two Science"
+        ]
+      },
+      {
+        "name": "Bajra International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Computer Application (BCA)",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Balaju School of Engineering and Technology, Kathmandu",
+        "courses": [
+          "Diploma in Civil Engineering",
+          "Diploma in Electrical Engineering",
+          "Diploma in Mechanical Engineering",
+          "Diploma in Ophthalmic Science"
+        ]
+      },
+      {
+        "name": "Baneshwor Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)",
+          "MA in Anthropology"
+        ]
+      },
+      {
+        "name": "Bansbari Secondary School, Maharajgunj, Kathmandu, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Baundeshwor Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Bijeswori Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Bishwo Bhasa Campus, Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Boudha Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "MA in Buddhism and Peace Studies"
+        ]
+      },
+      {
+        "name": "BP Memorial Health Institute and Research Center, Kathmandu",
+        "courses": [
+          "PCL Nursing (Staff Nurse)",
+          "PCL in General Medicine - Health Assistant (HA)"
+        ]
+      },
+      {
+        "name": "Bridgewater International College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science",
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "Brihaspati Vidyasadan, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Brilliant Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "British Gurkha College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "British Model College, Kathmandu",
+        "courses": [
+          "GCE A level Non-Science",
+          "GCE A level- Science"
+        ]
+      },
+      {
+        "name": "Brooklyn College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Social Works (BSW)",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "BST College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Budhanilkantha Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "Camad College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Arts in Development Studies (BDevS)"
+        ]
+      },
+      {
+        "name": "Cambridge International College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Camellia College of Management, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Campion Kathmandu School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Canvas international college, Kathmandu",
+        "courses": [
+          "Bachelor of Science (BSc)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Capital College and Research Center (CCRC), Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Capitol Hill College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Carina International Academy, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Central College of Business Management, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Healthcare Management (BHCM)",
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "Central Department of Anthropology Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Anthropology",
+          "M.Phil in Anthropology",
+          "Ph.D in Antropology",
+          "BA in Anthropology"
+        ]
+      },
+      {
+        "name": "Central Department of Biotechnology | Tribhuvan University, Kathmandu",
+        "courses": [
+          "MSc Biotechnology",
+          "PhD in Biotechnology"
+        ]
+      },
+      {
+        "name": "Central Department of Botany, Tribhuvan University, Kathmandu",
+        "courses": [
+          "PhD in Botany",
+          "MSc in Biodiversity and Environmental Management",
+          "MSc in Botany"
+        ]
+      },
+      {
+        "name": "Central Department of Buddhist Studies, Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Buddhist Studies",
+          "PhD in Buddhist Studies"
+        ]
+      },
+      {
+        "name": "Central Department of Economics Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Economics",
+          "Mphil in Economics",
+          "PhD in Economics"
+        ]
+      },
+      {
+        "name": "Central Department of Environmental Science, Tribhuvan University, Kathmandu",
+        "courses": [
+          "M.Sc in Environmental Science",
+          "Ph.D. Environmental Science",
+          "MSc in Environmental Health in Disaster"
+        ]
+      },
+      {
+        "name": "Central Department of Fine Arts Tribhuvan University, Kathmandu",
+        "courses": [
+          "Master of Fine Arts (MFA)"
+        ]
+      },
+      {
+        "name": "Central Department of Geography, Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Geography",
+          "PhD in Geography"
+        ]
+      },
+      {
+        "name": "Central Department of Hindi Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Hindi",
+          "PhD in Hindi"
+        ]
+      },
+      {
+        "name": "Central Department of International Relations and Diplomacy, Kathmandu",
+        "courses": [
+          "MA in International Relations and Diplomacy",
+          "MPhil - PhD in International Relations and Diplomacy"
+        ]
+      },
+      {
+        "name": "Central Department of Linguistics Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Linguistics",
+          "PhD in Linguistics"
+        ]
+      },
+      {
+        "name": "Central Department of Management Tribhuvan University, Kathmandu",
+        "courses": [
+          "MPhil in Management",
+          "MBA in Finance",
+          "Master of Business Management (MBM)",
+          "MBA in Marketing"
+        ]
+      },
+      {
+        "name": "Central Department of Mathematics Tribhuvan University, Kathmandu",
+        "courses": [
+          "MSc in Mathematics",
+          "PhD in Mathematics",
+          "MPhil in Mathematics"
+        ]
+      },
+      {
+        "name": "Central Department of Microbiology Tribhuvan University, Kathmandu",
+        "courses": [
+          "MSc in Microbiology",
+          "PhD in Microbiology"
+        ]
+      },
+      {
+        "name": "Central Department of Nepali Tribhuvan University, Kathmandu",
+        "courses": [
+          "MPhil in Nepali",
+          "MA Nepali",
+          "PhD in Nepali"
+        ]
+      },
+      {
+        "name": "Central Department of Political Science Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA Political Science",
+          "PhD in Political Science"
+        ]
+      },
+      {
+        "name": "Central Department of Population Studies Tribhuvan University, Kathmandu",
+        "courses": [
+          "PhD in Population Studies",
+          "MA Population Studies",
+          "MPhil in Population Studies"
+        ]
+      },
+      {
+        "name": "Central Department of Rural Development Tribhuvan University, Kathmandu",
+        "courses": [
+          "MA in Rural Development",
+          "PhD in Rural Development"
+        ]
+      },
+      {
+        "name": "Central Department of Statistics, Tribhuvan University, Kathmandu",
+        "courses": [
+          "MSc in Statistics",
+          "PhD in Statistics"
+        ]
+      },
+      {
+        "name": "Central Institute of Science and Technology (CIST) College, Kathmandu",
+        "courses": [
+          "Bachelor of Pharmacy (B.Pharm)",
+          "Bachelor of Public Health (BPH)",
+          "M. Pharm in Clinical Pharmacy"
+        ]
+      },
+      {
+        "name": "CG Institute of Management, Kathmandu",
+        "courses": [
+          "BSc (Hons) in Information Technology (B.Sc. (Hons) IT)",
+          "Masters of Business Administration (MBA)",
+          "BIT With Technopreneurship (Hons)"
+        ]
+      },
+      {
+        "name": "Chaitanya Institute of Management (CIM), Kathmandu",
+        "courses": [
+          "CAP - I - The Institute of Chartered Accountants of Nepal (ICAN)",
+          "CAP - II - The Institute of Chartered Accountants of Nepal (ICAN)"
+        ]
+      },
+      {
+        "name": "Chakrabarti Habi Education Academy College of Law, Kathmandu",
+        "courses": [
+          "Bachelor of Laws (BA LLB)",
+          "Master of Laws (LLM)"
+        ]
+      },
+      {
+        "name": "Chamunda Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Chapabot Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Chelsea International Academy, Kathmandu",
+        "courses": [
+          "GCE A level Non-Science",
+          "GCE A level- Science",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Chiran Milan Bishwa Shanti Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "College of Applied Business & Technology, Kathmandu",
+        "courses": [
+          "BSc Computer Science and Information Technology (BSc CSIT)",
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Information Management (BIM)"
+        ]
+      },
+      {
+        "name": "College of Applied Sciences, Kathmandu",
+        "courses": [
+          "BSc in Environmental Science",
+          "MSc in Environmental Science"
+        ]
+      },
+      {
+        "name": "College of Business Management (CBM), Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Master of Business Studies (MBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "College of Development Studies, Kathmandu",
+        "courses": ["Master in Development Studies (MDevS)"]
+      },
+      {
+        "name": "College of Information Technology and Engineering (CITE), Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Computer Application (BCA)",
+          "Bachelor of Computer Engineering (BCE)",
+          "Master of Information Technology (MIT)"
+        ]
+      },
+      {
+        "name": "College of Journalism and Mass Communication (CJMC), Kathmandu",
+        "courses": [
+          "Bachelor in Mass Communication and Journalism",
+          "MA in Mass Communication and Journalism",
+          "Master in Development Studies (MDevS)"
+        ]
+      },
+      {
+        "name": "College of Medical Polytechnic NAIHS, Kathmandu",
+        "courses": [
+          "PCL in General Medicine (HA)",
+          "Diploma in Pharmacy",
+          "Certificate in Medical Lab Technology (CMLT)",
+          "PCL in Radiography"
+        ]
+      },
+      {
+        "name": "College of National Academic Square (CNAS), Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Columbus College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Counseling Psychology and Social Studies College, Kathmandu",
+        "courses": [
+          "Post Graduate Diploma in Counseling Psychology",
+          "Six Months Training on Psycho-social Counseling"
+        ]
+      },
+      {
+        "name": "Deerwalk Institute of Technology (DWIT), Kathmandu",
+        "courses": [
+          "BSc Computer Science and Information Technology (BSc CSIT)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Deerwalk Sifal School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Dhanwantari Ayurbigyan Adhyayan Sansthan, Kathmandu",
+        "courses": ["PCL in Ayurveda and General Medicine"]
+      },
+      {
+        "name": "Diamond College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Divya Gyan College, Kathmandu",
+        "courses": [
+          "Bachelor of Computer Application (BCA)",
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "East-Pole Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Ed-Mark Academy, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Master of Business Studies (MBS)",
+          "Bachelor of Business Administration (BBA)",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Elite Institute of Management (EIM), Kathmandu",
+        "courses": ["CAP - I"]
+      },
+      {
+        "name": "Eternal Light Public Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Everest College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Management (BBM)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Everest College of Nursing, Kathmandu",
+        "courses": [
+          "Bachelor of Science (B.Sc) in Nursing",
+          "Post Basic Bachelor in Nursing (PBBN)"
+        ]
+      },
+      {
+        "name": "Everest Florida Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Law"
+        ]
+      },
+      {
+        "name": "Everest Innovative College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Everest Multiple College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "EverGreen English Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Excel Business College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "BBA in Banking and Insurance (BBA-BI)",
+          "Master of Business Administration (MBA)"
+        ]
+      },
+      {
+        "name": "Faculty of Humanities and Social Sciences Tribhuvan University, Kathmandu",
+        "courses": [
+          "Master in Tourism and Hospitality Studies (MTHS)",
+          "Master in Sports Science (MSS)",
+          "Master of Labour Studies",
+          "Master in Governance and Anticorruption Studies"
+        ]
+      },
+      {
+        "name": "Fluorescent Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Galaxy Public School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science"
+        ]
+      },
+      {
+        "name": "Gandhi Tulsi Campus, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Ganesh Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed.)"
+        ]
+      },
+      {
+        "name": "Ganesh Secondary School, Kathmandu, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Education"
+        ]
+      },
+      {
+        "name": "Ganeshman Singh Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)",
+          "Ten Plus Two (10+2) Management"
+        ]
+      },
+      {
+        "name": "GATE College, Kathmandu",
+        "courses": [
+          "Bachelor in International Hospitality Management (BIHM)",
+          "Diploma in Culinary Arts",
+          "Bachelor in Professional Hospitality (BPH)",
+          "Certificate III in Commercial Cookery (SIT30816)"
+        ]
+      },
+      {
+        "name": "Gateway College of Professional Studies, Kathmandu",
+        "courses": [
+          "Bachelor of Hotel Management (BHM)",
+          "Advanced Diploma in Hospitality Management (ADHM)",
+          "Diploma in Global Culinary Arts (DGCA)",
+          "Master of Hotel and Hospitality Management (MHHM)"
+        ]
+      },
+      {
+        "name": "Geetanjali College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Gillette College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Glacier International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Science"
+        ]
+      },
+      {
+        "name": "Global College International, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "GCE A level Non-Science",
+          "GCE A level- Science",
+          "Master of Business Administration (MBA)"
+        ]
+      },
+      {
+        "name": "Global College of Management, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Master of Business Studies (MBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Goldengate International College, Kathmandu",
+        "courses": [
+          "B.Tech. Food Technology",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "GP Koirala Memorial College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)",
+          "Bachelor of Arts in Social Work (BASW)"
+        ]
+      },
+      {
+        "name": "Gramin Adarsha Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)",
+          "MA in Rural Development"
+        ]
+      },
+      {
+        "name": "Grammar College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Grammar Public Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Gramsewa College, Kathmandu",
+        "courses": [
+          "Bachelor of Education (B.Ed)",
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "Green Kantipur Public Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science"
+        ]
+      },
+      {
+        "name": "Greenfield National College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Business Management (BBM)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Greenland Childrens Academy, Kathmandu",
+        "courses": ["Ten Plus Two (10+2) Management"]
+      },
+      {
+        "name": "GS College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Guhyeshwori Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Education",
+          "Ten Plus Two (+2) Law"
+        ]
+      },
+      {
+        "name": "Guinness International College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Science"
+        ]
+      },
+      {
+      "name": "Gurukul CA, Kathmandu",
+      "courses": ["CAP - I", "CAP - II", "CAP - III"]
+      },
+      {
+        "name": "Gyan Niketan Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Gyankunj College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Hams Nursing College, Kathmandu",
+        "courses": ["PCL Nursing (Staff Nurse)"]
+      },
+      {
+        "name": "Heartland Academy, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science"
+        ]
+      },
+      {
+        "name": "Herald College Kathmandu, Kathmandu",
+        "courses": [
+          "BA (Hons) International Business Management (BIBM)",
+          "BSc (Hons.) in Computer Science (BIT)",
+          "International Master of Business Administration (IMBA)"
+        ]
+      },
+      {
+        "name": "Herald International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Hillside College of Engineering, Kathmandu",
+        "courses": [
+          "Bachelor of Civil Engineering (BE Civil)",
+          "Bachelor of Electrical Engineering"
+        ]
+      },
+      {
+        "name": "Himal Dental Hospital and Institute of Dental Science, Kathmandu",
+        "courses": ["Certificate in Dental Science (Dental Hygiene)"]
+      },
+      {
+        "name": "Himalaya College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Himalaya International Model Secondary School (HIMS), Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Himalayan Ayurveda Medical Science College, Kathmandu",
+        "courses": [
+          "PCL in Ayurveda and General Medicine"
+        ]
+      },
+      {
+        "name": "Himalayan College of Agriculture Science and Technology (HICAST), Kathmandu",
+        "courses": [
+          "Bachelor of Science (Hons.) in Agriculture",
+          "Bachelor of Veterinary Science and Animal Husbandry (BVSc AH)",
+          "MSc Dairy Technology",
+          "MSc in Meat Technology"
+        ]
+      },
+      {
+        "name": "Himalayan College of Geomatic Engineering and Land Resource Management, Kathmandu",
+        "courses": [
+          "BE in Geomatic Engineering"
+        ]
+      },
+      {
+        "name": "Himalayan College of Learning Excellence, Kathmandu",
+        "courses": [
+          "Bachelor of Computer Application (BCA)",
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "Himalayan College of Management, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)",
+          "Master of Information Technology (MIT)",
+          "Bachelor of Computer Science (Hons) - BCS IT"
+        ]
+      },
+      {
+        "name": "Himalayan Whitehouse International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Hotel Management (BHM)",
+          "Bachelor of Civil Engineering (BE Civil)",
+          "BTech in Biotechnology"
+        ]
+      },
+      {
+        "name": "Holy Vision Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Holy Vision Technical Campus, Kathmandu",
+        "courses": [
+          "Diploma in Pharmacy",
+          "PCL Nursing (Staff Nurse)",
+          "PCL in General Medicine-Health Assistant (HA)"
+        ]
+      },
+      {
+        "name": "Hrit Academy, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (10+2) Law"
+        ]
+      },
+      {
+        "name": "Human Resource Development and Research Institute, Kathmandu",
+        "courses": [
+          "Pre-Diploma in Medical Lab Technology (Lab Assistant)"
+        ]
+      },
+      {
+        "name": "IACER - Institute of Advanced Communication, Education and Research, Kathmandu",
+        "courses": [
+          "Master of Arts (MA) in English",
+          "Master of Philosophy (M.Phil) in English"
+        ]
+      },
+      {
+        "name": "Ideal English Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "IEC College of Art and Fashion, Kathmandu",
+        "courses": [
+          "BA in Interior Architecture",
+          "BA (Hons) in Fashion & Retailing"
+        ]
+      },
+      {
+        "name": "IIFT Nepal, Kathmandu",
+        "courses": [
+          "Advanced Diploma in Interior Design",
+          "Advanced Diploma in Fashion Design"
+        ]
+      },
+      {
+        "name": "IIMS College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "B.Sc. (Hons) Computing",
+          "Bachelor of International Hospitality Management (Hons)",
+          "Master of Business Administration (MBA)"
+        ]
+      },
+      {
+        "name": "Institute of Management Studies, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Information Management (BIM)",
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "International College of Hospitality Management (ICHM), Kathmandu",
+        "courses": [
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "International School of Tourism and Hotel Management (IST College), Kathmandu",
+        "courses": [
+          "+2 Management Diploma in Hotel / Tourism Management",
+          "FHS Diploma in Hotel Management (BHM)",
+          "FHS Diploma in Travel and Tourism Management (BTTM)"
+        ]
+      },
+      {
+        "name": "Islington College, Kathmandu",
+        "courses": [
+          "B.Sc Computer Networking and IT Security",
+          "B.Sc. (Hons) in Computing",
+          "Bachelor Degree in Business Administration (BBA)",
+          "Bachelor Degree in Multimedia Technologies (BIT)"
+        ]
+      },
+      {
+        "name": "IST Secondary School and College, Kathmandu",
+        "courses": [
+          "Ten Plus Two in Management"
+        ]
+      },
+      {
+        "name": "Jagat Mandir Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Janak Nath Memorial Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Janakalyan Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Janamaitri Multiple Campus, Kathmandu",
+        "courses": [
+          "B.Ed in Information Communication Technology (B.Ed ICT)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "Janasewa Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education",
+          "Ten Plus Two (+2) in Electrical Engineering"
+        ]
+      },
+      {
+        "name": "Janavikash Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Jaya Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Bachelor of Computer Application (BCA)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Jitpur Secondary School, Jitpurphedi, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education",
+          "Pre-Diploma in Agriculture (Plant Science)"
+        ]
+      },
+      {
+        "name": "Jitpurphedi Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)"
+        ]
+      },
+      {
+        "name": "Jubilant College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "K and K International College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)"
+        ]
+      },
+      {
+        "name": "Kaasthamandap Vidhyalaya, Kathmandu",
+        "courses": [
+          "GCE A level Non-Science",
+          "GCE A level- Science"
+        ]
+      },
+      {
+        "name": "Kadambari Memorial College, Kathmandu",
+        "courses": [
+          "Bachelor of Social Works (BSW)",
+          "Master of Social Work (MSW)"
+        ]
+      },
+      {
+        "name": "Kalika Sharan Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Kamal English Boarding Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Kamal Netra Chhuna Muna Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kamana International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kanjirowa National Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Kantipur Academy of Health Science, Kathmandu",
+        "courses": [
+          "Certificate in Diagnostic Radiography",
+          "Certificate in Medical Laboratory Technology (CMLT)",
+          "PCL Nursing (Staff Nurse)",
+          "Bachelor of Pharmacy"
+        ]
+      },
+      {
+        "name": "Kantipur Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Kantipur City College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Civil Engineering",
+          "Bachelor of Computer Application (BCA)",
+          "Bachelor of Computer Engineering"
+        ]
+      },
+      {
+        "name": "Kantipur College of Management and Information Technology (KCMIT), Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Information Management (BIM)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Kantipur College of Medical Science, Kathmandu",
+        "courses": [
+          "BSc Microbiology",
+          "Certificate in Medical Laboratory Technology (CMLT)",
+          "Diploma in Pharmacy",
+          "M.Sc in Microbiology"
+        ]
+      },
+      {
+        "name": "Kantipur College of Technical Science, Kathmandu",
+        "courses": [
+          "Diploma in Civil Engineering"
+        ]
+      },
+      {
+        "name": "Kantipur Community Health Services, Kathmandu",
+        "courses": [
+          "JTA-Plant Science",
+          "Pre-Diploma in Medical Lab Technology (Lab Assistant)",
+          "Veterinary JTA",
+          "Pre-Diploma in Civil Engineering (Civil Sub-Overseer)"
+        ]
+      },
+      {
+        "name": "Kantipur Dental College, Kathmandu",
+        "courses": [
+          "Bachelor of Dental Surgery (BDS)",
+          "Certificate in Dental Science (Dental Hygiene)",
+          "Diploma in Pharmacy",
+          "MDS Community Dentistry"
+        ]
+      },
+      {
+        "name": "Kanya Mandir Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Kapan Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "Karnali College of Health Science, Kathmandu",
+        "courses": [
+          "Bachelor of Pharmacy",
+          "Bachelor of Public Health (BPH)",
+          "Master of Public Health (MPH)"
+        ]
+      },
+      {
+        "name": "Kasthamandap School of Public Affairs Management (KSPAM), Kathmandu",
+        "courses": [
+          "Master of Public Administration (MPA)"
+        ]
+      },
+      {
+        "name": "Kathmandu Academy of Tourism and Hospitality, Kathmandu",
+        "courses": [
+          "Bachelor of Travel and Tourism Studies (BTTS)",
+          "Master of Tourism Studies (MTS)"
+        ]
+      },
+      {
+        "name": "Kathmandu Bernhardt College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "BA BSW",
+          "BSC CSIT",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Kathmandu Bernhardt Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kathmandu Business Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Kathmandu Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kathmandu Don Bosco College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)",
+          "Executive MBA"
+        ]
+      },
+      {
+        "name": "Kathmandu Engineering College, Kathmandu",
+        "courses": [
+          "Bachelor of Civil Engineering (BE Civil)",
+          "Bachelor of Electrical Engineering",
+          "Bachelor of Architecture (B.Arch.)",
+          "Bachelor of Computer Engineering"
+        ]
+      },
+      {
+        "name": "Kathmandu Forestry College, Kathmandu",
+        "courses": [
+          "BSc Forestry",
+          "Diploma in Forestry",
+          "M.Sc. in Geographical Information Science and Systems",
+          "MSc in Natural Resource Management and Rural Development"
+        ]
+      },
+      {
+        "name": "Kathmandu Institute of Technology (KIT), Kathmandu",
+        "courses": [
+          "Diploma in Architecture Engineering",
+          "Diploma in Civil Engineering",
+          "Diploma in Computer Engineering",
+          "Diploma in Electrical Engineering"
+        ]
+      },
+      {
+        "name": "Kathmandu Medical College, Kathmandu",
+        "courses": [
+          "Bachelor of Dental Surgery (BDS)",
+          "Bachelor of Medicine, Bachelor of Surgery (MBBS)",
+          "Bachelor of Nursing Science (BNS)",
+          "Bachelor of Science (B.Sc) in Nursing"
+        ]
+      },
+      {
+        "name": "Kathmandu Model College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Bachelor of Arts (BA)"
+        ]
+      },
+      {
+        "name": "Kathmandu Model Hospital School of Nursing, Kathmandu",
+        "courses": [
+          "Bachelor of Science (B.Sc) in Nursing",
+          "PCL Nursing (Staff Nurse)",
+          "Post Basic Bachelor in Nursing (PBBN)"
+        ]
+      },
+      {
+        "name": "Kathmandu Model Hospital School of Oral Health, Kathmandu",
+        "courses": [
+          "Certificate in Dental Science (Dental Hygiene)"
+        ]
+      },
+      {
+        "name": "Kathmandu Model Secondary School, Bagbazar, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Ten Plus Two (+2) Law",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kathmandu New Castle Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Kathmandu School of Medical Technology (KSMT), Kathmandu",
+        "courses": [
+          "Certificate in Diagnostic Radiography",
+          "Certificate in Medical Laboratory Technology (CMLT)",
+          "Diploma in Physiotherapy"
+        ]
+      },
+      {
+        "name": "Kathmandu Shiksha Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Education (B.Ed)",
+          "Master of Education (M.Ed)",
+          "Ten Plus Two (+2) Management",
+          "One-year B. Ed."
+        ]
+      },
+      {
+        "name": "Kathmandu Training Center (KTC), Kathmandu",
+        "courses": [
+          "Pre-Diploma in Social Mobilization"
+        ]
+      },
+      {
+        "name": "Kathmandu University Centre for Buddhist Studies, Kathmandu",
+        "courses": [
+          "Bachelor of Arts in Buddhist Studies",
+          "MA in Buddhist Studies"
+        ]
+      },
+      {
+        "name": "Kathmandu Valley College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Kathmandu Valley Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Kendriya Vidyalaya Kathmandu, Kathmandu",
+        "courses": [
+          "Class 11 & 12 (Commerce) - CBSE",
+          "Class 11 & 12 (Science) - CBSE"
+        ]
+      },
+      {
+        "name": "King's College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)",
+          "MBA Nonprofit",
+          "MBA Entrepreneurship"
+        ]
+      },
+      {
+        "name": "KIST College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Information Management (BIM)",
+          "Bachelor of Information Technology (BIT)"
+        ]
+      },
+      {
+        "name": "Koteshwor Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "KU City College, Kathmandu",
+        "courses": [
+          "Bachelor of Social Work (BSW)",
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kumari Awasiya Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Law",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Kumari Engineering College, Kathmandu",
+        "courses": [
+          "Diploma in Civil Engineering"
+        ]
+      },
+      {
+        "name": "Kumudini Kunj Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management"
+        ]
+      },
+      {
+        "name": "Kutumba College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Humanities",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Laboratory Secondary School, Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Laligurans Batika Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Laligurans Rastriya College (LRC), Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science",
+          "Bachelor of Business Studies (BBS)"
+        ]
+      },
+      {
+        "name": "Liberty College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "Lincoln College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Education (B.Ed)",
+          "Bachelor of Arts in Social Work (BASW)"
+        ]
+      },
+      {
+        "name": "Lincoln School, Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Little Buddha College of Health Science, Kathmandu",
+        "courses": [
+          "Bachelor of Pharmacy (B.Pharm)",
+          "Bachelor of Public Health (BPH)",
+          "Diploma in Pharmacy"
+        ]
+      },
+      {
+        "name": "Liverpool International College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Science",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)"
+        ]
+      },
+      {
+        "name": "Lord Buddha Education Foundation (LBEF), Kathmandu",
+        "courses": [
+          "B.Sc. (Hons) in Information Technology",
+          "MBA Weekend",
+          "BSc (Hons) IT Cloud Engineering",
+          "B.A(Hons.) In Business Management"
+        ]
+      },
+      {
+        "name": "LRI College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Lumbini Academic College, Kathmandu",
+        "courses": [
+          "Ten Plus Two in Management",
+          "Ten Plus Two in Education",
+          "Ten Plus Two in Humanities",
+          "Ten Plus Two in Science"
+        ]
+      },
+      {
+        "name": "Lumbini Bikas Bank Limited, Kathmandu",
+        "courses": []
+      },
+      {
+        "name": "Lumbini College of Buddhism and Himalayan Studies, Kathmandu",
+        "courses": [
+          "M.A. Buddhism and Himalayan Studies"
+        ]
+      },
+      {
+        "name": "Madan Ashrit Memorial Technical School, Kathmandu",
+        "courses": [
+          "Diploma in Civil Engineering",
+          "Diploma in Hotel Management",
+          "Pre-Diploma in Civil Engineering (Civil Sub-Overseer)",
+          "Pre-Diploma in Veterinary JTA"
+        ]
+      },
+      {
+        "name": "Madan Bhandari Memorial College, Kathmandu",
+        "courses": [
+          "BSc Computer Science and Information Technology (BSc CSIT)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor in Arts in Social Work (BASW)"
+        ]
+      },
+      {
+        "name": "Maha Manjushree Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management"
+        ]
+      },
+      {
+        "name": "Mahan Siddhartha High School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Law"
+        ]
+      },
+      {
+        "name": "Mahankal Janajagrit Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Education"
+        ]
+      },
+      {
+        "name": "Maharajgunj Nursing Campus, Kathmandu",
+        "courses": [
+          "B.Sc Nursing",
+          "Bachelor of Nursing Science (BNS)",
+          "Master in Nursing (MN)",
+          "Bachelor in Midwifery Sciences"
+        ]
+      },
+      {
+        "name": "Mahendra Boudha Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Mahendra Narayan Nidhi Memorial Health Institute, Kathmandu",
+        "courses": [
+          "PCL Nursing (Staff Nurse)"
+        ]
+      },
+      {
+        "name": "Mahendra Rastriya Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management"
+        ]
+      },
+      {
+        "name": "Malpi Institute, Kathmandu",
+        "courses": [
+          "GCE A level- Science",
+          "GCE A level Non-Science"
+        ]
+      },
+      {
+        "name": "Malpi International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "BBA in Banking and Insurance (BBA-BI)"
+        ]
+      },
+      {
+        "name": "Management Development Campus, Kathmandu",
+        "courses": [
+          "Executive MBA (EMBA)"
+        ]
+      },
+      {
+        "name": "Manasalu Public Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two Management",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Mangal Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "Mangal Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Education"
+        ]
+      },
+      {
+        "name": "Mangalodaya Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Manmohan Memorial College, Kathmandu",
+        "courses": [
+          "Master of Education (M.Ed) General",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities",
+          "Ten Plus Two (10+2) Education"
+        ]
+      },
+      {
+        "name": "Manmohan Memorial Institute of Health Sciences (MMIHS), Kathmandu",
+        "courses": [
+          "Bachelor of Nursing Science (BNS)",
+          "Bachelor of Science in Nursing (BSc.Nursing)",
+          "Bachelor of Public Health (BPH)",
+          "Bachelor of Pharmacy"
+        ]
+      },
+      {
+        "name": "Manohar Sahid Smarak Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Mansingh Dharma Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Martyr Memorial Institute of Science and Technology, Kathmandu",
+        "courses": [
+          "Certificate in Diagnostic Radiography",
+          "Certificate in Medical Laboratory Technology (CMLT)",
+          "Diploma in Pharmacy",
+          "PCL Nursing (Staff Nurse)"
+        ]
+      },
+      {
+        "name": "Medhavi College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Computer System and Information Technology (BCSIT)",
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "Metro Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Mid Valley International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business (Hospitality Management) (Hons)",
+          "Bachelor of Information Technology (Hons)",
+          "Bachelor of Business (Finance) (Hons)"
+        ]
+      },
+      {
+        "name": "Milton International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Business Management (BBM)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Modern Indian School, Kathmandu",
+        "courses": [
+          "XI Arts (CBSE)",
+          "XI Commerce (CBSE)",
+          "XI Science (CBSE)"
+        ]
+      },
+      {
+        "name": "Modern Kanya Multiple College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Modern Nepal College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Studies (BBS)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Morgan Engineering and Management College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Civil Engineering",
+          "Bachelor of Electrical Engineering",
+          "Bachelor of Hotel Management (BHM)"
+        ]
+      },
+      {
+        "name": "Morgan International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Information Management (BIM)",
+          "Master of Business Studies (MBS)",
+          "Ten Plus Two (10+2) Management"
+        ]
+      },
+      {
+        "name": "Nagarik College of Health Sciences, Kathmandu",
+        "courses": [
+          "Bachelor of Science (B.Sc) in Nursing",
+          "Post Basic Bachelor in Nursing (BNS)"
+        ]
+      },
+      {
+        "name": "Nagarjun Thula Gaun Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Namgyal Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "Nami College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "BSc (Hons) in Computing",
+          "BSc (Hons) Network Engineering",
+          "BSc(Hons) Software Engineering"
+        ]
+      },
+      {
+        "name": "NAMS College, Kathmandu",
+        "courses": [
+          "Bachelor of Public Health (BPH)",
+          "Bachelor of Science (B.Sc) in Nursing",
+          "Diploma in Pharmacy",
+          "PCL in General Medicine-Health Assistant (HA)"
+        ]
+      },
+      {
+        "name": "Namuna College of Fashion Technology, Kathmandu",
+        "courses": [
+          "Bachelor of Fashion Design and Management"
+        ]
+      },
+      {
+        "name": "NASA International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Ten Plus Two (10+2) Management",
+          "Ten Plus Two (10+2) Humanities"
+        ]
+      },
+      {
+        "name": "National College, Kathmandu",
+        "courses": [
+          "Bachelor in Development Finance",
+          "Bachelor in Development Studies",
+          "Bachelor of Social Sciences (BoSS)",
+          "Bachelor in Psychology (BPsych)"
+        ]
+      },
+      {
+        "name": "National College (NACOL)-NIST, Kathmandu",
+        "courses": [
+          "Bachelor of Science (B.Sc) in Microbiology",
+          "M.Sc in Microbiology",
+          "M.Sc. Biotechnology",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "National College of Computer Studies (NCCS), Kathmandu",
+        "courses": [
+          "B.Sc. Computer Science and Information Technology (B.SC. CSIT)",
+          "Bachelor of Hotel Management (BHM)",
+          "Bachelor of Information Management (BIM)",
+          "Bachelor of Business Management (BBM)"
+        ]
+      },
+      {
+        "name": "National College of Food Science and Technology (NCFST), Kathmandu",
+        "courses": [
+          "B.Tech. Food Technology"
+        ]
+      },
+      {
+        "name": "National College of Management and Technical Science (NCMT), Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "BSc Hons. in Hospitality Management (BHM)",
+          "Master in Business Administration (MBA)",
+          "Bachelor of Information Technology (BIT)"
+        ]
+      },
+      {
+        "name": "National Integrated College (NIC), Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "National Model College for Advanced Learning, Kathmandu",
+        "courses": [
+          "Bachelor of Pharmacy"
+        ]
+      },
+      {
+        "name": "Nava Jeewan Secondary School and College, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Law"
+        ]
+      },
+      {
+        "name": "Nava Jyoti English Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Navodit College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "NCA College of Management, Kathmandu",
+        "courses": ["ACCA", "International Public Sector Accounting Standards (IPSAS)", "Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Neel Barahi Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Nepal College of Development Studies, Kathmandu",
+        "courses": ["BA Rural Development"]
+      },
+      {
+        "name": "Nepal college of Travel and Tourism Management (NCTTM), Kathmandu",
+        "courses": ["Bachelor in Travel and Tourism Management (BTTM)", "Bachelor of Hotel Management (BHM)", "Master of Travel and Tourism Management (MTTM)"]
+      },
+      {
+        "name": "Nepal Kasthamandap College, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Business Studies (BBS)", "Ten Plus Two (10+2) Management", "Ten Plus Two (10+2) Humanities"]
+      },
+      {
+        "name": "Nepal Mega College, Kathmandu",
+        "courses": ["Ten Plus Two in Management", "Ten Plus Two in Humanities", "Ten Plus Two in Science", "Bachelor of Business Studies (BBS)"]
+      },
+      {
+        "name": "Nepal Vidyapith, Kathmandu",
+        "courses": ["Ten Plus Two in Management", "Ten Plus Two in Law", "Ten Plus Two in Education", "Ten Plus Two in Humanities"]
+      },
+      {
+        "name": "Nepalaya College, Kathmandu",
+        "courses": ["Master of Business Studies (MBS)", "Bachelor of Business Studies (BBS)", "Bachelor of Business Administration (BBA)", "Bachelor of Computer Application (BCA)"]
+      },
+      {
+        "name": "Nepalese Army Institute of Health Sciences (NAIHS), Kathmandu",
+        "courses": ["Bachelor of Medicine, Bachelor of Surgery (MBBS)"]
+      },
+      {
+        "name": "New Leera Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "New Summit College, Kathmandu",
+        "courses": ["Bachelor of Business Studies (BBS)", "BSc CSIT", "Ten Plus Two Humanities", "Ten Plus Two Management"]
+      },
+      {
+        "name": "NIST National School of Sciences, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Nobel Academy, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Nobel College, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "BBA in Banking and Insurance (BBA-BI)", "Bachelor of Computer Information Systems (BCIS)", "Bachelor of Health Care Management (BHCM)"]
+      },
+      {
+        "name": "Norvic Business College, Kathmandu",
+        "courses": ["Bachelor of Business Administration (BBA)", "Bachelor of Health Care Management (BHCM)"]
+      },
+      {
+        "name": "Norvic Institute of Nursing Education (NINE), Kathmandu",
+        "courses": ["Bachelor of Science (B.Sc) in Nursing", "PCL Nursing (Staff Nurse)", "Post Basic Bachelor in Nursing (PBBN)"]
+      },
+      {
+        "name": "Nova International College, Kathmandu",
+        "courses": ["Master of Business Administration (MBA)", "Bachelor of Business Administration (BBA)"]
+      },
+      {
+        "name": "NTP College, Kathmandu",
+        "courses": ["BBA in Hospitality Management (BBA HM)", "Master of Business Administration (MBA)", "Diploma in Hospitality Management (DHM)", "Diploma in Culinary Arts (DCM)"]
+      },
+      {
+        "name": "Ojasbi Academy, Kathmandu",
+        "courses": ["Certificate in Medical Laboratory Technology (CMLT)", "TSLC in Civil Engineering (Civil Sub-Overseer)", "TSLC in Electrical Engineering (Electrical Sub-overseer)"]
+      },
+      {
+        "name": "Oliver Public Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Science"]
+      },
+      {
+        "name": "Om Samaj Shaikshik Pratisthan, Kathmandu",
+        "courses": ["PCL Nursing (Staff Nurse)", "PCL in General Medicine-Health Assistant (HA)"]
+      },
+      {
+        "name": "Opal International Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Orchid International College, Kathmandu",
+        "courses": ["BSc Computer Science and Information Technology (BSC CSIT)", "Bachelor of Information Management (BIM)", "Bachelor of Arts in Social Work (BASW)", "Bachelor of Computer Application (BCA)"]
+      },
+      {
+        "name": "Orient College, Kathmandu",
+        "courses": ["Bachelor of Arts in Social Work (BASW)", "Bachelor of Business Studies (BBS)", "GCE A level Non-Science", "GCE A level- Science"]
+      },
+      {
+        "name": "Oscar International College, Kathmandu",
+        "courses": ["Bachelor in Film Studies"]
+      },
+      {
+        "name": "Oxford Boarding Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Pentagon International College, Kathmandu",
+        "courses": ["Bachelor of Arts (BA)", "Bachelor of Business Studies (BBS)", "Bachelor of Arts in Social Works (BASW)", "Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Pharping Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Humanities", "Ten Plus Two (+2) Education"]
+      },
+      {
+        "name": "Phect Nepal Model Hospital School of Medical Laboratory Sciences, Kathmandu",
+        "courses": ["Diploma in Pharmacy", "PCL in Diagnostic Radiography", "Certificate in Medical Laboratory Technology (CMLT)"]
+      },
+      {
+        "name": "Phoenix College of Management, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Master of Business Administration (MBA)",
+          "Bachelor of Information Technology (BIT)",
+          "Master of Computer Science (MCS)"
+        ]
+      },
+      {
+        "name": "Phutung Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Pragati Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Pragya Boarding Secondary School, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Prajjwal Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Premier College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Social Works (BSW)",
+          "Master of Business Studies (MBS)",
+          "Chartered Accountancy (CA)"
+        ]
+      },
+      {
+        "name": "Prime College, Kathmandu",
+        "courses": [
+          "B.Sc. Computer Science and Information Technology (B.SC. CSIT)",
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Information Management (BIM)"
+        ]
+      },
+      {
+        "name": "Prithvi Narayan Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Pushpalal Memorial Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "RAI School, Kathmandu",
+        "courses": [
+          "Class 11 and 12 (Science) - CBSE Board",
+          "Class 11 and 12 (Commerce) - CBSE Board",
+          "Class 11 and 12 (Humanities) - CBSE Board"
+        ]
+      },
+      {
+        "name": "Rainbow International College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Rajdhani Academy, Kathmandu",
+        "courses": ["Ten Plus Two (+2) Management"]
+      },
+      {
+        "name": "Rajdhani Model College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Hotel Management (BHM)",
+          "Master of Business Administration (MBA) - Evening"
+        ]
+      },
+      {
+        "name": "Rarahil Memorial School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Ratna Jyoti Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Rehdon College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Reliance College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Arts in Social Work (BASW)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Reliance International Academy, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Law"
+        ]
+      },
+      {
+        "name": "Richmond International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Sagarmatha College for Higher Studies, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)",
+          "Bachelor of Social Works (BSW)",
+          "Bachelor of Business Administration (BBA)"
+        ]
+      },
+      {
+        "name": "Sagarmatha Multiple College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Administration (BBA)",
+          "MA in Sociology and Anthropology",
+          "Ten Plus Two (+2) Humanities"
+        ]
+      },
+      {
+        "name": "Sahayogi Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Arts (BA)"
+        ]
+      },
+      {
+        "name": "Sahayogi Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Sahid Adarsha Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "Sahid Ramnath Dahal Multiple Campus, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Education (B.Ed)"
+        ]
+      },
+      {
+        "name": "SAIM College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "MBA in Global Business"
+        ]
+      },
+      {
+        "name": "Samaj School of Dentistry, Kathmandu",
+        "courses": ["Certificate in Dental Science (Dental Hygeine)"]
+      },
+      {
+        "name": "Samarpan Academy Institute of Crisis Management Studies, Kathmandu",
+        "courses": [
+          "Master in Crisis Management Studies (MCMS)",
+          "Masters in Counselling Psychology (MCP)",
+          "Bachelor of Computer Application (BCA)"
+        ]
+      },
+      {
+        "name": "Samata College, Kathmandu",
+        "courses": [
+          "Bachelor of Arts (BA)",
+          "Bachelor of Business Studies (BBS)",
+          "Master of Business Studies (MBS)"
+        ]
+      },
+      {
+        "name": "Sangla BalKumari Secondary School, Kathmandu",
+        "courses": [
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Education"
+        ]
+      },
+      {
+        "name": "Sann International College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Administration (BBA)",
+          "Bachelor of Science (B.Sc) in Biotechnology",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Science"
+        ]
+      },
+      {
+        "name": "Sarovar College, Kathmandu",
+        "courses": [
+          "Bachelor of Business Studies (BBS)",
+          "Bachelor of Social Works (BSW)",
+          "Bachelor of Arts (BA)"
+        ]
+      },
+      {
+        "name": "School of Banking Business and Research (SBBR)",
+        "location": "Kathmandu",
+        "courses_offered": ["CAP - I - The Institute of Chartered Accountants of Nepal"]
+    },
+    {
+        "name": "School of Counseling Psychology (CEDA)",
+        "location": "Kathmandu",
+        "courses_offered": ["Masters in Counselling Psychology"]
+    },
+    {
+        "name": "Seed Financial Academy",
+        "location": "Kathmandu",
+        "courses_offered": ["ACCA Program"]
+    },
+    {
+        "name": "Shi-Gan International College of Science and Technology",
+        "location": "Kathmandu",
+        "courses_offered": ["Bachelor of Science (B.Sc) in Microbiology", "M.Sc in Microbiology"]
+    },
+    {
+        "name": "ShiGan Health Foundation",
+        "location": "Kathmandu",
+        "courses_offered": ["Certificate in Medical Laboratory Technology (CMLT)"]
+    },
+    {
+        "name": "Shikharapur Campus",
+        "location": "Kathmandu",
+        "courses_offered": ["Bachelor of Business Studies (BBS)", "Bachelor of Education (B.Ed)", "Bachelor of Arts (BA)"]
+    },
+    {
+        "name": "Shishu Nikunja English Secondary School",
+        "location": "Kathmandu",
+        "courses_offered": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+    },
+    {
+        "name": "Shitala Secondary School",
+        "location": "Balaju, Kathmandu, Kathmandu",
+        "courses_offered": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+    },
+    {
+        "name": "Shree Rastriya Secondary School",
+        "location": "Kathmandu",
+        "courses_offered": ["Ten Plus Two (+2) Management", "Ten Plus Two (+2) Education"]
+    },
+    {
+        "name": "Shubhashree College of Management",
+        "location": "Kathmandu",
+        "courses_offered": ["Bachelor of Business Administration (BBA)", "Bachelor of Hotel Management (BHM)"]
+    },
+    {
+      "name": "Academy of Culinary Arts and Hospitality Management, Lalitpur",
+      "courses": [
+        "Bachelor of Science (Hons.) in Hospitality Management",
+        "Diploma in Culinary Arts",
+        "Australian Diploma in Hospitality Management"
+      ]
+    },
+    {
+      "name": "Advance Academy and Republica College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "Alka Institute of Medical Sciences, Lalitpur",
+      "courses": [
+        "Certificate in Medical Laboratory Technology (CMLT)",
+        "PCL Nursing (Staff Nurse)",
+        "PCL in General Medicine-Health Assistant (HA)",
+        "Post Basic Bachelor in Nursing (PBBN)"
+      ]
+    },
+    {
+      "name": "Araniko International Academy, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Science",
+        "Ten Plus Two (+2) Humanities"
+      ]
+    },
+    {
+      "name": "Asian College for Advance Studies, Lalitpur",
+      "courses": [
+        "Bachelor of Pharmacy",
+        "Bachelor of Public Health (BPH)",
+        "Bachelor of Science (B.Sc) in Nursing",
+        "Certificate in Diagnostic Radiography"
+      ]
+    },
+    {
+      "name": "Asian College of Medical Science and Technology, Lalitpur",
+      "courses": [
+        "Certificate in Medical Laboratory Technology (CMLT)"
+      ]
+    },
+    {
+      "name": "B and B Medical Institute, Lalitpur",
+      "courses": [
+        "Bachelor of Science (B.Sc) in Nursing",
+        "PCL Nursing (Staff Nurse)",
+        "Post Basic Bachelor in Nursing (PBBN)"
+      ]
+    },
+    {
+      "name": "Bagh Bhairab Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Education"
+      ]
+    },
+    {
+      "name": "Bajra Barahi Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Science"
+      ]
+    },
+    {
+      "name": "Balkumari Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management"
+      ]
+    },
+    {
+      "name": "Children Paradise Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Humanities"
+      ]
+    },
+    {
+      "name": "Deep Kunj English Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management"
+      ]
+    },
+    {
+      "name": "Gamvir Samudra Setu Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Education"
+      ]
+    },
+    {
+      "name": "Green Tara College of Health Science, Lalitpur",
+      "courses": [
+        "Certificate in Medical Laboratory Technology (CMLT)",
+        "PCL Nursing (Staff Nurse)",
+        "PCL in General Medicine-Health Assistant (HA)",
+        "PCL in Radiography"
+      ]
+    },
+    {
+      "name": "Himalayan Medical Education Society, Lalitpur",
+      "courses": [
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "ICAN - The Institute of Chartered Accountants of Nepal, Lalitpur",
+      "courses": [
+        "Chartered Accountancy (CA)"
+      ]
+    },
+    {
+      "name": "Kathmandu University School of Arts (KUSOA), Lalitpur",
+      "courses": [
+        "Bachelor in Community Development",
+        "Bachelor in Economics",
+        "Bachelor in Media Studies",
+        "Bachelor in Music / Enthnomusicology"
+      ]
+    },
+    {
+      "name": "KIST Medical College, Lalitpur",
+      "courses": [
+        "Bachelor of Dental Surgery (BDS)",
+        "Bachelor of Medicine, Bachelor of Surgery (MBBS)",
+        "Bachelor of Pharmacy",
+        "Bachelor in Medical Laboratory Technology (BSc MLT)"
+      ]
+    },
+    {
+      "name": "Lalitpur Nursing Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Science in Nursing (BNS)",
+        "PCL Nursing (Staff Nurse)",
+        "Bachelor of Science (B.Sc) in Nursing",
+        "Master of Nursing"
+      ]
+    },
+    {
+      "name": "Lalitpur Valley College, Lalitpur",
+      "courses": [
+        "B.Tech. Food Technology",
+        "Bachelor of Science (B.Sc) in Microbiology",
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Little Angels College of Higher Studies, Lalitpur",
+      "courses": [
+        "GCE A level- Science",
+        "GCE A level Non-Science"
+      ]
+    },
+    {
+      "name": "Mahendra Adarsha Vidhyashram College, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Education",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Nagarjuna Academy International School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "National Law College, Lalitpur",
+      "courses": [
+        "Bachelor of Arts Bachelor of Laws (BA LLB)",
+        "Master of Laws (LLM)"
+      ]
+    },
+    {
+      "name": "National Multiple College of Medical Science, Lalitpur",
+      "courses": [
+        "Certificate in Diagnostic Radiography",
+        "Certificate in Medical Laboratory Technology (CMLT)",
+        "TSLC in Medical Lab Technology (Lab Assistant)"
+      ]
+    },
+    {
+      "name": "National Open College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Health Care Management (BHCM)",
+        "Bachelor of Public Health (BPH)",
+        "Master of Healthcare Management (MHCM)"
+      ]
+    },
+    {
+      "name": "Nepal College of Information Technology (NCIT), Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Civil Engineering (BE Civil)",
+        "Bachelor of Computer Application (BCA)",
+        "Bachelor of Computer Engineering (BCE)"
+      ]
+    },
+    {
+      "name": "Nepal College of Management, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor in Hospitality and Tourism Management (BHTM)"
+      ]
+    },
+    {
+      "name": "Nepal Open University, Lalitpur",
+      "courses": [
+        "Diploma in Library and Information Management",
+        "M.Phil in Social Science",
+        "M.Phil in Education",
+        "Post Graduate Diploma in Distance and e-Learning"
+      ]
+    },
+    {
+      "name": "Patan Academy of Health Sciences (PAHS), Lalitpur",
+      "courses": [
+        "MBBS - Bachelor of Medicine and Bachelor of Surgery",
+        "MD Anaesthesiology",
+        "MD Dermatology",
+        "MD Pathology"
+      ]
+    },
+    {
+      "name": "Patan College for Professional Studies (PCPS), Lalitpur",
+      "courses": [
+        "Bachelor in Business Administration (Hons) (BBA)",
+        "B.Sc. (Hons.) in Computer Science & Software Engineering",
+        "BSc (Computer Science & Software Engineering) Top-Up",
+        "BSc (Hons) in Software Engineering Foundation"
+      ]
+    },
+    {
+      "name": "Patan Multiple Campus, Lalitpur",
+      "courses": [
+        "B.Sc. Computer Science and Information Technology (B.Sc. CSIT)",
+        "Bachelor of Arts (BA)",
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Plan Academy College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "Pulchowk Campus - Institute of Engineering (IOE), Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering (BE Civil)",
+        "Bachelor of Electrical Engineering",
+        "Bachelor of Architecture (B.Arch.)",
+        "Bachelor of Computer Engineering (BCE)"
+      ]
+    },
+    {
+      "name": "Rato Bangala School, Lalitpur",
+      "courses": [
+        "GCE A level- Science",
+        "GCE A level Non-Science"
+      ]
+    },
+    {
+      "name": "Sagarmatha Engineering College, Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering",
+        "Bachelor of Computer Engineering",
+        "Bachelor of Electronics and Communication Engineering"
+      ]
+    },
+    {
+      "name": "Aayaam International College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Hotel Management (BHM)"
+      ]
+    },
+    {
+      "name": "Academia International College, Lalitpur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSc CSIT)",
+        "Bachelor in Computer Applications (BCA)",
+        "Bachelor of Business Management (BBM)",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Adarsha Kanya Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Adarsha Kanya Niketan Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "Adarsha Saula College, Lalitpur",
+      "courses": [
+        "Bachelor of Arts (BA)",
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)",
+        "Master of Business Studies (MBS)"
+      ]
+    },
+    {
+      "name": "Advance International Model Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "AIMS International College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Computer Application (BCA)",
+        "Bachelor of Arts (BA)",
+        "Bachelor of Social Works (BSW)"
+      ]
+    },
+    {
+      "name": "Arniko Multiple Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Asian College of Higher Studies (ACHS), Lalitpur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSc CSIT)",
+        "Bachelor of Computer Application (BCA)",
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Business Management (BBM)"
+      ]
+    },
+    {
+      "name": "Asian Engineering College, Lalitpur",
+      "courses": [
+        "Diploma in Architecture Engineering",
+        "Diploma in Civil Engineering"
+      ]
+    },
+    {
+      "name": "Asian Institute of Technology and Management (AITM) College, Lalitpur",
+      "courses": [
+        "International Master of Business Administration (IMBA)",
+        "BSc (Hons) Computing and Information Technology",
+        "Bachelor in International Hotel and Tourism Management",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "Bagalamukhi Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Education (B.Ed)"
+      ]
+    },
+    {
+      "name": "Baleshwori Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management"
+      ]
+    },
+    {
+      "name": "Bidhyadhishwari Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Education"
+      ]
+    },
+    {
+      "name": "Binayak Technical Institute, Lalitpur",
+      "courses": [
+        "CMLT - Certificate in Medical Laboratory Technology",
+        "PCL in General Medicine (HA)",
+        "PCL in Radiography"
+      ]
+    },
+    {
+      "name": "Bluebird College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Science",
+        "Ten Plus Two (10+2) Humanities"
+      ]
+    },
+    {
+      "name": "Bright Future College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)",
+        "Ten Plus Two (10+2) Humanities",
+        "Ten Plus Two (10+2) Management"
+      ]
+    },
+    {
+      "name": "Campion Academy, Lalitpur",
+      "courses": [
+        "Plus Two Science",
+        "Plus Two Management",
+        "Plus Two Humanities",
+        "A - Level Science"
+      ]
+    },
+    {
+      "name": "Caribbean College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Humanities"
+      ]
+    },
+    {
+      "name": "Caspian Valley College, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Central Degree College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Master of Business Administration (MBA)"
+      ]
+    },
+    {
+      "name": "Central Engineering Campus, Lalitpur",
+      "courses": [
+        "Diploma in Civil Engineering",
+        "Diploma in Electrical Engineering",
+        "Pre-Diploma in Civil Engineering (Civil Sub-overseer)",
+        "Pre-Diploma in Electrical Engineering (Electrical Sub-overseer)"
+      ]
+    },
+    {
+      "name": "Chhampi Devi Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Humanities"
+      ]
+    },
+    {
+      "name": "Citizen College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "BBA in Travel and Tourism (BBA-TT)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "College of Applied Food and Dairy Technology (CAFODAT), Lalitpur",
+      "courses": [
+        "Bachelor in Food and Dairy Technology",
+        "M.Sc in Nutrition and Dietetics",
+        "Diploma in Food / Dairy Technology",
+        "MSc in Food Technology"
+      ]
+    },
+    {
+      "name": "College of Biomedical Engineering and Applied Sciences, Lalitpur",
+      "courses": [
+        "BE in Biomedical Engineering"
+      ]
+    },
+    {
+      "name": "College of Technical Sciences, Lalitpur",
+      "courses": [
+        "Bachelor of Science (B.Sc) in Nursing",
+        "Post Basic Bachelor in Nursing (PBBN)"
+      ]
+    },
+    {
+      "name": "Cosmos College of Management and Technology, Lalitpur",
+      "courses": [
+        "BE Information Technology (BEIT)",
+        "BE Electronics & Communication",
+        "BE Computer Engineering",
+        "BE Civil Engineering"
+      ]
+    },
+    {
+      "name": "DAV Business School, Lalitpur",
+      "courses": [
+        "Master of Business Administration (MBA)"
+      ]
+    },
+    {
+      "name": "DAV College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Bachelor of Science (B.Sc) in Microbiology"
+      ]
+    },
+    {
+      "name": "DAV Institute of Information Technology, Lalitpur",
+      "courses": [
+        "Diploma in Information Technology"
+      ]
+    },
+    {
+      "name": "DAV Sushil Kedia Vishwa Bharati Secondary School, Lalitpur",
+      "courses": [
+        "CBSE XI Commerce",
+        "CBSE XI Science",
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Science"
+      ]
+    },
+    {
+      "name": "Devi Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (10+2) Management",
+        "Ten Plus Two (10+2) Education"
+      ]
+    },
+    {
+      "name": "Dibyabhumi Multiple College, Lalitpur",
+      "courses": [
+        "Bachelor of Arts (BA)",
+        "Bachelor of Social Works (BSW)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "DON BOSCO Institute, Lalitpur",
+      "courses": [
+        "Diploma in Electrical Engineering"
+      ]
+    },
+    {
+      "name": "Education and Community Health Organization, Lalitpur, Lalitpur",
+      "courses": [
+        ""
+      ]
+    },
+    {
+      "name": "Einstein Academy, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Everest Engineering College (EEC), Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering (BE Civil)",
+        "Bachelor of Computer Engineering",
+        "BE Information Technology (BE IT)"
+      ]
+    },
+    {
+      "name": "Gaurishankar English Boarding Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "GEMS Institute of Higher Education, Lalitpur",
+      "courses": [
+        "GCE A level- Science",
+        "GCE A level Non-Science",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "Himalaya College of Engineering, Lalitpur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSc CSIT)",
+        "Bachelor of Civil Engineering (BE Civil)",
+        "Bachelor of Architecture (B.Arch.)",
+        "Bachelor of Computer Engineering (BCE)"
+      ]
+    },
+    {
+      "name": "Himalaya Institute of Technology, Lalitpur",
+      "courses": [
+        "Pre-Diploma in Civil Engineering (Civil Sub-Overseer)",
+        "Pre-Diploma in Electronic Engineering",
+        "Pre-Diploma in Survey Engineering (AMIN)"
+      ]
+    },
+    {
+      "name": "Himalayan Institute of Science and Technology (HIST), Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering",
+        "Bachelor of Electronics & Communication Engineering",
+        "M.Sc in Engineering Management",
+        "M.Sc in Information System Engineering"
+      ]
+    },
+    {
+      "name": "Himalayan Nursing College, Lalitpur",
+      "courses": [
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Himchuli College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Hope International College, Lalitpur",
+      "courses": [
+        "Bachelor of Pharmacy (B.Pharm)",
+        "Bachelor of Public Health (BPH)",
+        "BSc in Nursing",
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Innovative College of Health Science, Lalitpur",
+      "courses": [
+        "Post Basic Bachelor in Nursing Science (PBNS)"
+      ]
+    },
+    {
+      "name": "Jana Bhawana Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts (BA)",
+        "Bachelor of Information Communication Technology Education (BICTE)",
+        "Master of Business Studies (MBS)"
+      ]
+    },
+    {
+      "name": "Janamaitri Foundation Institute of Health Sciences, Lalitpur",
+      "courses": [
+        "B.Sc. Nursing",
+        "B.Sc. Medical Laboratory Technology",
+        "Bachelor of Pharmacy",
+        "Bachelor of Nursing Science (BNS)"
+      ]
+    },
+    {
+      "name": "Kantipur Engineering College, Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering (BE Civil)",
+        "Bachelor of Computer Engineering",
+        "Bachelor of Electronics and Communication Engineering"
+      ]
+    },
+    {
+      "name": "Kantipur Valley College, Lalitpur",
+      "courses": [
+        "B.Tech in Biotechnology",
+        "Bachelor of Business Administration (BBA)",
+        "Master of Business Administration (MBA)",
+        "EMBA"
+      ]
+    },
+    {
+      "name": "Kathford International College of Engineering and Management, Lalitpur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSC CSIT)",
+        "Bachelor of Civil Engineering",
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Computer Engineering"
+      ]
+    },
+    {
+      "name": "Kathmandu College of Management, Lalitpur",
+      "courses": [
+        "BBA Finance & Banking",
+        "BBA Marketing"
+      ]
+    },
+    {
+      "name": "Kathmandu University School of Education (KUSoEd), Lalitpur",
+      "courses": [
+        "M.Ed. in English Language Teaching",
+        "M.Ed. in Mathematics Education",
+        "Master in Sustainable Development",
+        "Master in Technical and Vocational Education and Training"
+      ]
+    },
+    {
+      "name": "Kathmandu University School of Management (KUSOM), Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (Honors)",
+        "Bachelor of Business Administration (Emphasis)",
+        "Doctorate of Philosophy (PhD) in Management",
+        "Executive MBA"
+      ]
+    },
+    {
+      "name": "Kitini College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts (BA)",
+        "Bachelor of Education (B.Ed)"
+      ]
+    },
+    {
+      "name": "Kitini Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "KITS College of Nursing, Lalitpur",
+      "courses": [
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Kshitiz Campus College of Management and Technology, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Laligurans English Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two in Management"
+      ]
+    },
+    {
+      "name": "Lalit Multiple Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)",
+        "Master of Education (M.Ed)"
+      ]
+    },
+    {
+      "name": "Lalit Polytechnic Training Institute (LPTI), Lalitpur",
+      "courses": [
+        ""
+      ]
+    },
+    {
+      "name": "Lalitpur Engineering College, Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering",
+        "Bachelor of Computer Engineering",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Lalitpur NIST College, Lalitpur",
+      "courses": [
+        "Bachelor of Computer Application (BCA)",
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Ten Plus Two (+2) Management"
+      ]
+    },
+    {
+      "name": "Little Angels College, Lalitpur",
+      "courses": []
+    },
+    {
+      "name": "Little Angels College of Higher Studies (LACHS), Lalitpur",
+      "courses": [
+        "Bachelor of Science (B.Sc) in Nursing",
+        "B.Sc in Medical Laboratory Technology (B.Sc MLT)",
+        "Bachelor of Nursing (BN)",
+        "Bachelor of Pharmacy"
+      ]
+    },
+    {
+      "name": "Little Angels College of Management, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor in Hospitality and Tourism Management (BHTM)",
+        "Bachelor of Business Information System (BBIS)"
+      ]
+    },
+    {
+      "name": "Lotus Academic College, Lalitpur",
+      "courses": [
+        "MA in Applied Buddhism",
+        "Post Graduate Diploma in Buddhist Studies",
+        "MA in Buddhist Studies"
+      ]
+    },
+    {
+      "name": "Lumbini International Academy of Science and Technology, Lalitpur",
+      "courses": [
+        "M.Sc in Construction Engineering and Management",
+        "M.Sc in Disaster Risk Engineering and Management"
+      ]
+    },
+    {
+      "name": "Lumbini International College, Lalitpur",
+      "courses": [
+        "GCE A level- Science",
+        "GCE A level Non-Science"
+      ]
+    },
+    {
+      "name": "Mahankal Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)"
+      ]
+    },
+    {
+      "name": "Mega National College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "CAP - I - The Institute of Chartered Accountants of Nepal",
+        "Ten Plus Two (10+2) Management"
+      ]
+    },
+    {
+      "name": "Milestone College of Science and Technology, Lalitpur",
+      "courses": [
+        "Pre-Diploma in Survey Engineering (AMIN)",
+        "Pre-Diploma in Civil Engineering (Civil Sub-Overseer)"
+      ]
+    },
+    {
+      "name": "Milestone International College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Science",
+        "Ten Plus Two (+2) Humanities"
+      ]
+    },
+    {
+      "name": "MM Institute of Science and Technology, Lalitpur",
+      "courses": [
+        "Diploma in Radiography",
+        "Diploma in Health Assistant"
+      ]
+    },
+    {
+      "name": "Modern Technical College, Lalitpur",
+      "courses": [
+        "B.Sc in Medical Laboratory Technology (B.Sc MLT)",
+        "Bachelor of Pharmacy (B.Pharm)",
+        "Bachelor of Public Health (BPH)"
+      ]
+    },
+    {
+      "name": "MSR Development Support Institute, Lalitpur",
+      "courses": [
+        "TSLC in Social Mobilization"
+      ]
+    },
+    {
+      "name": "Nagarjuna College of Information Technology, Lalitpur",
+      "courses": [
+        "B.Sc. Computer Science and Information Technology (B.SC. CSIT)",
+        "Bachelor of Information Management (BIM)",
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Namuna Machhindra Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts (BA)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities"
+      ]
+    },
+    {
+      "name": "National Aviation Academy, Lalitpur",
+      "courses": []
+    },
+    {
+      "name": "National College of Engineering, Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering",
+        "Bachelor of Electrical Engineering",
+        "Bachelor of Computer Engineering",
+        "Bachelor of Electronics and Information Engineering"
+      ]
+    },
+    {
+      "name": "Nepal Institute of Medical Science and Technology (NIMST), Lalitpur",
+      "courses": [
+        "Certificate in Diagnostic Radiography",
+        "Certificate in Medical Laboratory Technology (CMLT)",
+        "Diploma in Pharmacy",
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Nesfield International College, Lalitpur",
+      "courses": [
+        "Bachelor of Arts (BA)",
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Hotel Management (BHM)",
+        "Bachelor of Arts in Social Work (BASW)"
+      ]
+    },
+    {
+      "name": "Nick Simons Institute (NSI), Lalitpur",
+      "courses": []
+    },
+    {
+      "name": "Nightingale Nursing College, Lalitpur",
+      "courses": [
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "NIMS College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Bachelor of Computer Application (BCA)",
+        "Bachelor of Social Work"
+      ]
+    },
+    {
+      "name": "NIMS Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "Nirvana College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)"
+      ]
+    },
+    {
+      "name": "Ojashwi College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Phulchowki College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Phulchowki Secondary School, Lalitpur",
+      "courses": [
+        "Diploma in Civil Engineering",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities"
+      ]
+    },
+    {
+      "name": "Prasadi Academy, Lalitpur",
+      "courses": [
+        "Ten Plus Two in Science",
+        "Ten Plus Two in Management"
+      ]
+    },
+    {
+      "name": "Quest International College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Hotel Management (BHM)",
+        "Master of Business Administration (MBA)"
+      ]
+    },
+    {
+      "name": "Ritz College of Engineering and Management, Lalitpur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Hotel Management (BHM)",
+        "BE in Civil Engineering"
+      ]
+    },
+    {
+      "name": "Rolwaling College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Sagarmatha College of Science and Technology, Lalitpur",
+      "courses": [
+        "B.Sc. Computer Science and Information Technology (B.SC. CSIT)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Sagarmatha Secondary School, Lalitpur",
+      "courses": [
+        "Ten Plus Two in Management",
+        "Ten Plus Two in Agriculture",
+        "Ten Plus Two in Science"
+      ]
+    },
+    {
+      "name": "Shramik Shanti Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Shuvatara School, Lalitpur",
+      "courses": [
+        "Ten Plus Two in Management"
+      ]
+    },
+    {
+      "name": "Star Academy Lalitpur, Lalitpur",
+      "courses": [
+        "PCL Nursing (Staff Nurse)",
+        "PCL in General Medicine-Health Assistant (HA)"
+      ]
+    },
+    {
+      "name": "Sudha Sagar Campus, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Sugat Bouddha Mahavidyalaya, Lalitpur",
+      "courses": [
+        "Master of Arts (MA) in Buddhist Studies"
+      ]
+    },
+    {
+      "name": "Swoyambhu International College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Bachelor of Business Management (BBM)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "The British School, Lalitpur",
+      "courses": [
+        "GCE A level- Science",
+        "GCE A level Non-Science"
+      ]
+    },
+    {
+      "name": "The Westminster College, Lalitpur",
+      "courses": [
+        "BSc (Hons) Computer Science",
+        "BSc (Hons) Cyber Security and Forensics"
+      ]
+    },
+    {
+      "name": "United Academy, Lalitpur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "United College, Lalitpur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts (BA)",
+        "Master of Business Studies (MBS)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Universal Engineering and Science College, Lalitpur",
+      "courses": [
+        "Bachelor of Civil Engineering (BE Civil)",
+        "Bachelor of Computer Engineering (BCE)",
+        "Bachelor of Science (B.Sc) in Biochemistry"
+      ]
+    },
+    {
+      "name": "Vedas College, Lalitpur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSC CSIT)",
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Management"
+      ]
+    },
+    {
+      "name": "Virinchi College, Lalitpur",
+      "courses": [
+        "Bachelors of Information and Communication Technology",
+        "Master of Business Administration (MBA)",
+        "Bachelor in Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Yala Institute of Health Science, Lalitpur",
+      "courses": [
+        "Certificate in Medical Laboratory Technology (CMLT)"
+      ]
+    },
+    {
+      "name": "Bagiswori Secondary School, Taulachhen, Bhaktapur, Bhaktapur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Science",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "Janakpur Engineering College, Bhaktapur",
+      "courses": [
+        "Bachelor of Civil Engineering",
+        "Bachelor of Computer Engineering",
+        "Bachelor of Electronics and Communication Engineering"
+      ]
+    },
+    {
+      "name": "Kathmandu School of Law, Bhaktapur",
+      "courses": [
+        "Bachelor of Laws (BA LLB)",
+        "MA in Conflict and International Humanitarian Laws",
+        "MA in Human Rights",
+        "LLM in Human Rights and Gender Justice"
+      ]
+    },
+    {
+      "name": "Khwopa Polytechnic Institute, Bhaktapur",
+      "courses": [
+        "Diploma in Civil Engineering",
+        "Diploma in Electronics Engineering",
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Nepal Engineering College (nec), Bhaktapur",
+      "courses": [
+        "Bachelor of Architecture (B.Arch.)",
+        "Bachelor of Civil and Rural Engineering",
+        "Bachelor of Computer Engineering (BCE)",
+        "Bachelor of Civil Engineering"
+      ]
+    },
+    {
+      "name": "Sanothimi Campus, Bhaktapur",
+      "courses": [
+        "B.Ed in Information Communication Technology (B.Ed ICT)",
+        "Bachelor of Education (B.Ed)",
+        "M.Ed Curriculum and Evaluation",
+        "M.Ed Education Planning and Management"
+      ]
+    },
+    {
+      "name": "Training Institute for Technical Instruction (TITI), Bhaktapur",
+      "courses": [
+        "Bachelor of Technical Education (B.Tech.Ed.) Livestock",
+        "Bachelor of Technical Education (B.Tech.Ed.) Plant Science"
+      ]
+    },
+    {
+      "name": "Adarsha Azad College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)"
+      ]
+    },
+    {
+      "name": "Adarsha Azad Secondary School Bhaktapur, Bhaktapur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "Adarsha Multiple Campus, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "Bagiswori College, Bhaktapur",
+      "courses": [
+        "Bachelor of Arts (BA)",
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "MA in Sociology"
+      ]
+    },
+    {
+      "name": "Bagiswori College of Management, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Administration (BBA)"
+      ]
+    },
+    {
+      "name": "Bhaktapur Homeopathic Clinic and Medical College, Bhaktapur",
+      "courses": [
+        "Diploma in homeopathy (HHA)"
+      ]
+    },
+    {
+      "name": "Bhaktapur Multiple Campus, Bhaktapur",
+      "courses": [
+        "BSc CSIT",
+        "Bachelor of Arts (BA)",
+        "Bachelor of Business Administration (BBA)",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Chanakya College of Management, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Master of Business Studies (MBS)",
+        "Ten Plus Two (+2) Management"
+      ]
+    },
+    {
+      "name": "Iwamura College of Health Science, Bhaktapur",
+      "courses": [
+        "Certificate in Diagnostic Radiography",
+        "Certificate in Medical Laboratory Technology (CMLT)",
+        "Diploma in Pharmacy",
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Jana Adarsha Campus, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Janapremi College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts and Social Work (BASW)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "Kathmandu College of Technology, Bhaktapur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSc CSIT)",
+        "Bachelor of Computer Application (BCA)",
+        "Bachelor of Business Studies (BBS)"
+      ]
+    },
+    {
+      "name": "Kathmandu World School, Bhaktapur",
+      "courses": [
+        "Ten Plus Two in Management",
+        "Ten Plus Two in Science"
+      ]
+    },
+    {
+      "name": "Khwopa College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts (BA)",
+        "Bachelor of Science in Environmental Science (BSc ES)",
+        "B.Sc in Physics"
+      ]
+    },
+    {
+      "name": "Khwopa College of Engineering, Bhaktapur",
+      "courses": [
+        "Bachelor of Civil Engineering",
+        "Bachelor of Electrical Engineering",
+        "Bachelor of Computer Engineering"
+      ]
+    },
+    {
+      "name": "Khwopa College of Law, Bhaktapur",
+      "courses": [
+        "Bachelor of Arts, Bachelor of Laws (BA LLB)"
+      ]
+    },
+    {
+      "name": "Khwopa Engineering College, Bhaktapur",
+      "courses": [
+        "Bachelor of Architecture (B.Arch.)",
+        "Bachelor of Civil Engineering",
+        "Bachelor of Computer Engineering",
+        "BE Electronics, Communication & Automation Engineering"
+      ]
+    },
+    {
+      "name": "Khwopa Secondary School, Bhaktapur, Bhaktapur",
+      "courses": [
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Science",
+        "Ten Plus Two (+2) Humanities",
+        "Ten Plus Two (+2) Education"
+      ]
+    },
+    {
+      "name": "Navadurga Multiple Campus, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management"
+      ]
+    }, {
+      "name": "Nepali Army School of EME Polytechnic (NASEMEP), Bhaktapur",
+      "courses": [
+        "Diploma in Automobile Engineering",
+        "Diploma in Mechanical Engineering"
+      ]
+    },
+    {
+      "name": "Nicholson College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management"
+      ]
+    },
+    {
+      "name": "Padma College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Humanities"
+      ]
+    },
+    {
+      "name": "Samajik College, Bhaktapur",
+      "courses": [
+        "B.Sc. Computer Science and Information Technology (B.SC. CSIT)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Samriddhi College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Arts in Social Work (BASW)",
+        "BSc Computer Science and Information Technology (BSc CSIT)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "School of Technical Education, Bhaktapur",
+      "courses": [
+        "Certificate in Medical Education (CMLT)",
+        "Pre-Diploma in Civil Sub-Overseer",
+        "Pre-Diploma in Electrical Sub Overseer"
+      ]
+    },
+    {
+      "name": "SeaBird International College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two (+2) Education",
+        "Ten Plus Two (+2) Science"
+      ]
+    },
+    {
+      "name": "Sharada Campus, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Bachelor of Education (B.Ed)",
+        "M.Ed Education Planning and Management",
+        "Master of Education (M.Ed) in Population Education"
+      ]
+    },
+    {
+      "name": "Shradha Institute of Health Science, Bhaktapur",
+      "courses": [
+        "Diploma in Pharmacy",
+        "PCL Nursing (Staff Nurse)"
+      ]
+    },
+    {
+      "name": "Swastik College, Bhaktapur",
+      "courses": [
+        "BSc Computer Science and Information Technology (BSc CSIT)",
+        "Bachelor of Computer Application (BCA)"
+      ]
+    },
+    {
+      "name": "Universal Modern College, Bhaktapur",
+      "courses": [
+        "Bachelor of Business Studies (BBS)",
+        "Ten Plus Two (+2) Management",
+        "Ten Plus Two in Law"
+      ]
+    }
+    ]
+  }
+  
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  

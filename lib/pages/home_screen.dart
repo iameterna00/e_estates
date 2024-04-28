@@ -87,8 +87,8 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final photoUrl = ref.watch(userProvider).photoURL;
-    final displayName = ref.watch(userProvider).name ?? 'there';
+    final photoUrl = ref.watch(userProvider)?.photoUrl;
+    final displayName = ref.watch(userProvider)?.username ?? 'there';
     final providerContainer = ProviderScope.containerOf(context);
     final address =
         providerContainer.read(locationNotifierProvider.notifier).address ??
@@ -299,7 +299,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            _selectedTag == "Rent";
+            _selectedTag = "Rent";
           });
         },
         child: const Icon(Icons.person),

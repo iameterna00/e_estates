@@ -5,7 +5,6 @@ import 'package:e_estates/pages/chat_screen.dart';
 import 'package:e_estates/stateManagement/alluser_provider.dart';
 import 'package:e_estates/stateManagement/chat_provider.dart';
 import 'package:e_estates/stateManagement/followeduser_lists.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

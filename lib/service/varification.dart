@@ -46,10 +46,10 @@ class _VerificationWaitingScreenState extends State<VerificationWaitingScreen> {
           followers: [],
           following: [],
         );
-        await _firestore.collection('users').doc(user.email).set(user.toJson());
+        await _firestore.collection('users').doc(user.uid).set(user.toJson());
 
         if (mounted) {
-          Navigator.of(context).pushReplacementNamed('/homepage');
+          Navigator.of(context).pushReplacementNamed('/completeprofile');
         } else {
           if (mounted) {
             ScaffoldMessenger.of(context).showSnackBar(

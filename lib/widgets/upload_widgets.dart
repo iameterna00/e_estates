@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:e_estates/models/college_models.dart';
 import 'package:e_estates/widgets/home_amanities.dart';
 import 'package:e_estates/widgets/tenent_preferences.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +44,8 @@ class _UploadWidgetsState extends State<UploadWidgets> {
   bool amanitiesChecker = false;
   bool prefrencesChecker = false;
   bool isStudent = false;
-  String? selectedCollege;
+  List<College> colleges = [];
+  College? selectedCollege;
   String? selectedCourse;
   String? paymentFrequency = 'Monthly';
   List<String> selectedItems = [];
@@ -48,18 +53,26 @@ class _UploadWidgetsState extends State<UploadWidgets> {
   String dropdownValue = 'Monthly';
   String lableText = "hello";
 
-  Map<String, List<String>> collegeCourses = {
-    'Tribhuvan University': ['BSc CSIT', 'BBA', 'BE Civil'],
-    'Kathmandu University': ['B.Tech', 'BSc', 'MBA'],
-    'Pokhara University': ['BBA', 'BE Computer', 'BHM'],
-  };
-
-  List<String> get courses =>
-      selectedCollege != null ? collegeCourses[selectedCollege] ?? [] : [];
-
   @override
   void initState() {
     super.initState();
+    loadColleges();
+  }
+
+  void loadColleges() async {
+    try {
+      final String response =
+          await rootBundle.loadString('assets/kathmandu_college.json');
+      final data = json.decode(response);
+      var collegeList = data['colleges'] as List;
+      colleges = collegeList.map((c) => College.fromJson(c)).toList();
+      if (colleges.isNotEmpty) {
+        selectedCollege = colleges[0];
+      }
+    } catch (e) {
+      // Handle the error appropriately
+      print('Error loading colleges: $e');
+    }
   }
 
   @override
@@ -407,53 +420,103 @@ class _UploadWidgetsState extends State<UploadWidgets> {
           ],
         ),
         if (isStudent) ...[
-          DropdownButton<String>(
-            value: selectedCollege,
-            hint: const Text('Select your college'),
-            items: collegeCourses.keys
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              setState(() {
-                selectedCollege = newValue;
-                selectedCourse = null;
-              });
-            },
-          ),
-          if (selectedCollege != null) ...[
-            DropdownButton<String>(
-              value: selectedCourse,
-              hint: const Text('Select your course'),
-              items: courses.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedCourse = newValue;
-                });
-              },
-            ),
-          ],
-        ],
-        if (isStudent && selectedCollege != null && selectedCourse != null)
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Implement your submission logic here.
-                print('Selected College: $selectedCollege');
-                print('Selected Course: $selectedCourse');
-              },
-              child: Text('Submit'),
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Container(
+                          padding: const EdgeInsets.all(8.0),
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: ListView.builder(
+                            itemCount: colleges.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ListTile(
+                                title: Text(colleges[index].name),
+                                onTap: () {
+                                  setState(() {
+                                    selectedCollege = colleges[index];
+                                    selectedCourse =
+                                        null; // Reset the course selection
+                                    Navigator.pop(
+                                        context); // Close the bottom sheet
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Text(selectedCollege?.name ?? 'Select College'),
+                ),
+                if (selectedCollege != null) ...[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Text("Selected College: ${selectedCollege?.name}"),
+                  )
+                ]
+              ],
             ),
           ),
+          if (selectedCollege != null &&
+              (selectedCollege!.courses.isNotEmpty)) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DropdownSearch<String>(
+                    dropdownSearchDecoration: const InputDecoration(
+                      labelText: "Select Courses",
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 20,
+                        horizontal: 15,
+                      ),
+                    ),
+                    items: selectedCollege!.courses,
+                    dropdownBuilder: (context, selectedCourse) {
+                      return Text(
+                        selectedCourse ?? "",
+                        style: const TextStyle(
+                            color: Colors.grey), // Custom playful text style
+                      );
+                    },
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        selectedCourse = newValue;
+                      });
+                    },
+                    selectedItem: selectedCourse,
+                  ),
+                ],
+              ),
+            ),
+          ] else if (selectedCollege != null &&
+              selectedCollege!.courses.isEmpty) ...[
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: Text("No courses available for this college"),
+            )
+          ],
+          if (isStudent && selectedCollege != null && selectedCourse != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Implement your submission logic here
+                  print('Selected College: ${selectedCollege?.name}');
+                  print('Selected Course: $selectedCourse');
+                },
+                child: Text('Submit'),
+              ),
+            ),
+        ],
         Row(
           children: <Widget>[
             Expanded(

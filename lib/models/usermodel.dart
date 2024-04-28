@@ -17,14 +17,24 @@ class UserModel {
     required this.following,
   });
 
+  // Named constructor for an empty user
+  UserModel.empty()
+      : email = '',
+        uid = '',
+        photoUrl = 'https://via.placeholder.com/150',
+        username = '',
+        followers = [],
+        following = [];
+
   Map<String, dynamic> toJson() => {
         'username': username,
         'uid': uid,
         'email': email,
         'profileUrl': photoUrl,
-        "followers": followers,
+        'followers': followers,
         'following': following
       };
+
   static UserModel fromMap(Map<String, dynamic> map) {
     return UserModel(
       username: map['username'] ?? '',
@@ -38,13 +48,6 @@ class UserModel {
 
   static UserModel fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>;
-    return UserModel(
-      username: snapshot['username'] ?? '',
-      uid: snapshot['uid'] ?? '',
-      email: snapshot['email'] ?? '',
-      photoUrl: snapshot['profileUrl'] ?? 'https://via.placeholder.com/150',
-      followers: snapshot['followers'] ?? [],
-      following: snapshot['following'] ?? [],
-    );
+    return fromMap(snapshot);
   }
 }

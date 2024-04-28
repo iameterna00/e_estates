@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_estates/models/usermodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,28 +10,28 @@ final authStateChangesProvider = StreamProvider<User?>((ref) {
   return ref.watch(firebaseAuthProvider).authStateChanges();
 });
 
-final userProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
+final userProvider = StateNotifierProvider<UserNotifier, UserModel?>((ref) {
   return UserNotifier(ref.watch(authStateChangesProvider));
 });
 
-class UserState {
-  final String? name;
-  final String? photoURL;
-  final String? uid;
-
-  UserState({
-    this.name,
-    this.photoURL,
-    this.uid,
-  });
-}
-
-class UserNotifier extends StateNotifier<UserState> {
-  final AsyncValue<User?> user;
-  UserNotifier(this.user) : super(UserState()) {
-    user.whenData((user) {
-      state = UserState(
-          name: user?.displayName, photoURL: user?.photoURL, uid: user?.uid);
+class UserNotifier extends StateNotifier<UserModel?> {
+  UserNotifier(AsyncValue<User?> userStream) : super(null) {
+    userStream.whenData((user) {
+      if (user != null) {
+        fetchUserData(user.uid);
+      } else {
+        state = null;
+      }
     });
+  }
+
+  void fetchUserData(String uid) async {
+    DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    if (userDoc.exists) {
+      state = UserModel.fromSnap(userDoc);
+    } else {
+      state = UserModel.empty();
+    }
   }
 }

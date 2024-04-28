@@ -1,3 +1,4 @@
+import 'package:e_estates/pages/complete_profile.dart';
 import 'package:e_estates/pages/explore_page.dart';
 import 'package:e_estates/pages/login_page.dart';
 import 'package:e_estates/pages/numberlogin.dart';
@@ -22,6 +23,7 @@ class AppRoutes {
   static const String topfeedDetail = '/topfeeddetail';
   static const String phoneverification = '/phoneverification';
   static const String mobilescreen = '/mobilescreen';
+  static const String completeprofile = '/completeprofile';
 
   static const String locationPicker = '/locationpicker';
 
@@ -38,6 +40,7 @@ class AppRoutes {
       verificationWaiting: (BuildContext context) =>
           const VerificationWaitingScreen(),
       uploadimage: (BuildContext context) => const ImageUpload(),
+      completeprofile: (BuildContext context) => const CompleteProfile(),
       locationPicker: (BuildContext context) => const LocationPickerMap(),
       explore: (BuildContext context) => const ExplorePage(),
     };
