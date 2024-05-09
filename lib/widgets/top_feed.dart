@@ -1,5 +1,6 @@
 import 'package:e_estates/pages/topfeed_detaipage.dart';
 import 'package:e_estates/models/image_post.dart';
+import 'package:e_estates/stateManagement/filterstudent.dart';
 
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
@@ -10,9 +11,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class TopFeed extends ConsumerWidget {
   final String selectedTag;
 
-  const TopFeed({super.key, required this.selectedTag});
+  const TopFeed({
+    super.key,
+    required this.selectedTag,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool filterIsStudent = ref.watch(isStudentFilterProvider);
+    print("Filter is Student Active: $filterIsStudent");
     final postsAsyncValue = ref.watch(topFeedProvider);
 
     return Container(
@@ -24,6 +30,12 @@ class TopFeed extends ConsumerWidget {
           if (selectedTag != "All") {
             filteredPosts =
                 posts.where((post) => post.tags.contains(selectedTag)).toList();
+            print("Filtered by tag count: ${filteredPosts.length}");
+          }
+          if (filterIsStudent) {
+            filteredPosts =
+                filteredPosts.where((post) => post.isStudent).toList();
+            print("Filtered by isStudent count: ${filteredPosts.length}");
           }
 
           if (filteredPosts.isEmpty) {
@@ -88,6 +100,7 @@ class TopFeed extends ConsumerWidget {
               builder: (context) => TopFeedDetail(
                 detailpagepost: post,
                 distance: distanceDisplay,
+                postID: post.id,
               ),
             ),
           );

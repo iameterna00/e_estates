@@ -68,9 +68,17 @@ class UserProfilePageState extends State<UserProfilePage> {
         child: Column(
           children: <Widget>[
             CircleAvatar(
-              radius: 60,
-              backgroundImage: NetworkImage(widget.user.photoUrl),
-            ),
+                radius: 60,
+                backgroundImage: widget.user.photoUrl.isNotEmpty
+                    ? NetworkImage(widget.user.photoUrl)
+                    : null,
+                child: widget.user.photoUrl.isEmpty
+                    ? const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 60,
+                      )
+                    : null),
             const SizedBox(height: 20),
             Text("Followers: ${widget.user.followers.length}"),
             Text("Following: ${widget.user.following.length}"),

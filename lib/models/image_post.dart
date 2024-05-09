@@ -17,6 +17,9 @@ class ImagePost {
   final String uid;
   final String uploaderProfilePicture;
   final dynamic uploadedAt;
+  final bool isStudent;
+  final String? college;
+  final String? courses;
 
   bool isLikedByCurrentUser;
   final List<String> likedUsers;
@@ -40,6 +43,9 @@ class ImagePost {
     required this.likedUsers,
     required this.isLikedByCurrentUser,
     required this.uploadedAt,
+    required this.isStudent,
+    this.courses,
+    this.college,
   });
 
   factory ImagePost.fromDocument(DocumentSnapshot doc, String currentUserId) {
@@ -66,6 +72,9 @@ class ImagePost {
       isLikedByCurrentUser: isLiked,
       likedUsers: List<String>.from(data['likedUsers'] ?? []),
       uploadedAt: data['uploadedAt'],
+      isStudent: data['IsStudent'] ?? false,
+      college: data['College'],
+      courses: data['Courses'],
     );
   }
 }

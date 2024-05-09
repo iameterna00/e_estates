@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/models/chat_model.dart';
 import 'package:e_estates/models/usermodel.dart';
 import 'package:e_estates/pages/chat_screen.dart';
+import 'package:e_estates/service/customtime.dart';
 import 'package:e_estates/stateManagement/alluser_provider.dart';
 import 'package:e_estates/stateManagement/chat_provider.dart';
 import 'package:e_estates/stateManagement/followeduser_lists.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,9 +28,12 @@ class _ChatAndFollowersPageState extends State<ChatAndFollowersPage> {
         appBar: AppBar(
           title: const Text('Chats'),
           bottom: const TabBar(
+            indicatorColor: Colors.blue,
+            labelColor: Colors.blue,
+            overlayColor: MaterialStatePropertyAll(Colors.transparent),
             tabs: [
               Tab(text: 'Chats'),
-              Tab(text: 'Followers'),
+              Tab(text: 'followed'),
             ],
           ),
         ),
@@ -61,12 +64,21 @@ class ChatsList extends ConsumerWidget {
 
     return Column(children: [
       Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
         child: TextField(
+          style: Theme.of(context).textTheme.bodyMedium,
           decoration: InputDecoration(
+            filled: true,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+            fillColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.grey[300],
             hintText: 'Search',
             prefixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: BorderSide.none,
+            ),
           ),
           onChanged: (value) {
             ref.read(searchQueryProvider.notifier).state = value;
@@ -89,6 +101,8 @@ class ChatsList extends ConsumerWidget {
                             .toLowerCase()
                             .contains(searchQuery.toLowerCase()));
               }).toList();
+              filteredChats.sort(
+                  (a, b) => b.lastMessageTime.compareTo(a.lastMessageTime));
 
               return ListView.builder(
                 itemCount: filteredChats.length,
@@ -97,15 +111,36 @@ class ChatsList extends ConsumerWidget {
                   final otherUserId =
                       chat.participantIds.firstWhere((id) => id != userID);
                   final otherUser = usersMap[otherUserId]!;
-
+                  String timeAgo = shortTimeAgo(chat.lastMessageTime);
+                  String messageDisplay = chat.lastMessage.isNotEmpty
+                      ? "${chat.lastMessage} · $timeAgo"
+                      : "You haven't talked yet";
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(otherUser.photoUrl),
+                      child: ClipOval(
+                        child: Image.network(
+                          otherUser.photoUrl,
+                          fit: BoxFit.cover,
+                          width: 48, // The size of the CircleAvatar
+                          height: 48,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            } else {
+                              return const Icon(Icons.person, size: 48);
+                            }
+                          },
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return const Icon(Icons.error,
+                                size: 48); // Fallback icon in case of error
+                          },
+                        ),
+                      ),
                     ),
                     title: Text(otherUser.username),
-                    subtitle: Text(chat.lastMessage.isNotEmpty
-                        ? chat.lastMessage
-                        : "You haven't talked yet"),
+                    subtitle: Text(messageDisplay),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -155,13 +190,21 @@ class _FollowersListState extends ConsumerState<FollowersList> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
           child: TextField(
+            style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
+              filled: true,
+              contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+              fillColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.grey[300],
               hintText: 'Search',
               prefixIcon: const Icon(Icons.search),
-              border:
-                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: BorderSide.none,
+              ),
             ),
             onChanged: (value) {
               ref.read(searchQueryProvider.notifier).state = value;

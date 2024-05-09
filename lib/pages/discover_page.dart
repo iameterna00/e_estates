@@ -1,5 +1,6 @@
 import 'package:e_estates/models/usermodel.dart';
 import 'package:e_estates/pages/user_profile.dart';
+import 'package:e_estates/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -17,6 +18,16 @@ class UsersListPageState extends State<UsersListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: CustomBottomAppBar(
+        onExplore: () {
+          Navigator.pushNamed(context, "/explore");
+        },
+        onFavorites: () {},
+        onAdd: () {
+          Navigator.pushNamed(context, "/picker");
+        },
+        onChat: () {},
+      ),
       appBar: AppBar(
         title: const Text('Discover Users'),
       ),
@@ -25,11 +36,18 @@ class UsersListPageState extends State<UsersListPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                filled: true,
+                fillColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.grey[300],
                 hintText: 'Search for users...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide.none,
                 ),
               ),
               onChanged: (value) {
@@ -74,8 +92,13 @@ class UsersListPageState extends State<UsersListPage> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                              backgroundImage: NetworkImage(user.photoUrl),
-                            ),
+                                backgroundImage: user.photoUrl.isNotEmpty
+                                    ? NetworkImage(user.photoUrl)
+                                    : null,
+                                child: user.photoUrl.isEmpty
+                                    ? const Icon(Icons.person,
+                                        color: Colors.white)
+                                    : null),
                             const SizedBox(
                               width: 10,
                             ),

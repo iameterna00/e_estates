@@ -91,10 +91,8 @@ class _PanelControllerState extends State<PanelController> {
   Widget build(BuildContext context) {
     return SlidingUpPanelWidget(
       controlHeight: 120.0,
-
-      anchor: 0.4, // Panel expands to 40% of the screen
+      anchor: 0.4,
       panelController: _panelController,
-
       onTap: () {
         // Check the panel's current state and toggle accordingly
         if (_panelController.status == SlidingUpPanelStatus.expanded) {
@@ -112,11 +110,11 @@ class _PanelControllerState extends State<PanelController> {
         decoration: ShapeDecoration(
           color: Theme.of(context).brightness == Brightness.light
               ? Colors.white
-              : const Color.fromARGB(255, 24, 24, 24),
+              : Color.fromARGB(255, 10, 10, 10),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(18.0),
-              topRight: Radius.circular(18.0),
+              topLeft: Radius.circular(25.0),
+              topRight: Radius.circular(25.0),
             ),
           ),
         ),
@@ -136,7 +134,7 @@ class _PanelControllerState extends State<PanelController> {
     return Column(
       children: [
         const SizedBox(
-          height: 50.0,
+          height: 40.0,
           child: Center(
             child: Icon(
               Icons.drag_handle,
@@ -154,8 +152,15 @@ class _PanelControllerState extends State<PanelController> {
             },
             controller: _searchController,
             decoration: InputDecoration(
-              border: InputBorder.none,
+              fillColor: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.black
+                  : Colors.grey[300],
               hintText: 'Search location',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(25.0),
+                borderSide: BorderSide.none,
+              ),
+              filled: true,
               prefixIcon: const Icon(
                 Icons.search,
               ),

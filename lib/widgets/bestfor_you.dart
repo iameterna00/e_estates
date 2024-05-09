@@ -9,7 +9,9 @@ import 'package:e_estates/service/customtime.dart';
 import 'package:e_estates/service/likemodel.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:e_estates/stateManagement/fetch_user_uid.dart';
+import 'package:e_estates/stateManagement/filterstudent.dart';
 import 'package:e_estates/stateManagement/postdistance_provider.dart';
+
 import 'package:e_estates/stateManagement/top_feed_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +24,7 @@ class BestForYou extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bool filterIsStudent = ref.watch(isStudentFilterProvider);
     final postsAsyncValue = ref.watch(topFeedProvider);
 
     return Column(
@@ -37,6 +40,17 @@ class BestForYou extends ConsumerWidget {
                 filteredPosts = posts
                     .where((post) => post.tags.contains(selectedTag))
                     .toList();
+              }
+              if (filterIsStudent) {
+                filteredPosts =
+                    filteredPosts.where((post) => post.isStudent).toList();
+                print("Filtered by isStudent count: ${filteredPosts.length}");
+              }
+              if (filteredPosts.isEmpty) {
+                return Center(
+                  child: Image.asset('assets/icons/empty.png',
+                      height: 250, width: 250),
+                );
               }
 
               return ListView.builder(
@@ -92,9 +106,7 @@ class BestForYou extends ConsumerWidget {
 
     bool isNavigating = false;
     final user = ref.watch(userProvider)?.uid;
-    bool isLikedLocally = post.isLikedByCurrentUser;
 
-    int likesCount = post.likedUsers.length;
     return Padding(
       padding: const EdgeInsets.only(left: 10, right: 12, bottom: 10),
       child: Column(
@@ -167,6 +179,7 @@ class BestForYou extends ConsumerWidget {
                     builder: (context) => TopFeedDetail(
                       detailpagepost: post,
                       distance: distanceDisplay,
+                      postID: post.id,
                     ),
                   ),
                 );
@@ -276,21 +289,7 @@ class BestForYou extends ConsumerWidget {
                               child: Row(
                                 children: [
                                   LikeButtonWidget(
-                                    onLikePressed: () {
-                                      setState(() {
-                                        isLikedLocally = !isLikedLocally;
-
-                                        if (isLikedLocally) {
-                                          likesCount++;
-                                        } else {
-                                          likesCount--;
-                                        }
-                                      });
-                                      toggleLikeStatus(post, ref)
-                                          .then((newIsLiked) {});
-                                    },
-                                    isLiked: isLikedLocally,
-                                    likesCount: likesCount,
+                                    postId: post.id,
                                   ),
                                 ],
                               ),

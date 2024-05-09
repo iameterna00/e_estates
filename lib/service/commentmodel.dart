@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_estates/models/comment_models.dart'; // Ensure this model includes userProfileUrl
+import 'package:e_estates/models/comment_models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-Widget buildComments(
+buildComments(
   BuildContext context,
   String postId,
   ScrollController scrollController,
@@ -66,6 +66,9 @@ void showCommentsBottomSheet(BuildContext context, String postId) {
   final TextEditingController commentController = TextEditingController();
 
   showModalBottomSheet(
+    backgroundColor: Theme.of(context).brightness == Brightness.dark
+        ? Colors.black
+        : Colors.white,
     context: context,
     isScrollControlled: true,
     builder: (BuildContext context) {
@@ -93,6 +96,10 @@ void showCommentsBottomSheet(BuildContext context, String postId) {
                           style: Theme.of(context).textTheme.bodyMedium,
                           controller: commentController,
                           decoration: InputDecoration(
+                            fillColor:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Colors.black
+                                    : Colors.grey[300],
                             hintText: "Write a comment...",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25.0),
@@ -112,7 +119,7 @@ void showCommentsBottomSheet(BuildContext context, String postId) {
                           if (commentController.text.trim().isEmpty) {
                             return;
                           }
-                          _submitComment(
+                          submitComment(
                               postId, commentController.text.trim(), context);
                           commentController.clear();
                         },
@@ -129,7 +136,7 @@ void showCommentsBottomSheet(BuildContext context, String postId) {
   );
 }
 
-Future<void> _submitComment(
+Future<void> submitComment(
     String postId, String content, BuildContext context) async {
   final FirebaseAuth auth = FirebaseAuth.instance;
   if (auth.currentUser == null) {

@@ -8,26 +8,32 @@ class Comment {
   final DateTime timestamp;
   String userProfileUrl;
   String username;
+  String? parentId; // Optional field to reference the parent comment
 
-  Comment(
-      {required this.id,
-      required this.postId,
-      required this.userId,
-      required this.content,
-      required this.timestamp,
-      this.userProfileUrl = '',
-      required this.username});
+  Comment({
+    required this.id,
+    required this.postId,
+    required this.userId,
+    required this.content,
+    required this.timestamp,
+    this.userProfileUrl = '',
+    required this.username,
+    this.parentId,
+  });
 
   factory Comment.fromDocument(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>? ?? {};
     return Comment(
       id: doc.id,
-      postId: doc['postId'],
-      userId: doc['userId'],
-      content: doc['content'],
-      timestamp: DateTime.fromMillisecondsSinceEpoch(doc['timestamp']),
+      postId: data['postId'] ?? 'default_postId',
+      userId: data['userId'] ?? 'default_userId',
+      content: data['content'] ?? 'No content provided',
+      timestamp: data.containsKey('timestamp')
+          ? DateTime.fromMillisecondsSinceEpoch(data['timestamp'])
+          : DateTime.now(),
       userProfileUrl: data['userProfileUrl'] ?? '',
-      username: doc['username'],
+      username: data['username'] ?? 'Anonymous',
+      parentId: data['parentId'], // Optional, can be null
     );
   }
 
@@ -37,6 +43,7 @@ class Comment {
       'userId': userId,
       'content': content,
       'timestamp': timestamp.millisecondsSinceEpoch,
+      'parentId': parentId, // Include the parentId in the Firestore document
     };
   }
 }

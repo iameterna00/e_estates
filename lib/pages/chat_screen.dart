@@ -33,7 +33,7 @@ class ChatScreenState extends State<ChatScreen> {
     });
   }
 
-  Future<void> sendMessage() async {
+  void sendMessage() async {
     final String content = _messageController.text.trim();
     if (content.isNotEmpty) {
       final message = MessageModel(
@@ -75,7 +75,21 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.otherUsername)),
+      appBar: AppBar(
+          title: Row(
+        children: [
+          CircleAvatar(
+            radius: 15,
+            backgroundImage: NetworkImage(
+              widget.otherUserProfile,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Text(widget.otherUsername)
+        ],
+      )),
       body: Column(
         children: [
           Expanded(
@@ -151,11 +165,23 @@ class ChatScreenState extends State<ChatScreen> {
               children: [
                 Expanded(
                   child: TextField(
+                    style: Theme.of(context).textTheme.bodyMedium,
                     controller: _messageController,
-                    decoration: const InputDecoration(
-                      labelText: 'Type a message',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      fillColor: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.black
+                          : Colors.grey[300],
+                      hintText: "Write a message...",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 15),
                     ),
+                    minLines: 1,
+                    maxLines: 4,
                   ),
                 ),
                 IconButton(

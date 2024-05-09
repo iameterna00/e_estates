@@ -1,12 +1,17 @@
+import 'package:e_estates/pages/chat_lists.dart';
 import 'package:e_estates/pages/my_profilepage.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
+import 'package:e_estates/stateManagement/filterstudent.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
+
 import 'package:e_estates/widgets/bestfor_you.dart';
 import 'package:e_estates/widgets/bottom_navigation.dart';
 
 import 'package:e_estates/widgets/top_feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../stateManagement/top_feed_provider.dart';
 
@@ -21,6 +26,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final String userLocation = "Your Location";
   final TextEditingController _locationController = TextEditingController();
+  bool IsStudent = false;
   final List _tags = [
     "All",
     "Rent",
@@ -88,6 +94,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final photoUrl = ref.watch(userProvider)?.photoUrl;
+    final userID = ref.watch(userProvider)?.uid;
     final displayName = ref.watch(userProvider)?.username ?? 'there';
     final providerContainer = ProviderScope.containerOf(context);
     final address =
@@ -103,57 +110,78 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 8, top: 20, bottom: 10),
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MyProfilePage()));
-                          },
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundImage: photoUrl != null
-                                ? NetworkImage(photoUrl)
-                                : const AssetImage('assets/icons/noProfile.png')
-                                    as ImageProvider,
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8, top: 20, bottom: 10),
+                          child: Container(
+                            width: 60,
+                            height: 60,
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MyProfilePage()));
+                              },
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundImage: photoUrl != null
+                                    ? NetworkImage(photoUrl)
+                                    : const AssetImage(
+                                            'assets/icons/noProfile.png')
+                                        as ImageProvider,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        TextButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, "/themepage");
+                          },
+                          child: RichText(
+                            text: TextSpan(children: [
+                              TextSpan(
+                                text:
+                                    '${greeting()}, ${firstName(displayName)}\n',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                              const WidgetSpan(
+                                child: Icon(Icons.location_pin,
+                                    size: 14, color: Colors.grey),
+                              ),
+                              TextSpan(
+                                text: address,
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            ]),
+                          ),
+                        )
+                      ],
                     ),
-                    TextButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.transparent),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/themepage");
-                      },
-                      child: RichText(
-                        text: TextSpan(children: [
-                          TextSpan(
-                            text: '${greeting()}, ${firstName(displayName)}\n',
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          const WidgetSpan(
-                            child: Icon(Icons.location_pin,
-                                size: 14, color: Colors.grey),
-                          ),
-                          TextSpan(
-                            text: address,
-                            style: Theme.of(context).textTheme.bodySmall,
-                          ),
-                        ]),
-                      ),
-                    )
+                    IconButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ProviderScope(
+                              child: ChatAndFollowersPage(
+                                userID: userID,
+                              ),
+                            ),
+                          ));
+                        },
+                        icon: const Icon(
+                          Icons.notifications,
+                          size: 28,
+                        ))
                   ],
                 ),
                 Row(
@@ -298,11 +326,15 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            _selectedTag = "Rent";
-          });
+          ref.read(isStudentFilterProvider.notifier).state ^=
+              true; // Toggle the boolean state
         },
-        child: const Icon(Icons.person),
+        tooltip: 'Toggle Student Filter',
+        child: Icon(
+          ref.watch(isStudentFilterProvider)
+              ? Icons.home
+              : Icons.school, // Dynamic icon change
+        ),
       ),
       bottomNavigationBar: CustomBottomAppBar(
           onExplore: () {

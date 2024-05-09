@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:e_estates/models/image_post.dart';
+import 'package:e_estates/service/commentmodel.dart';
+import 'package:e_estates/widgets/comment_widget.dart';
 import 'package:e_estates/widgets/topfeed_detail_maps.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
@@ -12,10 +12,16 @@ import 'package:photo_view/photo_view.dart';
 
 class TopFeedDetail extends StatefulWidget {
   final String distance;
+  final dynamic curentUserid;
   final ImagePost detailpagepost;
+  final String postID;
 
   const TopFeedDetail(
-      {super.key, required this.detailpagepost, required this.distance});
+      {super.key,
+      required this.detailpagepost,
+      required this.distance,
+      required this.postID,
+      this.curentUserid});
 
   @override
   State<TopFeedDetail> createState() => _TopFeedDetailState();
@@ -29,6 +35,8 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
   bool _longPressed = false;
   late ScrollController _scrollController;
   bool _showAppBar = false;
+
+  final TextEditingController commentController = TextEditingController();
 
   @override
   void initState() {
@@ -44,14 +52,15 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
     return Scaffold(
       body: SafeArea(
         child: Stack(
           children: [
             SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                   Container(
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
@@ -534,15 +543,53 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
                           )),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 200,
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Comments",
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                     ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          controller: commentController,
+                          decoration: InputDecoration(
+                            hintText: "Write a comment...",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25.0),
+                              borderSide: BorderSide.none,
+                            ),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 15),
+                          ),
+                          minLines: 1,
+                          maxLines: 4,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.send),
+                        onPressed: () {
+                          if (commentController.text.trim().isEmpty) {
+                            return;
+                          }
+                          submitComment(widget.postID,
+                              commentController.text.trim(), context);
+                          commentController.clear();
+                        },
+                      ),
+                    ],
+                  ),
+                  CommentsWidget(
+                    postId: widget.postID,
+                  ),
+                  const SizedBox(
+                    height: 100,
                   )
-                ],
-              ),
-            ),
+                ])),
             _showAppBar
                 ? IconButton(
                     onPressed: () {
@@ -553,26 +600,28 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
           ],
         ),
       ),
-      floatingActionButton: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient:
-              const LinearGradient(colors: [Colors.blue, Colors.blueAccent]),
-        ),
-        child: FloatingActionButton.extended(
-          onPressed: () {
-            setState(() {});
-          },
-          label: Text('Rent Now',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                  fontFamily: GoogleFonts.raleway().fontFamily)),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-      ),
+      floatingActionButton: isKeyboardVisible
+          ? const SizedBox()
+          : Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                gradient: const LinearGradient(
+                    colors: [Colors.blue, Colors.blueAccent]),
+              ),
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  setState(() {});
+                },
+                label: Text('Rent Now',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: GoogleFonts.raleway().fontFamily)),
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+            ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       bottomNavigationBar: BottomAppBar(
         elevation: 0,

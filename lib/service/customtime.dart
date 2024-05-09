@@ -17,3 +17,31 @@ String customTimeAgo(DateTime uploadedAtDateTime) {
     return '$years year${years > 1 ? 's' : ''} ago';
   }
 }
+
+String shortTimeAgo(DateTime dateTime) {
+  String result = timeago.format(dateTime, allowFromNow: true);
+
+  result = result.replaceAll('minutes', 'min');
+  result = result.replaceAll('minute', 'min');
+  result = result.replaceAll('hours', 'h');
+  result = result.replaceAll('hour', '');
+  result = result.replaceAll('days', 'd');
+  result = result.replaceAll('day', 'd');
+  result = result.replaceAll('months', 'm');
+  result = result.replaceAll('month', 'm');
+  result = result.replaceAll('years', 'y');
+  result = result.replaceAll('year', 'y');
+  result = result.replaceAll('about', '');
+  result = result.replaceAll('an', '1h');
+  result = result.replaceAllMapped(
+      RegExp(r'(\d+)\s+(min)'), (Match m) => '${m[1]}${m[2]}');
+  result = result.replaceAllMapped(
+      RegExp(r'(\d+)\s+(h)'), (Match m) => '${m[1]}${m[2]}');
+  result = result.replaceAllMapped(
+      RegExp(r'(\d+)\s+(d)'), (Match m) => '${m[1]}${m[2]}');
+  result = result.replaceAllMapped(
+      RegExp(r'(\d+)\s+(mo)'), (Match m) => '${m[1]}${m[2]}');
+  result = result.replaceAllMapped(
+      RegExp(r'(\d+)\s+(yr)'), (Match m) => '${m[1]}${m[2]}');
+  return result;
+}

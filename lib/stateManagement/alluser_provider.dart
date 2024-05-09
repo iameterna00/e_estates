@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/models/usermodel.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final allUsersProvider = FutureProvider<Map<String, UserModel>>((ref) async {
@@ -11,4 +12,13 @@ final allUsersProvider = FutureProvider<Map<String, UserModel>>((ref) async {
     usersMap[user.uid] = user;
   }
   return usersMap;
+});
+
+final currentUserProvider = StreamProvider<User?>((ref) {
+  return FirebaseAuth.instance.authStateChanges();
+});
+
+final userProfileProvider =
+    StreamProvider.autoDispose.family<DocumentSnapshot?, String>((ref, uid) {
+  return FirebaseFirestore.instance.collection('users').doc(uid).snapshots();
 });

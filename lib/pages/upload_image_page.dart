@@ -34,6 +34,7 @@ class ImageUploadState extends State<ImageUpload> {
   bool highlightedlocationButton = false;
   bool highlightedAmanitiesButton = false;
   bool highlightedPrefrencesButton = false;
+  bool isStudent = false;
   bool checkedlocationButton = false;
   bool isTagSelectionValid = true;
   bool _locationPicked = false;
@@ -42,9 +43,33 @@ class ImageUploadState extends State<ImageUpload> {
   double? latitude;
   double? longitude;
   String? location;
+  String? college;
+  String? courses;
   String? paymentFrequency;
   List<String>? homeAminities;
   List<String>? tenentPreferences;
+
+  void handleStudentStatusChange(bool isStudent) {
+    setState(() {
+      this.isStudent = isStudent;
+      print("Student status updated to: $isStudent");
+    });
+  }
+
+  void takecollege(String? college) {
+    setState(() {
+      this.college = college;
+
+      print("Student college updated to: $college");
+    });
+  }
+
+  void takecourses(String? courses) {
+    setState(() {
+      this.courses = courses;
+      print("Student courses updated to: $courses");
+    });
+  }
 
   Future<void> requestPermission() async {
     var status = await Permission.storage.status;
@@ -242,7 +267,10 @@ class ImageUploadState extends State<ImageUpload> {
         "Name": name,
         "UID": uid,
         "ProfilePicture": profilePicture,
-        'likedUsers': []
+        'likedUsers': [],
+        'IsStudent': isStudent,
+        'College': college,
+        'Courses': courses
       });
       String postId = docRef.id;
       await docRef.update({'postId': postId});
@@ -428,30 +456,32 @@ class ImageUploadState extends State<ImageUpload> {
                   ),
                 ),
                 UploadWidgets(
-                  homeAminities: (newhome) {
-                    setState(() {
-                      homeAminities = newhome;
-                      _amanitiesPicked = true;
-                    });
-                  },
-                  onPaymentFrequencyChanged: (newPaymentFrequency) {
-                    setState(() {
-                      paymentFrequency = newPaymentFrequency;
-                    });
-                  },
-                  saveMystate: navigateAndReceiveLocation,
-                  titleController: titleController,
-                  descriptionController: descriptionController,
-                  priceController: priceController,
-                  highlightLocationButton: highlightedlocationButton,
-                  checkedLocationButton: checkedlocationButton,
-                  highlightedAmanitiesButton: highlightedAmanitiesButton,
-                  tenentPreferences: (tenants) {
-                    tenentPreferences = tenants;
-                    _prefrencesPicked = true;
-                  },
-                  highlightedPrefrencesButton: highlightedPrefrencesButton,
-                ),
+                    homeAminities: (newhome) {
+                      setState(() {
+                        homeAminities = newhome;
+                        _amanitiesPicked = true;
+                      });
+                    },
+                    onPaymentFrequencyChanged: (newPaymentFrequency) {
+                      setState(() {
+                        paymentFrequency = newPaymentFrequency;
+                      });
+                    },
+                    saveMystate: navigateAndReceiveLocation,
+                    titleController: titleController,
+                    descriptionController: descriptionController,
+                    priceController: priceController,
+                    highlightLocationButton: highlightedlocationButton,
+                    checkedLocationButton: checkedlocationButton,
+                    highlightedAmanitiesButton: highlightedAmanitiesButton,
+                    tenentPreferences: (tenants) {
+                      tenentPreferences = tenants;
+                      _prefrencesPicked = true;
+                    },
+                    highlightedPrefrencesButton: highlightedPrefrencesButton,
+                    onIsStudentChanged: handleStudentStatusChange,
+                    college: takecollege,
+                    courses: takecourses),
               ],
             ),
           ),

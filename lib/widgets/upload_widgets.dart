@@ -1,11 +1,10 @@
 import 'dart:convert';
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:e_estates/models/college_models.dart';
 import 'package:e_estates/widgets/home_amanities.dart';
 import 'package:e_estates/widgets/tenent_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class UploadWidgets extends StatefulWidget {
@@ -17,10 +16,12 @@ class UploadWidgets extends StatefulWidget {
   final bool checkedLocationButton;
   final bool highlightedAmanitiesButton;
   final bool highlightedPrefrencesButton;
-
   final Function(String?) onPaymentFrequencyChanged;
   final Function(List<String>) homeAminities;
   final Function(List<String>) tenentPreferences;
+  final Function(bool) onIsStudentChanged;
+  final Function(String?) college;
+  final Function(String?) courses;
 
   const UploadWidgets(
       {super.key,
@@ -34,13 +35,17 @@ class UploadWidgets extends StatefulWidget {
       required this.checkedLocationButton,
       required this.highlightedAmanitiesButton,
       required this.tenentPreferences,
-      required this.highlightedPrefrencesButton});
+      required this.highlightedPrefrencesButton,
+      required this.onIsStudentChanged,
+      required this.college,
+      required this.courses});
 
   @override
   State<UploadWidgets> createState() => _UploadWidgetsState();
 }
 
 class _UploadWidgetsState extends State<UploadWidgets> {
+  TextEditingController searchController = TextEditingController();
   bool amanitiesChecker = false;
   bool prefrencesChecker = false;
   bool isStudent = false;
@@ -49,6 +54,7 @@ class _UploadWidgetsState extends State<UploadWidgets> {
   String? selectedCourse;
   String? paymentFrequency = 'Monthly';
   List<String> selectedItems = [];
+  List<College> filteredColleges = [];
   List<String> selectedPreference = [];
   String dropdownValue = 'Monthly';
   String lableText = "hello";
@@ -57,6 +63,26 @@ class _UploadWidgetsState extends State<UploadWidgets> {
   void initState() {
     super.initState();
     loadColleges();
+    filteredColleges = List.from(colleges);
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  String getAcronym(String name) {
+    const List<String> ignoreWords = ['of', 'the', 'and'];
+    return name
+        .split(' ')
+        .where((word) =>
+            !ignoreWords.contains(word.toLowerCase())) // Exclude ignore words
+        .map((word) => word.isNotEmpty
+            ? word[0]
+            : '') // Take the first letter of each remaining word
+        .join()
+        .toUpperCase(); // Combine into an acronym and convert to uppercase
   }
 
   void loadColleges() async {
@@ -65,12 +91,14 @@ class _UploadWidgetsState extends State<UploadWidgets> {
           await rootBundle.loadString('assets/kathmandu_college.json');
       final data = json.decode(response);
       var collegeList = data['colleges'] as List;
-      colleges = collegeList.map((c) => College.fromJson(c)).toList();
-      if (colleges.isNotEmpty) {
-        selectedCollege = colleges[0];
-      }
+      setState(() {
+        colleges = collegeList.map((c) => College.fromJson(c)).toList();
+        filteredColleges = List.from(colleges);
+        if (colleges.isNotEmpty) {
+          selectedCollege = colleges[0];
+        }
+      });
     } catch (e) {
-      // Handle the error appropriately
       print('Error loading colleges: $e');
     }
   }
@@ -406,116 +434,298 @@ class _UploadWidgetsState extends State<UploadWidgets> {
               ),
             ),
             Checkbox(
-              checkColor: Colors.black,
+              checkColor: Colors.white,
+              side: const BorderSide(width: 1, color: Colors.grey),
               activeColor: Colors.blue,
               value: isStudent,
               onChanged: (bool? newValue) {
-                setState(() {
-                  isStudent = newValue!;
-                  selectedCollege = null;
-                  selectedCourse = null;
-                });
+                if (newValue != null) {
+                  setState(() {
+                    isStudent = newValue;
+                    widget.onIsStudentChanged(newValue);
+                    print(widget.onIsStudentChanged);
+
+                    selectedCollege = null; // Reset related selections
+                    selectedCourse = null;
+                  });
+                }
               },
             ),
           ],
         ),
         if (isStudent) ...[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          padding: const EdgeInsets.all(8.0),
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          child: ListView.builder(
-                            itemCount: colleges.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                title: Text(colleges[index].name),
-                                onTap: () {
-                                  setState(() {
-                                    selectedCollege = colleges[index];
-                                    selectedCourse =
-                                        null; // Reset the course selection
-                                    Navigator.pop(
-                                        context); // Close the bottom sheet
-                                  });
-                                },
+          Column(
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  alignment: Alignment.centerLeft,
+                  backgroundColor: Colors.transparent,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                            ? Colors.black
+                            : Colors.white,
+                    context: context,
+                    isScrollControlled:
+                        true, // Ensure the sheet takes full height if needed
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder:
+                            (BuildContext context, StateSetter setModalState) {
+                          return DraggableScrollableSheet(
+                            expand: false,
+                            initialChildSize:
+                                0.75, // Adjust these sizes according to your needs
+                            minChildSize: 0.5,
+                            maxChildSize: 0.90,
+                            builder: (context, scrollController) {
+                              return Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 50.0,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.drag_handle,
+                                          color: Color.fromARGB(
+                                              255, 124, 124, 124),
+                                        ), // Arrow icon
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 12),
+                                      child: TextField(
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium,
+                                        controller: searchController,
+                                        onChanged: (value) {
+                                          setModalState(() {
+                                            value = value.toLowerCase();
+                                            filteredColleges =
+                                                colleges.where((college) {
+                                              return college.name
+                                                      .toLowerCase()
+                                                      .contains(value) ||
+                                                  getAcronym(college.name)
+                                                      .toLowerCase()
+                                                      .startsWith(value);
+                                            }).toList();
+                                          });
+                                        },
+                                        decoration: InputDecoration(
+                                          hintText: 'Search College',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            borderSide: BorderSide(
+                                                color: Colors.grey.shade400),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            borderSide: BorderSide(
+                                                color: Colors.grey.shade300,
+                                                width: 2.0),
+                                          ),
+                                          suffixIcon: const Icon(Icons.search),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: ListView.builder(
+                                        controller: scrollController,
+                                        itemCount: filteredColleges.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return ListTile(
+                                            title: Text(
+                                              filteredColleges[index].name,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium,
+                                            ),
+                                            onTap: () {
+                                              setState(() {
+                                                selectedCollege =
+                                                    filteredColleges[index];
+                                                widget.college(
+                                                    selectedCollege!.name);
+
+                                                selectedCourse =
+                                                    null; // Reset the course selection
+                                                Navigator.pop(
+                                                    context); // Close the bottom sheet
+                                              });
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: Text(selectedCollege?.name ?? 'Select College'),
-                ),
-                if (selectedCollege != null) ...[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text("Selected College: ${selectedCollege?.name}"),
-                  )
-                ]
-              ],
-            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+                child: Padding(
+                    padding: const EdgeInsets.only(bottom: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.school_rounded,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 4),
+                            RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: 'Select College  ',
+                                    style: GoogleFonts.raleway(
+                                        fontSize: 15,
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? Colors.white
+                                            : Colors.grey),
+                                  ),
+                                  TextSpan(
+                                    text: '(Optional)',
+                                    style: GoogleFonts.raleway(
+                                      fontSize: 15,
+                                      color: Colors.grey[400],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Icon(
+                          Icons.arrow_drop_down,
+                          size: 20,
+                        ),
+                      ],
+                    )),
+              ),
+              if (selectedCollege != null) ...[
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    "Selected College: ${selectedCollege?.name}",
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                )
+              ]
+            ],
           ),
           if (selectedCollege != null &&
               (selectedCollege!.courses.isNotEmpty)) ...[
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DropdownSearch<String>(
-                    dropdownSearchDecoration: const InputDecoration(
-                      labelText: "Select Courses",
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 20,
-                        horizontal: 15,
-                      ),
-                    ),
-                    items: selectedCollege!.courses,
-                    dropdownBuilder: (context, selectedCourse) {
-                      return Text(
-                        selectedCourse ?? "",
-                        style: const TextStyle(
-                            color: Colors.grey), // Custom playful text style
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  alignment: Alignment.centerLeft,
+                  backgroundColor: Colors.transparent,
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                            ? Colors.black
+                            : Colors.white,
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return DraggableScrollableSheet(
+                        expand: false,
+                        initialChildSize: 0.75,
+                        minChildSize: 0.5,
+                        maxChildSize: 0.90,
+                        builder: (context, scrollController) {
+                          return ListView.builder(
+                            controller: scrollController,
+                            itemCount: selectedCollege!.courses.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  title: Text(
+                                    selectedCollege!.courses[index],
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      selectedCourse =
+                                          selectedCollege!.courses[index];
+                                      widget.courses(selectedCourse);
+
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                ),
+                              );
+                            },
+                          );
+                        },
                       );
                     },
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        selectedCourse = newValue;
-                      });
-                    },
-                    selectedItem: selectedCourse,
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.book_rounded,
+                            size: 16,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            'Select Course',
+                            style: GoogleFonts.raleway(
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Icon(
+                        Icons.arrow_drop_down,
+                        size: 20,
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
-          ] else if (selectedCollege != null &&
-              selectedCollege!.courses.isEmpty) ...[
-            const Padding(
-              padding: EdgeInsets.all(8),
-              child: Text("No courses available for this college"),
+          ],
+          if (selectedCourse != null) ...[
+            Text(
+              "Selected Cources: $selectedCourse",
+              style: const TextStyle(color: Colors.grey),
             )
           ],
-          if (isStudent && selectedCollege != null && selectedCourse != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Implement your submission logic here
-                  print('Selected College: ${selectedCollege?.name}');
-                  print('Selected Course: $selectedCourse');
-                },
-                child: Text('Submit'),
-              ),
-            ),
         ],
         Row(
           children: <Widget>[
