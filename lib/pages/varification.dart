@@ -69,9 +69,18 @@ class _VerificationWaitingScreenState extends State<VerificationWaitingScreen> {
       if (user != null && !user.emailVerified) {
         await user.sendEmailVerification();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black
+                : Colors.white,
             content: Text(
-                'Verification email has been resent. Please check your inbox.'),
+              'Verification email has been resent.\n Please check your inbox.',
+              style: TextStyle(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black,
+              ),
+            ),
           ),
         );
       }
@@ -79,19 +88,65 @@ class _VerificationWaitingScreenState extends State<VerificationWaitingScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Verify Your Email')),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-                'A verification email has been sent to your email address.'),
-            ElevatedButton(
-              onPressed: checkEmailVerified,
-              child: const Text('I have verified my email'),
+            const SizedBox(
+              height: 100,
             ),
-            TextButton(
-              onPressed: () => resendVerificationEmail(context),
-              child: const Text('Resend email'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                child: Image.asset('assets/icons/varification.png'),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.all(
+                              const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 0.0)),
+                        ),
+                        onPressed: checkEmailVerified,
+                        child: const Text(
+                          'I have verified my email',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(
+                            const EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 0.0)),
+                      ),
+                      onPressed: () => resendVerificationEmail(context),
+                      child: const Text(
+                        'Resend email',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'A verification email has been sent to your email address.',
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+              ),
             ),
           ],
         ),

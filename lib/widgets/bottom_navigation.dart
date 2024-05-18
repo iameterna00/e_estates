@@ -1,4 +1,3 @@
-import 'package:e_estates/pages/chat_lists.dart';
 import 'package:e_estates/pages/discover_page.dart';
 import 'package:e_estates/pages/home_screen.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
@@ -27,6 +26,9 @@ class CustomBottomAppBar extends ConsumerWidget {
     final userid = ref.watch(userProvider)?.uid;
 
     return BottomAppBar(
+      color: Theme.of(context).brightness == Brightness.light
+          ? Colors.white
+          : Color.fromARGB(255, 10, 10, 10),
       height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,8 +64,8 @@ class CustomBottomAppBar extends ConsumerWidget {
               );
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.chat_rounded, size: 25),
+          /*   IconButton(
+            icon: const Icon(Icons.notifications, size: 25),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => ProviderScope(
@@ -73,22 +75,18 @@ class CustomBottomAppBar extends ConsumerWidget {
                 ),
               ));
             },
-          ),
-          /*     Container(
+          ), */
+          Container(
             width: 48,
             height: 48,
             alignment: Alignment.center,
             child: InkWell(
               onTap: onProfileTap,
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 radius: 15,
-                backgroundImage: photoUrl != null
-                    ? NetworkImage(photoUrl)
-                    : const AssetImage('assets/icons/noProfile.png')
-                        as ImageProvider,
               ),
             ),
-          ), */
+          ),
         ],
       ),
     );

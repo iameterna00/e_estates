@@ -1,8 +1,7 @@
 import 'package:e_estates/models/chat_model.dart';
 import 'package:e_estates/models/conversation_model.dart';
-
+import 'package:e_estates/service/chat_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatefulWidget {
   final String currentUserId;
@@ -28,48 +27,9 @@ class ChatScreenState extends State<ChatScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        markChatAsSeen();
+        ChatUtils.markChatAsSeen(widget.chatDetails.id, widget.currentUserId);
       }
     });
-  }
-
-  void sendMessage() async {
-    final String content = _messageController.text.trim();
-    if (content.isNotEmpty) {
-      final message = MessageModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        senderId: widget.currentUserId,
-        receiverId: widget.chatDetails.participantIds
-            .firstWhere((id) => id != widget.currentUserId),
-        content: content,
-        timestamp: DateTime.now(),
-      );
-      _messageController.clear();
-      CollectionReference messages = FirebaseFirestore.instance
-          .collection('chats/${widget.chatDetails.id}/messages');
-
-      await messages.add(message.toJson());
-
-      DocumentReference chatDoc = FirebaseFirestore.instance
-          .collection('chats')
-          .doc(widget.chatDetails.id);
-
-      await chatDoc.update({
-        'lastMessage': content,
-        'lastMessageTime': Timestamp.fromDate(message.timestamp),
-        'hasUnseenMessages': true
-      });
-    }
-  }
-
-  Stream<List<MessageModel>> fetchMessages() {
-    return FirebaseFirestore.instance
-        .collection('chats/${widget.chatDetails.id}/messages')
-        .orderBy('timestamp', descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => MessageModel.fromMap(doc.data(), doc.id))
-            .toList());
   }
 
   @override
@@ -94,14 +54,15 @@ class ChatScreenState extends State<ChatScreen> {
         children: [
           Expanded(
             child: StreamBuilder<List<MessageModel>>(
-              stream: fetchMessages(),
+              stream: ChatUtils.fetchMessages(widget.chatDetails.id),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
                 final messages = snapshot.data!;
-                markChatAsSeen();
+                ChatUtils.markChatAsSeen(
+                    widget.chatDetails.id, widget.currentUserId);
                 return ListView.builder(
                   reverse: true,
                   itemCount: messages.length,
@@ -126,29 +87,31 @@ class ChatScreenState extends State<ChatScreen> {
                           ),
                           const SizedBox(width: 8),
                         ],
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(18),
-                            color: isSentByMe
-                                ? Colors.blue
-                                : Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? Colors.black
-                                    : Colors.grey[400],
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 12),
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 4, horizontal: 8),
-                          child: Text(
-                            message.content,
-                            style: TextStyle(
+                        Flexible(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(18),
                               color: isSentByMe
-                                  ? Colors.white
+                                  ? Colors.blue
                                   : Theme.of(context).brightness ==
                                           Brightness.dark
-                                      ? Colors.white
-                                      : Colors.white,
+                                      ? Colors.black
+                                      : Colors.grey[400],
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 4, horizontal: 8),
+                            child: Text(
+                              message.content,
+                              style: TextStyle(
+                                color: isSentByMe
+                                    ? Colors.white
+                                    : Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -186,7 +149,15 @@ class ChatScreenState extends State<ChatScreen> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.send),
-                  onPressed: sendMessage,
+                  onPressed: () {
+                    if (_messageController.text.trim().isNotEmpty) {
+                      ChatUtils.sendMessage(
+                          _messageController,
+                          widget.currentUserId,
+                          widget.chatDetails.participantIds,
+                          widget.chatDetails.id);
+                    }
+                  },
                 ),
               ],
             ),
@@ -194,26 +165,5 @@ class ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
-  }
-
-  void markChatAsSeen() async {
-    final lastMessageSnapshot = await FirebaseFirestore.instance
-        .collection('chats/${widget.chatDetails.id}/messages')
-        .orderBy('timestamp', descending: true)
-        .limit(1)
-        .get();
-
-    if (lastMessageSnapshot.docs.isNotEmpty) {
-      final lastMessageSenderId =
-          lastMessageSnapshot.docs.first.data()['senderId'];
-
-      if (lastMessageSenderId != widget.currentUserId) {
-        DocumentReference chatDoc = FirebaseFirestore.instance
-            .collection('chats')
-            .doc(widget.chatDetails.id);
-
-        chatDoc.update({'hasUnseenMessages': false});
-      }
-    }
   }
 }

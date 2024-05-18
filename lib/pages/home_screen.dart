@@ -168,20 +168,23 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                         )
                       ],
                     ),
-                    IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProviderScope(
-                              child: ChatAndFollowersPage(
-                                userID: userID,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ProviderScope(
+                                child: ChatAndFollowersPage(
+                                  userID: userID,
+                                ),
                               ),
-                            ),
-                          ));
-                        },
-                        icon: const Icon(
-                          Icons.notifications,
-                          size: 28,
-                        ))
+                            ));
+                          },
+                          icon: const Icon(
+                            Icons.chat_rounded,
+                            size: 28,
+                          )),
+                    )
                   ],
                 ),
                 Row(

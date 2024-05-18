@@ -33,6 +33,8 @@ String shortTimeAgo(DateTime dateTime) {
   result = result.replaceAll('year', 'y');
   result = result.replaceAll('about', '');
   result = result.replaceAll('an', '1h');
+  result = result.replaceAll('a d', '1d');
+
   result = result.replaceAllMapped(
       RegExp(r'(\d+)\s+(min)'), (Match m) => '${m[1]}${m[2]}');
   result = result.replaceAllMapped(

@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_estates/models/chat_model.dart';
 import 'package:e_estates/models/usermodel.dart';
 import 'package:e_estates/pages/chat_screen.dart';
+import 'package:e_estates/service/chat_functions.dart';
 import 'package:e_estates/service/customtime.dart';
 import 'package:e_estates/stateManagement/alluser_provider.dart';
 import 'package:e_estates/stateManagement/chat_provider.dart';
@@ -112,9 +111,9 @@ class ChatsList extends ConsumerWidget {
                       chat.participantIds.firstWhere((id) => id != userID);
                   final otherUser = usersMap[otherUserId]!;
                   String timeAgo = shortTimeAgo(chat.lastMessageTime);
-                  String messageDisplay = chat.lastMessage.isNotEmpty
+                  /*       String messageDisplay = chat.lastMessage.isNotEmpty
                       ? "${chat.lastMessage} · $timeAgo"
-                      : "You haven't talked yet";
+                      : "You haven't talked yet"; */
                   return ListTile(
                     leading: CircleAvatar(
                       child: ClipOval(
@@ -133,14 +132,24 @@ class ChatsList extends ConsumerWidget {
                           },
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
-                            return const Icon(Icons.error,
+                            return const Icon(Icons.person,
                                 size: 48); // Fallback icon in case of error
                           },
                         ),
                       ),
                     ),
                     title: Text(otherUser.username),
-                    subtitle: Text(messageDisplay),
+                    subtitle: Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            chat.lastMessage,
+                            maxLines: 2,
+                          ),
+                        ),
+                        Text(' · $timeAgo')
+                      ],
+                    ),
                     onTap: () {
                       Navigator.push(
                           context,
@@ -151,7 +160,7 @@ class ChatsList extends ConsumerWidget {
                                   otherUserProfile: otherUser.photoUrl,
                                   otherUsername: otherUser.username)));
                     },
-                    trailing: chat.hasUnseenMessages
+                    trailing: chat.justSentMessageBy != userID
                         ? const Icon(Icons.circle, color: Colors.blue, size: 12)
                         : null,
                   );
@@ -226,11 +235,12 @@ class _FollowersListState extends ConsumerState<FollowersList> {
               return ListView.builder(
                 itemCount: filteredUsers.length,
                 itemBuilder: (context, index) {
-                  final user = filteredUsers[index];
+                  final otherUser = filteredUsers[index];
                   return ListTile(
                     onTap: () async {
-                      final chatDetails = await fetchOrCreateChatSession(
-                          widget.userID, user.uid);
+                      final chatDetails =
+                          await ChatUtils.fetchOrCreateChatSession(
+                              widget.userID, otherUser.uid);
 
                       Navigator.push(
                         context,
@@ -238,17 +248,23 @@ class _FollowersListState extends ConsumerState<FollowersList> {
                           builder: (context) => ChatScreen(
                             currentUserId: widget.userID,
                             chatDetails: chatDetails,
-                            otherUserProfile: user.photoUrl,
-                            otherUsername: user.username,
+                            otherUserProfile: otherUser.photoUrl,
+                            otherUsername: otherUser.username,
                           ),
                         ),
                       );
                     },
-                    title: Text(user.username),
-                    subtitle: Text(user.email),
+                    title: Text(otherUser.username),
+                    subtitle: Text(otherUser.email),
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(user.photoUrl),
-                    ),
+                        backgroundImage: otherUser.photoUrl.isNotEmpty
+                            ? NetworkImage(
+                                otherUser.photoUrl,
+                              )
+                            : null,
+                        child: otherUser.photoUrl.isEmpty
+                            ? const Icon(Icons.person)
+                            : null),
                   );
                 },
               );
@@ -259,41 +275,5 @@ class _FollowersListState extends ConsumerState<FollowersList> {
         ),
       ],
     );
-  }
-}
-
-Future<ChatModel> fetchOrCreateChatSession(
-    String currentUserId, String followerId) async {
-  final querySnapshot = await FirebaseFirestore.instance
-      .collection('chats')
-      .where('participantIds', arrayContains: currentUserId)
-      .get();
-
-  QueryDocumentSnapshot<Map<String, dynamic>>? chatDoc;
-
-  for (var doc in querySnapshot.docs) {
-    if (doc.data()['participantIds'].contains(followerId)) {
-      chatDoc = doc;
-      break;
-    }
-  }
-
-  if (chatDoc != null) {
-    return ChatModel.fromMap(chatDoc.data(), chatDoc.id);
-  } else {
-    // Create a new chat session
-    DocumentReference chatDocRef =
-        FirebaseFirestore.instance.collection('chats').doc();
-
-    ChatModel newChat = ChatModel(
-      id: chatDocRef.id,
-      participantIds: [currentUserId, followerId],
-      lastMessage: "",
-      lastMessageTime: DateTime.now(),
-      hasUnseenMessages: true,
-    );
-
-    await chatDocRef.set(newChat.toJson());
-    return newChat;
   }
 }

@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:e_estates/pages/chat_screen.dart';
 import 'package:e_estates/pages/post_page.dart';
+import 'package:e_estates/service/chat_functions.dart';
+import 'package:e_estates/stateManagement/user_uid.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:e_estates/models/usermodel.dart';
@@ -75,21 +78,53 @@ class UserProfilePageState extends State<UserProfilePage> {
                 child: widget.user.photoUrl.isEmpty
                     ? const Icon(
                         Icons.person,
-                        color: Colors.white,
                         size: 60,
                       )
                     : null),
             const SizedBox(height: 20),
             Text("Followers: ${widget.user.followers.length}"),
             Text("Following: ${widget.user.following.length}"),
-            ValueListenableBuilder<bool>(
-              valueListenable: isFollowingNotifier,
-              builder: (context, isFollowing, _) {
-                return ElevatedButton(
-                  onPressed: toggleFollow,
-                  child: Text(isFollowing ? 'Unfollow' : 'Follow'),
-                );
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ValueListenableBuilder<bool>(
+                  valueListenable: isFollowingNotifier,
+                  builder: (context, isFollowing, _) {
+                    return ElevatedButton(
+                      onPressed: toggleFollow,
+                      child: Text(isFollowing ? 'Unfollow' : 'Follow'),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final userID = getCurrentUserId();
+                      final chatDetails =
+                          await ChatUtils.fetchOrCreateChatSession(
+                              userID, widget.user.uid);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChatScreen(
+                                  currentUserId: userID,
+                                  chatDetails: chatDetails,
+                                  otherUserProfile: widget.user.photoUrl,
+                                  otherUsername: widget.user.username)));
+                    },
+                    child: const Row(
+                      children: [
+                        Text('Message'),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(Icons.message)
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 20),
             const Padding(

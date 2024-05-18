@@ -520,19 +520,17 @@ class _UploadWidgetsState extends State<UploadWidgets> {
                                           });
                                         },
                                         decoration: InputDecoration(
+                                          fillColor:
+                                              Theme.of(context).brightness ==
+                                                      Brightness.dark
+                                                  ? Colors.black
+                                                  : Colors.grey[300],
+                                          filled: true,
                                           hintText: 'Search College',
                                           border: OutlineInputBorder(
                                             borderRadius:
-                                                BorderRadius.circular(15),
-                                            borderSide: BorderSide(
-                                                color: Colors.grey.shade400),
-                                          ),
-                                          focusedBorder: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            borderSide: BorderSide(
-                                                color: Colors.grey.shade300,
-                                                width: 2.0),
+                                                BorderRadius.circular(25.0),
+                                            borderSide: BorderSide.none,
                                           ),
                                           suffixIcon: const Icon(Icons.search),
                                         ),

@@ -27,8 +27,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment
-              .center, // Aligns children vertically to the center
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             InkWell(
               onTap: () async {

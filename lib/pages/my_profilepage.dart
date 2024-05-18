@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_estates/models/usermodel.dart';
+import 'package:e_estates/pages/profile_edit.dart';
 import 'package:e_estates/pages/user_profile.dart';
+import 'package:e_estates/service/profile_functions.dart';
 import 'package:e_estates/stateManagement/Myprofile_provider.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyProfilePage extends ConsumerWidget {
@@ -19,7 +19,20 @@ class MyProfilePage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Profile"),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text("Profile"),
+            IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileEdit()));
+                },
+                icon: const Icon(Icons.edit))
+          ],
+        ),
       ),
       body: userAsyncValue.when(
         data: (user) {
@@ -80,8 +93,14 @@ class MyProfilePage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Ensure postCount and the lists are passed correctly
-                _buildProfileStat(context, "Posts", postCount, [], "Posts"),
+                Column(
+                  children: [
+                    Text('$postCount',
+                        style: Theme.of(context).textTheme.titleLarge),
+                    const SizedBox(height: 4),
+                    const Text('Posts'),
+                  ],
+                ),
                 _buildProfileStat(
                   context,
                   "Followers",
@@ -155,7 +174,8 @@ class MyProfilePage extends ConsumerWidget {
                         FirebaseAuth.instance.currentUser
                             ?.uid) // Check if current user is the post owner
                       TextButton(
-                        onPressed: () => _deletePost(context, post.id),
+                        onPressed: () =>
+                            PostFunctions.deletePost(context, post.id),
                         child: const Text("Delete"),
                       ),
                   ],
@@ -169,97 +189,113 @@ class MyProfilePage extends ConsumerWidget {
       ),
     );
   }
-
-  Future<void> _deletePost(BuildContext context, String postId) async {
-    DocumentSnapshot postDocument =
-        await FirebaseFirestore.instance.collection('image').doc(postId).get();
-
-    List<dynamic> imageUrls = postDocument.get('urls') as List<dynamic>;
-
-    FirebaseStorage storage = FirebaseStorage.instance;
-
-    for (String url in imageUrls) {
-      String filePath = url.replaceAll(
-          RegExp(
-              r'https://firebasestorage.googleapis.com/v0/b/[a-z0-9-]+.appspot.com/o/'),
-          '');
-      filePath = Uri.decodeFull(filePath.split('?').first);
-
-      await storage.ref(filePath).delete();
-    }
-
-    FirebaseFirestore.instance
-        .collection('image')
-        .doc(postId)
-        .delete()
-        .then((_) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Post deleted successfully.")));
-
-      Navigator.of(context).pop();
-    }).catchError((error) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Error deleting post: $error")));
-    });
-  }
 }
 
 void _showUserList(BuildContext context, List<String> userIds, String title) {
   showModalBottomSheet(
-    backgroundColor: Theme.of(context).brightness == Brightness.dark
-        ? Colors.black
-        : Colors.white,
-    context: context,
-    builder: (BuildContext context) {
-      return Column(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.drag_handle_rounded),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          AppBar(
-            title: Text(title),
-            automaticallyImplyLeading: false,
-          ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: userIds.length,
-              itemBuilder: (context, index) {
-                return FutureBuilder<DocumentSnapshot>(
-                  future: FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(userIds[index])
-                      .get(),
-                  builder: (context, snapshot) {
-                    if (!snapshot.hasData) {
-                      return const ListTile(
-                        leading: CircleAvatar(),
-                        title: Text("Loading..."),
-                      );
-                    }
-                    var userData =
-                        snapshot.data!.data() as Map<String, dynamic>;
-                    UserModel userModel = UserModel.fromMap(userData);
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(userData['profileUrl'] ??
-                            'https://via.placeholder.com/150'),
-                      ),
-                      title: Text(userData['username'] ?? 'Username'),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              UserProfilePage(user: userModel),
-                        ));
-                      },
-                    );
-                  },
-                );
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : Colors.white,
+      context: context,
+      isScrollControlled: true, // Ensure the sheet takes full height if needed
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setModalState) {
+            //  List<String> filteredUserIds = List.from(userIds);
+
+            return DraggableScrollableSheet(
+              expand: false,
+              initialChildSize: 0.90,
+              minChildSize: 0.5,
+              maxChildSize: 0.90,
+              builder: (context, scrollController) {
+                return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 50.0,
+                            child: Center(
+                              child: Icon(
+                                Icons.drag_handle,
+                                color: Color.fromARGB(255, 124, 124, 124),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            child: TextField(
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              // controller: searchController,
+                              onChanged: (value) {},
+                              decoration: InputDecoration(
+                                fillColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.black
+                                    : Colors.grey[300],
+                                filled: true,
+                                hintText: 'Search',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25.0),
+                                  borderSide: BorderSide.none,
+                                ),
+                                suffixIcon: const Icon(Icons.search),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              title,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
+                          Expanded(
+                            child: ListView.builder(
+                              itemCount: userIds.length,
+                              itemBuilder: (context, index) {
+                                return FutureBuilder<DocumentSnapshot>(
+                                  future: FirebaseFirestore.instance
+                                      .collection('users')
+                                      .doc(userIds[index])
+                                      .get(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return const ListTile(
+                                        leading: CircleAvatar(),
+                                        title: Text("Loading..."),
+                                      );
+                                    }
+                                    var userData = snapshot.data!.data()
+                                        as Map<String, dynamic>;
+                                    UserModel userModel =
+                                        UserModel.fromMap(userData);
+                                    return ListTile(
+                                      leading: CircleAvatar(
+                                        backgroundImage: NetworkImage(userData[
+                                                'profileUrl'] ??
+                                            'https://via.placeholder.com/150'),
+                                      ),
+                                      title: Text(
+                                          userData['username'] ?? 'Username'),
+                                      onTap: () {
+                                        Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              UserProfilePage(user: userModel),
+                                        ));
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ]));
               },
-            ),
-          ),
-        ],
-      );
-    },
-  );
+            );
+          },
+        );
+      });
 }

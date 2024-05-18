@@ -5,21 +5,20 @@ class ChatModel {
   final List<String> participantIds;
   final String lastMessage;
   final DateTime lastMessageTime;
-  final bool hasUnseenMessages;
+  final String justSentMessageBy;
 
-  ChatModel({
-    required this.id,
-    required this.participantIds,
-    required this.lastMessage,
-    required this.lastMessageTime,
-    required this.hasUnseenMessages,
-  });
+  ChatModel(
+      {required this.id,
+      required this.participantIds,
+      required this.lastMessage,
+      required this.lastMessageTime,
+      required this.justSentMessageBy});
 
   Map<String, dynamic> toJson() => {
         'participantIds': participantIds,
         'lastMessage': lastMessage,
         'lastMessageTime': Timestamp.fromDate(lastMessageTime),
-        'hasUnseenMessages': hasUnseenMessages,
+        'justSentMessageBy': justSentMessageBy
       };
 
   static ChatModel fromMap(Map<String, dynamic> map, String documentId) {
@@ -28,7 +27,7 @@ class ChatModel {
       participantIds: List<String>.from(map['participantIds']),
       lastMessage: map['lastMessage'] ?? '',
       lastMessageTime: (map['lastMessageTime'] as Timestamp).toDate(),
-      hasUnseenMessages: map['hasUnseenMessages'] ?? false,
+      justSentMessageBy: map['justSentMessageBy'] ?? '',
     );
   }
 
@@ -39,7 +38,7 @@ class ChatModel {
       participantIds: List<String>.from(data['participantIds']),
       lastMessage: data['lastMessage'] ?? '',
       lastMessageTime: (data['lastMessageTime'] as Timestamp).toDate(),
-      hasUnseenMessages: data['hasUnseenMessages'] ?? false,
+      justSentMessageBy: data['justSentMessageBy'] ?? "",
     );
   }
 }

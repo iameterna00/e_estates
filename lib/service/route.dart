@@ -7,7 +7,7 @@ import 'package:e_estates/pages/home_screen.dart';
 import 'package:e_estates/pages/splash_screen.dart';
 import 'package:e_estates/pages/upload_image_page.dart';
 import 'package:e_estates/service/theme.dart';
-import 'package:e_estates/service/varification.dart';
+import 'package:e_estates/pages/varification.dart';
 import 'package:e_estates/widgets/location_picker.dart';
 import 'package:flutter/material.dart';
 

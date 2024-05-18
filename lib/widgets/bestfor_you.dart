@@ -33,7 +33,20 @@ class BestForYou extends ConsumerWidget {
           width: double.infinity,
           child: postsAsyncValue.when(
             loading: () => const Center(child: CircularProgressIndicator()),
-            error: (err, stack) => Text('Error: $err'),
+            error: (error, stackTrace) {
+              // Check for specific network-related error messages
+              if (error.toString().contains('Failed host lookup')) {
+                return const Center(
+                    child: Text('Please check your internet connection.'));
+              } else {
+                // Log the error or handle other types of errors
+                debugPrint(
+                    'Unexpected error: $error, Stack trace: $stackTrace');
+                return const Center(
+                    child: Text(
+                        'An unexpected error occurred. Please try again later.'));
+              }
+            },
             data: (posts) {
               List<ImagePost> filteredPosts = posts;
               if (selectedTag != "All") {
@@ -44,7 +57,6 @@ class BestForYou extends ConsumerWidget {
               if (filterIsStudent) {
                 filteredPosts =
                     filteredPosts.where((post) => post.isStudent).toList();
-                print("Filtered by isStudent count: ${filteredPosts.length}");
               }
               if (filteredPosts.isEmpty) {
                 return Center(
@@ -189,10 +201,33 @@ class BestForYou extends ConsumerWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
-                      post.imageUrls[0],
+                      post.imageUrls.isNotEmpty
+                          ? post.imageUrls[0]
+                          : 'assets/icons/noProfile.png',
                       fit: BoxFit.cover,
                       width: MediaQuery.of(context).size.width,
                       height: 350,
+                      errorBuilder: (context, error, stackTrace) {
+                        // This builder will work when there is an error in loading the image
+                        return Image.asset(
+                          'assets/icons/noProfile.png', // Fallback asset image
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                          height: 350,
+                        );
+                      },
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Positioned(
