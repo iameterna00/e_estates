@@ -1,6 +1,6 @@
-import 'package:e_estates/stateManagement/user_uid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:e_estates/stateManagement/user_uid.dart';
 
 class ProfileEdit extends StatefulWidget {
   const ProfileEdit({super.key});
@@ -12,7 +12,9 @@ class ProfileEdit extends StatefulWidget {
 class _ProfileEditState extends State<ProfileEdit> {
   String? userProfile;
   String? userName;
-  TextEditingController name = TextEditingController();
+  String? userNumber;
+  TextEditingController numberController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   String selectedOption = '';
 
   @override
@@ -22,16 +24,32 @@ class _ProfileEditState extends State<ProfileEdit> {
   }
 
   Future<void> initializeUserProfile() async {
-    userProfile = getCurrentUserProfile();
-    userName = getCurrentUsername();
-    name.text = userName!;
-    setState(() {});
+    try {
+      userProfile = await getCurrentUserProfile();
+      userName = await getCurrentUsername();
+      userNumber = await getCurrentUserNumber();
+
+      print('User Profile: $userProfile');
+      print('User Name: $userName');
+      print('User Number: $userNumber');
+
+      setState(() {
+        if (userName != null) {
+          nameController.text = userName!;
+        }
+        if (userNumber != null) {
+          numberController.text = userNumber!;
+        }
+      });
+    } catch (e) {
+      print('Error fetching user profile: $e');
+    }
   }
 
   void onOptionSelected(String option) {
     setState(() {
       selectedOption = option;
-      print(option);
+      print('Selected Option: $option');
     });
   }
 
@@ -39,7 +57,7 @@ class _ProfileEditState extends State<ProfileEdit> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Title(color: Colors.black, child: const Text("Edit")),
+        title: const Text("Edit", style: TextStyle(color: Colors.black)),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,53 +70,53 @@ class _ProfileEditState extends State<ProfileEdit> {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(userProfile!),
+                      backgroundImage: userProfile != null
+                          ? NetworkImage(userProfile!)
+                          : null,
+                      child: userProfile == null
+                          ? const Icon(Icons.person, size: 50)
+                          : null,
                     ),
                     TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          "Edit Picture",
-                          style: TextStyle(color: Colors.blue, fontSize: 14),
-                        )),
+                      style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll(Colors.transparent),
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "Edit Picture",
+                        style: TextStyle(color: Colors.blue, fontSize: 14),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 0),
-              child: Text(
-                "Name",
+              padding: EdgeInsets.symmetric(horizontal: 14),
+              child: Text("Name"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: nameController,
+                style: Theme.of(context).textTheme.bodyMedium,
+                decoration: InputDecoration(
+                  fillColor: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 52, 52, 52)
+                      : Colors.grey[300],
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  hintText: "userName",
+                ),
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                        controller: name,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        decoration: InputDecoration(
-                            fillColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? const Color.fromARGB(255, 52, 52, 52)
-                                    : Colors.grey[300],
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: BorderSide.none,
-                            ),
-                            hintText: "userName")),
-                  ),
-                ),
-              ],
-            ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+              padding: EdgeInsets.symmetric(horizontal: 14),
               child: Text("I am"),
             ),
             Padding(
@@ -106,97 +124,62 @@ class _ProfileEditState extends State<ProfileEdit> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () => onOptionSelected('Broker'),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: selectedOption == 'Broker'
-                            ? Colors.blue
-                            : const Color.fromARGB(255, 52, 52, 52),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Text(
-                        'Broker',
-                        style: TextStyle(),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () => onOptionSelected('House Owner'),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: selectedOption == 'House Owner'
-                            ? Colors.blue
-                            : const Color.fromARGB(255, 52, 52, 52),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Text(
-                        'House Owner',
-                        style: TextStyle(),
-                      ),
-                    ),
-                  ),
-                  InkWell(
-                    focusColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () => onOptionSelected('Student'),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      decoration: BoxDecoration(
-                        color: selectedOption == 'Student'
-                            ? Colors.blue
-                            : const Color.fromARGB(255, 52, 52, 52),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: const Text(
-                        'Student',
-                        style: TextStyle(),
-                      ),
-                    ),
-                  ),
+                  buildOptionButton('Broker'),
+                  buildOptionButton('House Owner'),
+                  buildOptionButton('Student'),
                 ],
               ),
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 14, vertical: 0),
+              padding: EdgeInsets.symmetric(horizontal: 14),
               child: Text("Number"),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: numberController,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9+-]')),
                 ],
                 style: Theme.of(context).textTheme.bodyMedium,
                 decoration: InputDecoration(
-                    fillColor: Theme.of(context).brightness == Brightness.dark
-                        ? const Color.fromARGB(255, 52, 52, 52)
-                        : Colors.grey[300],
-                    filled: true,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "+977"),
+                  fillColor: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 52, 52, 52)
+                      : Colors.grey[300],
+                  filled: true,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  hintText: "+977",
+                ),
               ),
             )
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget buildOptionButton(String option) {
+    return InkWell(
+      focusColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: () => onOptionSelected(option),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        decoration: BoxDecoration(
+          color: selectedOption == option
+              ? Colors.blue
+              : const Color.fromARGB(255, 52, 52, 52),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Text(
+          option,
+          style: const TextStyle(),
         ),
       ),
     );

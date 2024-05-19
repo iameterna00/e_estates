@@ -72,10 +72,10 @@ class UserProfilePageState extends State<UserProfilePage> {
           children: <Widget>[
             CircleAvatar(
                 radius: 60,
-                backgroundImage: widget.user.photoUrl.isNotEmpty
-                    ? NetworkImage(widget.user.photoUrl)
+                backgroundImage: widget.user.photoUrl!.isNotEmpty
+                    ? NetworkImage(widget.user.photoUrl!)
                     : null,
-                child: widget.user.photoUrl.isEmpty
+                child: widget.user.photoUrl!.isEmpty
                     ? const Icon(
                         Icons.person,
                         size: 60,
@@ -110,7 +110,7 @@ class UserProfilePageState extends State<UserProfilePage> {
                               builder: (context) => ChatScreen(
                                   currentUserId: userID,
                                   chatDetails: chatDetails,
-                                  otherUserProfile: widget.user.photoUrl,
+                                  otherUserProfile: widget.user.photoUrl!,
                                   otherUsername: widget.user.username)));
                     },
                     child: const Row(

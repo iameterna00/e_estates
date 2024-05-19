@@ -45,6 +45,7 @@ class _VerificationWaitingScreenState extends State<VerificationWaitingScreen> {
           uid: currentUser.uid,
           followers: [],
           following: [],
+          number: '',
         );
         await _firestore.collection('users').doc(user.uid).set(user.toJson());
 

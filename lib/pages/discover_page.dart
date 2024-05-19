@@ -92,10 +92,10 @@ class UsersListPageState extends State<UsersListPage> {
                         child: Row(
                           children: [
                             CircleAvatar(
-                                backgroundImage: user.photoUrl.isNotEmpty
-                                    ? NetworkImage(user.photoUrl)
+                                backgroundImage: user.photoUrl!.isNotEmpty
+                                    ? NetworkImage(user.photoUrl!)
                                     : null,
-                                child: user.photoUrl.isEmpty
+                                child: user.photoUrl!.isEmpty
                                     ? const Icon(Icons.person,
                                         color: Colors.white)
                                     : null),

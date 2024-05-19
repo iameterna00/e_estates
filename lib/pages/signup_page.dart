@@ -322,9 +322,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       username: username,
                     )));
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
+              SnackBar(
+                backgroundColor: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.black
+                    : Colors.white,
                 content: Text(
-                    'Verification email has been sent. Please check your email.'),
+                  'Verification email has been sent. Please check your email.',
+                  style: TextStyle(
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
+                  ),
+                ),
               ),
             );
           }

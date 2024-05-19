@@ -301,7 +301,7 @@ class _TopFeedMaps extends State<TopFeedMaps> with TickerProviderStateMixin {
                                             ? NetworkImage(widget
                                                 .singleHome!.imageUrls.first)
                                             : const AssetImage(
-                                                'assets/images/default_image.png'))
+                                                'assets/Icons/noProfile.png'))
                                         as ImageProvider<Object>,
                                     fit: BoxFit.cover,
                                   ),
@@ -357,7 +357,8 @@ class _TopFeedMaps extends State<TopFeedMaps> with TickerProviderStateMixin {
                                         children: [
                                           Image.asset(
                                               "assets/icons/Current_location_marker.png"),
-                                          if (photoUrl != null)
+                                          if (photoUrl != null &&
+                                              photoUrl.isNotEmpty)
                                             Container(
                                               width: 20,
                                               height: 20,
@@ -372,7 +373,24 @@ class _TopFeedMaps extends State<TopFeedMaps> with TickerProviderStateMixin {
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
-                                            )
+                                            ),
+                                          if (photoUrl == null ||
+                                              photoUrl.isEmpty)
+                                            Container(
+                                              width: 20,
+                                              height: 20,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.black,
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                      color: Colors.black)),
+                                              child: const ClipOval(
+                                                  child: Icon(
+                                                Icons.person,
+                                                size: 15,
+                                                color: Colors.grey,
+                                              )),
+                                            ),
                                         ],
                                       );
                                     },

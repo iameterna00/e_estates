@@ -43,22 +43,6 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   String? displayName;
-  String? photourl;
-
-  @override
-  void initState() {
-    super.initState();
-    _reloadUser();
-    setState(() {});
-  }
-
-  void _reloadUser() async {
-    await _auth.currentUser?.reload();
-    setState(() {
-      displayName = _auth.currentUser?.displayName;
-      photourl = _auth.currentUser?.photoURL;
-    });
-  }
 
   void _signOut(signout) async {
     try {
@@ -133,9 +117,14 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                                 radius: 50,
                                 backgroundImage: photoUrl != null
                                     ? NetworkImage(photoUrl)
-                                    : const AssetImage(
-                                            'assets/icons/noProfile.png')
-                                        as ImageProvider,
+                                    : null,
+                                child: photoUrl == null
+                                    ? const Icon(
+                                        Icons.person,
+                                        size: 30,
+                                        color: Colors.grey,
+                                      )
+                                    : null,
                               ),
                             ),
                           ),

@@ -77,49 +77,58 @@ class MyProfilePage extends ConsumerWidget {
     final userProfileAsyncValue = ref.watch(userProfileProvider(userId));
 
     return userProfileAsyncValue.when(
-      data: (userProfile) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 40,
-              backgroundImage: NetworkImage(userProfile.photoUrl),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(userProfile.username,
-                  style: Theme.of(context).textTheme.titleLarge),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Text('$postCount',
-                        style: Theme.of(context).textTheme.titleLarge),
-                    const SizedBox(height: 4),
-                    const Text('Posts'),
-                  ],
-                ),
-                _buildProfileStat(
-                  context,
-                  "Followers",
-                  userProfile.followers.length,
-                  userProfile.followers.cast<String>(),
-                  "Followers",
-                ),
-                _buildProfileStat(
-                  context,
-                  "Following",
-                  userProfile.following.length,
-                  userProfile.following.cast<String>(),
-                  "Following",
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+      data: (userProfile) {
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              CircleAvatar(
+                radius: 60,
+                backgroundImage: userProfile.photoUrl != null &&
+                        userProfile.photoUrl!.isNotEmpty
+                    ? NetworkImage(userProfile.photoUrl!)
+                    : null,
+                child: userProfile.photoUrl == null ||
+                        userProfile.photoUrl!.isEmpty
+                    ? const Icon(Icons.person, size: 60)
+                    : null,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(userProfile.username,
+                    style: Theme.of(context).textTheme.titleLarge),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Text('$postCount',
+                          style: Theme.of(context).textTheme.titleLarge),
+                      const SizedBox(height: 4),
+                      const Text('Posts'),
+                    ],
+                  ),
+                  _buildProfileStat(
+                    context,
+                    "Followers",
+                    userProfile.followers.length,
+                    userProfile.followers.cast<String>(),
+                    "Followers",
+                  ),
+                  _buildProfileStat(
+                    context,
+                    "Following",
+                    userProfile.following.length,
+                    userProfile.following.cast<String>(),
+                    "Following",
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (error, stack) => Text('Error: $error'),
     );

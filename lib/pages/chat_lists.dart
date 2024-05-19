@@ -118,7 +118,7 @@ class ChatsList extends ConsumerWidget {
                     leading: CircleAvatar(
                       child: ClipOval(
                         child: Image.network(
-                          otherUser.photoUrl,
+                          otherUser.photoUrl!,
                           fit: BoxFit.cover,
                           width: 48, // The size of the CircleAvatar
                           height: 48,
@@ -157,7 +157,7 @@ class ChatsList extends ConsumerWidget {
                               builder: (context) => ChatScreen(
                                   currentUserId: userID,
                                   chatDetails: chat,
-                                  otherUserProfile: otherUser.photoUrl,
+                                  otherUserProfile: otherUser.photoUrl!,
                                   otherUsername: otherUser.username)));
                     },
                     trailing: chat.justSentMessageBy != userID
@@ -248,7 +248,7 @@ class _FollowersListState extends ConsumerState<FollowersList> {
                           builder: (context) => ChatScreen(
                             currentUserId: widget.userID,
                             chatDetails: chatDetails,
-                            otherUserProfile: otherUser.photoUrl,
+                            otherUserProfile: otherUser.photoUrl!,
                             otherUsername: otherUser.username,
                           ),
                         ),
@@ -257,12 +257,12 @@ class _FollowersListState extends ConsumerState<FollowersList> {
                     title: Text(otherUser.username),
                     subtitle: Text(otherUser.email),
                     leading: CircleAvatar(
-                        backgroundImage: otherUser.photoUrl.isNotEmpty
+                        backgroundImage: otherUser.photoUrl!.isNotEmpty
                             ? NetworkImage(
-                                otherUser.photoUrl,
+                                otherUser.photoUrl!,
                               )
                             : null,
-                        child: otherUser.photoUrl.isEmpty
+                        child: otherUser.photoUrl!.isEmpty
                             ? const Icon(Icons.person)
                             : null),
                   );
