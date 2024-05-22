@@ -38,14 +38,13 @@ class _CompleteProfileState extends State<CompleteProfile> {
           await _auth.signInWithCredential(credential);
           setState(() {
             _isOTPSent = true;
-            _isVerifying = false; // Hide progress indicator
+            _isVerifying = false;
           });
         },
         verificationFailed: (FirebaseAuthException e) {
           setState(() {
-            _isVerifying = false; // Hide progress indicator
+            _isVerifying = false;
           });
-          // Handle error (e.g., show a message to the user)
         },
         codeSent: (String verificationId, int? resendToken) {
           setState(() {
@@ -67,13 +66,6 @@ class _CompleteProfileState extends State<CompleteProfile> {
       });
       // Handle error (e.g., show a message to the user)
     }
-  }
-
-  Future<void> _signInWithPhoneNumber() async {
-    PhoneAuthProvider.credential(
-      verificationId: _verificationId!,
-      smsCode: _codeController.text,
-    );
   }
 
   @override

@@ -24,7 +24,6 @@ class AppRoutes {
   static const String phoneverification = '/phoneverification';
   static const String mobilescreen = '/mobilescreen';
   static const String completeprofile = '/completeprofile';
-
   static const String locationPicker = '/locationpicker';
 
   static Map<String, WidgetBuilder> define() {

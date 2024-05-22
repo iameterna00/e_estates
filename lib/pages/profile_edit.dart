@@ -1,6 +1,9 @@
+import 'dart:io';
+import 'package:e_estates/service/profile_update.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:e_estates/stateManagement/user_uid.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ProfileEdit extends StatefulWidget {
   const ProfileEdit({super.key});
@@ -13,9 +16,12 @@ class _ProfileEditState extends State<ProfileEdit> {
   String? userProfile;
   String? userName;
   String? userNumber;
+  final ImagePicker _picker = ImagePicker();
   TextEditingController numberController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   String selectedOption = '';
+
+  List<XFile>? _selectedImages;
 
   @override
   void initState() {
@@ -23,15 +29,20 @@ class _ProfileEditState extends State<ProfileEdit> {
     initializeUserProfile();
   }
 
+  Future<void> pickImages(ImageSource source) async {
+    final XFile? pickedImage = await _picker.pickImage(source: source);
+    if (pickedImage != null) {
+      setState(() {
+        _selectedImages = [pickedImage];
+      });
+    }
+  }
+
   Future<void> initializeUserProfile() async {
     try {
       userProfile = await getCurrentUserProfile();
       userName = await getCurrentUsername();
       userNumber = await getCurrentUserNumber();
-
-      print('User Profile: $userProfile');
-      print('User Name: $userName');
-      print('User Number: $userNumber');
 
       setState(() {
         if (userName != null) {
@@ -49,7 +60,6 @@ class _ProfileEditState extends State<ProfileEdit> {
   void onOptionSelected(String option) {
     setState(() {
       selectedOption = option;
-      print('Selected Option: $option');
     });
   }
 
@@ -68,14 +78,86 @@ class _ProfileEditState extends State<ProfileEdit> {
               child: Center(
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: userProfile != null
-                          ? NetworkImage(userProfile!)
-                          : null,
-                      child: userProfile == null
-                          ? const Icon(Icons.person, size: 50)
-                          : null,
+                    GestureDetector(
+                      child: CircleAvatar(
+                        radius: 75,
+                        backgroundColor: Colors.grey[900],
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            if (userProfile != null &&
+                                userProfile!.isNotEmpty &&
+                                (_selectedImages == null ||
+                                    _selectedImages!.isEmpty))
+                              CircleAvatar(
+                                radius: 75,
+                                backgroundImage: NetworkImage(userProfile!),
+                              ),
+                            if (_selectedImages != null &&
+                                _selectedImages!.isNotEmpty)
+                              CircleAvatar(
+                                radius: 75,
+                                backgroundImage:
+                                    FileImage(File(_selectedImages![0].path)),
+                              ),
+                            if ((userProfile == null || userProfile!.isEmpty) &&
+                                (_selectedImages == null ||
+                                    _selectedImages!.isEmpty))
+                              const CircleAvatar(
+                                radius: 75,
+                                child: Icon(
+                                  Icons.person,
+                                  size: 80,
+                                ),
+                              ),
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 52, 52, 52),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.white, // Plus sign icon color
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      onTap: () async {
+                        await ProfileUpdate.requestPermission();
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return SafeArea(
+                              child: Wrap(
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: const Icon(Icons.photo_library),
+                                    title: const Text('Select from Gallery'),
+                                    onTap: () async {
+                                      Navigator.pop(context);
+                                      await pickImages(ImageSource.gallery);
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: const Icon(Icons.camera_alt),
+                                    title: const Text('Capture with Camera'),
+                                    onTap: () async {
+                                      Navigator.pop(context);
+                                      await pickImages(ImageSource.camera);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
                     ),
                     TextButton(
                       style: const ButtonStyle(

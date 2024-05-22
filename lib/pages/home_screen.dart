@@ -3,15 +3,11 @@ import 'package:e_estates/pages/my_profilepage.dart';
 import 'package:e_estates/stateManagement/auth_state_provider.dart';
 import 'package:e_estates/stateManagement/filterstudent.dart';
 import 'package:e_estates/stateManagement/location_provider.dart';
-
 import 'package:e_estates/widgets/bestfor_you.dart';
 import 'package:e_estates/widgets/bottom_navigation.dart';
-
 import 'package:e_estates/widgets/top_feed.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../stateManagement/top_feed_provider.dart';
 
@@ -26,7 +22,7 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final String userLocation = "Your Location";
   final TextEditingController _locationController = TextEditingController();
-  bool IsStudent = false;
+
   final List _tags = [
     "All",
     "Rent",
@@ -118,11 +114,10 @@ class HomeScreenState extends ConsumerState<HomeScreen> {
                                 backgroundImage: photoUrl != null
                                     ? NetworkImage(photoUrl)
                                     : null,
-                                child: photoUrl == null
+                                child: photoUrl == null || photoUrl.isEmpty
                                     ? const Icon(
                                         Icons.person,
                                         size: 30,
-                                        color: Colors.grey,
                                       )
                                     : null,
                               ),
