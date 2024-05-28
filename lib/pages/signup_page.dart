@@ -272,6 +272,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             'email': userCredential.user!.email,
             'followers': [],
             'following': [],
+            'number': ""
           });
         }
 

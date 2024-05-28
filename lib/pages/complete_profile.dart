@@ -20,7 +20,6 @@ class _CompleteProfileState extends State<CompleteProfile> {
   final _codeController = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = false;
-  String? _verificationId;
   bool _isOTPSent = false;
   String? _phoneNumber;
   bool _isVerifying = false;
@@ -48,14 +47,12 @@ class _CompleteProfileState extends State<CompleteProfile> {
         },
         codeSent: (String verificationId, int? resendToken) {
           setState(() {
-            _verificationId = verificationId;
             _isOTPSent = true;
             _isVerifying = false; // Hide progress indicator
           });
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           setState(() {
-            _verificationId = verificationId;
             _isVerifying = false; // Hide progress indicator
           });
         },

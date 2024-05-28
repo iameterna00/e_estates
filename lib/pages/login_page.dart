@@ -220,6 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
             'profileUrl': userCredential.user!.photoURL,
             'followers': [],
             'following': [],
+            'number': ""
           });
         }
 
