@@ -585,6 +585,7 @@ class _TopFeedDetailState extends State<TopFeedDetail> {
                   ),
                   CommentsWidget(
                     postId: widget.postID,
+                    isBottomSheet: false,
                   ),
                   const SizedBox(
                     height: 100,

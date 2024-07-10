@@ -158,7 +158,7 @@ class _CompleteProfileState extends State<CompleteProfile> {
             ),
             const Padding(
               padding: EdgeInsets.only(top: 10, left: 14, right: 12),
-              child: Text("Number"),
+              child: Text("Number (Optional)"),
             ),
             if (!_isOTPSent)
               Padding(

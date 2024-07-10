@@ -23,14 +23,36 @@ class MyProfilePage extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text("Profile"),
-            IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileEdit()));
-                },
-                icon: const Icon(Icons.edit))
+            userAsyncValue.when(
+              data: (user) {
+                if (user == null) {
+                  return Container();
+                }
+                final userprofileAsyncValue =
+                    ref.watch(userProfileProvider(user.uid));
+                return userprofileAsyncValue.when(
+                  data: (userProfile) {
+                    return IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileEdit(
+                                      userName: userProfile.username,
+                                      getCurrentUserProfile:
+                                          userProfile.photoUrl!,
+                                      number: userProfile.number,
+                                      iAm: userProfile.iAm)));
+                        },
+                        icon: const Icon(Icons.edit));
+                  },
+                  loading: () => Container(),
+                  error: (error, stack) => Container(),
+                );
+              },
+              loading: () => Container(),
+              error: (error, stack) => Container(),
+            )
           ],
         ),
       ),

@@ -38,7 +38,7 @@ class ReplyStateNotifier extends StateNotifier<int> {
   }
 }
 
-final replyCountProvider =
+final replyCountLimitProvider =
     StateNotifierProvider.family<ReplyStateNotifier, int, String>(
         (ref, commentId) {
   return ReplyStateNotifier();
@@ -57,12 +57,12 @@ final initialRepliesProvider =
     return snapshot.docs.map((doc) => Comment.fromDocument(doc)).toList();
   });
 });
-final replyCountProviders =
-    FutureProvider.family<int, String>((ref, commentId) async {
-  QuerySnapshot snapshot = await FirebaseFirestore.instance
+
+final replyCountProvider = StreamProvider.family<int, String>((ref, commentId) {
+  return FirebaseFirestore.instance
       .collection('comments')
       .doc(commentId)
       .collection('replies')
-      .get();
-  return snapshot.docs.length;
+      .snapshots()
+      .map((snapshot) => snapshot.docs.length);
 });

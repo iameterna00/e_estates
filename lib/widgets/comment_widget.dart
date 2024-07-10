@@ -23,8 +23,10 @@ final replyVisibilityProvider =
 
 class CommentsWidget extends ConsumerWidget {
   final String postId;
+  final bool isBottomSheet;
 
-  const CommentsWidget({super.key, required this.postId});
+  const CommentsWidget(
+      {super.key, required this.postId, required this.isBottomSheet});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,6 +40,7 @@ class CommentsWidget extends ConsumerWidget {
         return Comments(
           comments: comments,
           postId: postId,
+          isBottomSheet: isBottomSheet,
         );
       },
       loading: () => const CircularProgressIndicator(),
@@ -49,8 +52,13 @@ class CommentsWidget extends ConsumerWidget {
 class Comments extends ConsumerWidget {
   final List<Comment> comments;
   final String postId;
+  final bool isBottomSheet;
 
-  const Comments({super.key, required this.comments, required this.postId});
+  const Comments(
+      {super.key,
+      required this.comments,
+      required this.postId,
+      required this.isBottomSheet});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -123,38 +131,40 @@ class Comments extends ConsumerWidget {
         ),
         if (!isReplyVisible)
           if (isActiveReply)
-            Consumer(builder: (context, ref, _) {
-              final replyController =
-                  ref.watch(replyControllersProvider(comment.id));
+            if (!isBottomSheet)
+              Consumer(builder: (context, ref, _) {
+                final replyController =
+                    ref.watch(replyControllersProvider(comment.id));
 
-              return Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: TextField(
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  controller: replyController,
-                  decoration: InputDecoration(
-                    fillColor: Theme.of(context).brightness == Brightness.dark
-                        ? Colors.black
-                        : Colors.grey[300],
-                    filled: true,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide.none,
-                    ),
-                    hintText: "Write a reply...",
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.send),
-                      onPressed: () => CommentUtils.submitReply(
-                          comment.id, ref, replyController, postId),
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: TextField(
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    controller: replyController,
+                    decoration: InputDecoration(
+                      fillColor: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.black
+                          : Colors.grey[300],
+                      filled: true,
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 12),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: "reply to${comment.username}",
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.send),
+                        onPressed: () => CommentUtils.submitReply(
+                            comment.id, ref, replyController, postId),
+                      ),
                     ),
                   ),
-                ),
-              );
-            }),
+                );
+              }),
         if (ref.watch(replyVisibilityProvider(comment.id)))
-          buildReplies(context, comment.id, ref)
+          buildReplies(context, comment.id, comment.username, ref)
         else
           const SizedBox(),
         Padding(
@@ -173,7 +183,7 @@ class Comments extends ConsumerWidget {
                 child: ref.watch(replyVisibilityProvider(comment.id))
                     ? const Text("Hide Replies",
                         style: TextStyle(color: Colors.blue))
-                    : ref.watch(replyCountProviders(comment.id)).when(
+                    : ref.watch(replyCountProvider(comment.id)).when(
                           data: (count) => Text(
                             "$count Replies",
                             style: const TextStyle(
@@ -210,8 +220,9 @@ class Comments extends ConsumerWidget {
     );
   }
 
-  Widget buildReplies(BuildContext context, String commentId, WidgetRef ref) {
-    final int replyLimit = ref.watch(replyCountProvider(commentId));
+  Widget buildReplies(
+      BuildContext context, String commentId, String username, WidgetRef ref) {
+    final int replyLimit = ref.watch(replyCountLimitProvider(commentId));
     final repliesAsyncValue =
         ref.watch(repliesProvider(Tuple2(commentId, replyLimit)));
     final TextEditingController replyController =
@@ -254,11 +265,13 @@ class Comments extends ConsumerWidget {
                       backgroundColor:
                           MaterialStatePropertyAll(Colors.transparent)),
                   onPressed: () {
-                    ref.read(replyCountProvider(commentId).notifier).loadMore();
+                    ref
+                        .read(replyCountLimitProvider(commentId).notifier)
+                        .loadMore();
                   },
                   child: const Text('View More'),
                 ),
-              if (isReplyActive)
+              if (isReplyActive && !isBottomSheet)
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -275,7 +288,7 @@ class Comments extends ConsumerWidget {
                         borderRadius: BorderRadius.circular(25.0),
                         borderSide: BorderSide.none,
                       ),
-                      hintText: "Write a reply...",
+                      hintText: "Reply to$username ",
                       suffixIcon: IconButton(
                         icon: const Icon(Icons.send),
                         onPressed: () {
@@ -298,7 +311,7 @@ class Comments extends ConsumerWidget {
           color: Colors.blue,
         ),
       ),
-      error: (e, st) => const Text('Opps :('),
+      error: (e, st) => const Text('Oops :('),
     );
   }
 }

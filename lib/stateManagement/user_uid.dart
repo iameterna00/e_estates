@@ -39,6 +39,20 @@ Future<String?> getCurrentUserNumber() async {
   return null;
 }
 
+Future<String?> getIam() async {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+
+  if (user != null) {
+    DocumentSnapshot userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get();
+    return userDoc['iAm'] as String;
+  }
+  return null;
+}
+
 Future<String?> getCurrentUsername() async {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final User? user = auth.currentUser;

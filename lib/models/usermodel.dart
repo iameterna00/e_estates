@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserModel {
   final String email;
   final String uid;
+  final String iAm;
   final String? photoUrl;
   final String username;
   final List followers;
@@ -16,6 +17,7 @@ class UserModel {
     required this.photoUrl,
     required this.username,
     required this.followers,
+    required this.iAm,
     required this.following,
   });
 
@@ -26,6 +28,7 @@ class UserModel {
         photoUrl = 'https://via.placeholder.com/150',
         username = '',
         number = '',
+        iAm = '',
         followers = [],
         following = [];
 
@@ -36,7 +39,8 @@ class UserModel {
         'email': email,
         'profileUrl': photoUrl,
         'followers': followers,
-        'following': following
+        'following': following,
+        "iAm": iAm
       };
 
   static UserModel fromMap(Map<String, dynamic> map) {
@@ -44,10 +48,11 @@ class UserModel {
       username: map['username'] ?? '',
       number: map['number'] ?? '',
       uid: map['uid'] ?? '',
+      iAm: map['iAm'] ?? '',
       email: map['email'] ?? '',
       photoUrl: map['profileUrl'] ?? 'https://via.placeholder.com/150',
-      followers: map['followers'] ?? [],
-      following: map['following'] ?? [],
+      followers: List.from(map['followers'] ?? []),
+      following: List.from(map['following'] ?? []),
     );
   }
 

@@ -18,9 +18,34 @@ class ProfileUpdate {
           .collection('users')
           .doc(userId)
           .update({'number': phoneNumber});
+      print('number updated successfully to: $phoneNumber');
     } catch (error) {
       // Handle any errors
       print('Error updating user phone number: $error');
+    }
+  }
+
+  static Future<void> updateName(String userId, String username) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update({'username': username});
+      print('Username updated successfully to: $username');
+    } catch (error) {
+      print('Error updating username: $error');
+    }
+  }
+
+  static Future<void> iAM(String userId, String iAm) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .update({'iAm': iAm});
+      print('option updated Iam to: $iAm');
+    } catch (error) {
+      print('Error updating username: $error');
     }
   }
 
@@ -38,5 +63,11 @@ class ProfileUpdate {
     if (!status.isGranted) {
       await Permission.photos.request();
     }
+  }
+
+  static Future<void> updateUserProfileOption(String uid, String option) async {
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'option': option,
+    });
   }
 }

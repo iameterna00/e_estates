@@ -39,14 +39,14 @@ class _VerificationWaitingScreenState extends State<VerificationWaitingScreen> {
         final User currentUser = _auth.currentUser!; // Corrected class name
 
         UserModel user = UserModel(
-          email: currentUser.email ?? '',
-          photoUrl: '',
-          username: username,
-          uid: currentUser.uid,
-          followers: [],
-          following: [],
-          number: '',
-        );
+            email: currentUser.email ?? '',
+            photoUrl: '',
+            username: username,
+            uid: currentUser.uid,
+            followers: [],
+            following: [],
+            number: '',
+            iAm: '');
         await _firestore.collection('users').doc(user.uid).set(user.toJson());
 
         if (mounted) {

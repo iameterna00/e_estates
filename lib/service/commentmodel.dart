@@ -1,69 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_estates/models/comment_models.dart';
+import 'package:e_estates/service/comment_functions.dart';
+import 'package:e_estates/widgets/comment_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-buildComments(
+void showCommentsBottomSheet(
   BuildContext context,
   String postId,
-  ScrollController scrollController,
+  bool isBottomsheet,
 ) {
-  return StreamBuilder<QuerySnapshot>(
-    stream: FirebaseFirestore.instance
-        .collection('comments')
-        .where('postId', isEqualTo: postId)
-        .orderBy('timestamp', descending: true)
-        .snapshots(),
-    builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-      List<Comment> comments =
-          snapshot.data!.docs.map((doc) => Comment.fromDocument(doc)).toList();
-      if (comments.isEmpty) {
-        return const Center(
-          child: Text(
-            "No comments yet...",
-            style: TextStyle(color: Colors.grey, fontSize: 16),
-          ),
-        );
-      }
-
-      return ListView.builder(
-        itemCount: comments.length,
-        itemBuilder: (context, index) {
-          Comment comment = comments[index];
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: comment.userProfileUrl.isNotEmpty
-                  ? NetworkImage(comment.userProfileUrl)
-                  : null,
-            ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  comment.username,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-                Text(
-                  comment.content,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ],
-            ),
-          );
-        },
-      );
-    },
-  );
-}
-
-void showCommentsBottomSheet(BuildContext context, String postId) {
   final TextEditingController commentController = TextEditingController();
+  final FocusNode commentFocusNode = FocusNode();
 
   showModalBottomSheet(
     backgroundColor: Theme.of(context).brightness == Brightness.dark
@@ -87,42 +35,102 @@ void showCommentsBottomSheet(BuildContext context, String postId) {
                 children: <Widget>[
                   const Icon(Icons.drag_handle_rounded),
                   Expanded(
-                    child: buildComments(context, postId, scrollController),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          controller: commentController,
-                          decoration: InputDecoration(
-                            fillColor:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? Colors.black
-                                    : Colors.grey[300],
-                            hintText: "Write a comment...",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: BorderSide.none,
-                            ),
-                            filled: true,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 15),
-                          ),
-                          minLines: 1,
-                          maxLines: 4,
-                        ),
+                    child: SingleChildScrollView(
+                      child: CommentsWidget(
+                        postId: postId,
+                        isBottomSheet: true,
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.send),
-                        onPressed: () {
-                          if (commentController.text.trim().isEmpty) {
-                            return;
-                          }
-                          submitComment(
-                              postId, commentController.text.trim(), context);
-                          commentController.clear();
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Consumer(
+                        builder: (context, ref, child) {
+                          final activeReplyId = ref.watch(activeReplyProvider);
+                          return activeReplyId != null
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () {
+                                    ref
+                                        .read(activeReplyProvider.notifier)
+                                        .state = null;
+                                    commentController.clear();
+                                    commentFocusNode.requestFocus();
+                                  },
+                                )
+                              : SizedBox(); // Return an empty SizedBox if activeReplyId is null
                         },
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Consumer(
+                              builder: (context, ref, child) {
+                                final activeReplyId =
+                                    ref.watch(activeReplyProvider);
+                                final hintText = activeReplyId != null
+                                    ? "Reply to username"
+                                    : "Write a comment...";
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  if (activeReplyId != null) {
+                                    commentFocusNode.requestFocus();
+                                  }
+                                });
+
+                                return TextField(
+                                  focusNode: commentFocusNode,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  controller: commentController,
+                                  decoration: InputDecoration(
+                                    fillColor: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.black
+                                        : Colors.grey[300],
+                                    hintText: hintText,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    filled: true,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
+                                  ),
+                                  minLines: 1,
+                                  maxLines: 4,
+                                );
+                              },
+                            ),
+                          ),
+                          Consumer(
+                            builder: (context, ref, child) {
+                              final activeReplyId =
+                                  ref.watch(activeReplyProvider);
+
+                              return IconButton(
+                                icon: const Icon(Icons.send),
+                                onPressed: () {
+                                  if (commentController.text.trim().isEmpty) {
+                                    return;
+                                  }
+                                  if (activeReplyId != null) {
+                                    // Submit a reply
+                                    CommentUtils.submitReply(activeReplyId, ref,
+                                        commentController, postId);
+                                    ref
+                                        .read(activeReplyProvider.notifier)
+                                        .state = null; // Reset active reply
+                                  } else {
+                                    // Submit a comment
+                                    submitComment(postId,
+                                        commentController.text.trim(), context);
+                                  }
+                                  commentController.clear();
+                                },
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),

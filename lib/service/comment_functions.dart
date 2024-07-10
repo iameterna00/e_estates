@@ -5,27 +5,37 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CommentUtils {
   static void submitReply(String commentId, WidgetRef ref,
-      TextEditingController replyController, String postId) {
-    if (replyController.text.isEmpty) {
-      // Optionally handle the empty input case, e.g., show an error message
+      TextEditingController replyController, String postId) async {
+    String replyContent = replyController.text.trim();
+
+    if (replyContent.isEmpty) {
+      // Optionally handle empty reply case
       return;
     }
 
-    FirebaseFirestore.instance
-        .collection('comments')
-        .doc(commentId)
-        .collection('replies')
-        .add({
-      'content': replyController.text,
-      'userId': getCurrentUserId(),
-      'username': getCurrentUsername(),
-      'postId': postId,
-      'userProfileUrl': getCurrentUserProfile(),
-      'timestamp': DateTime.now().millisecondsSinceEpoch,
-    }).then((value) {
-      replyController.clear();
-    }).catchError((error) {
+    try {
+      String userId = getCurrentUserId();
+      String? username = await getCurrentUsername();
+      String? userProfileUrl = await getCurrentUserProfile();
+
+      await FirebaseFirestore.instance
+          .collection('comments')
+          .doc(commentId)
+          .collection('replies')
+          .add({
+        'content': replyContent,
+        'userId': userId,
+        'username': username,
+        'postId': postId,
+        'userProfileUrl': userProfileUrl,
+        'timestamp': DateTime.now().millisecondsSinceEpoch,
+      });
+
+      replyController
+          .clear(); // Clear the text field after successful submission
+    } catch (error) {
       print("Failed to add reply: $error");
-    });
+      // Optionally handle error, e.g., show an error message to the user
+    }
   }
 }
